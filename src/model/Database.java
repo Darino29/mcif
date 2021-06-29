@@ -100,7 +100,7 @@ public class Database {
 		            String addresse  = rs.getString("adresseClient");
 		            String ville  = rs.getString("villeClient");
 		            String pays  = rs.getString("paysClient");
-		            int tel  = rs.getInt("telClient");
+		            String tel  = rs.getString("telClient");
 		            clients.add(new Client(id, nom, prenom, ddn , addresse, ville, pays, tel));
 		        }
 		        connection.close();

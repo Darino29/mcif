@@ -16,9 +16,14 @@ import javax.swing.border.LineBorder;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
+
+import Controlleur.ClientControlle;
+
 import javax.swing.border.EtchedBorder;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelClient extends JPanel {
 	private JTextField txtNom;
@@ -166,6 +171,23 @@ public class PanelClient extends JPanel {
 		panel.add(txtDdn);
 		
 		JButton btnNewButton_1 = new JButton("Enregistrer");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String Nom = textNom.getText();
+                String Prenom = txtPrenom.getText();
+                String Ddn = txtDdn.getText();
+                String  Adresse = txtAdresse.getText();
+                String Ville = txtVille.getText();
+                String  Phone = txtPhone.getText();
+                Object pays = combobox.getSelectedItem();
+                String date = txtDdn.getText();
+                String paysS = pays.toString();
+                System.out.println(Nom +"    "+ Prenom + " "+ Ddn +" "+ Adresse + " " + Ville + " "+ Phone + " " + pays + " " + date);
+                ClientControlle cC = new ClientControlle();
+                cC.CreateClient( Nom, Prenom, Ddn, Adresse, Ville, paysS, Phone);
+			}
+		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnNewButton_1.setBounds(4, 410, 104, 35);
 		add(btnNewButton_1);
