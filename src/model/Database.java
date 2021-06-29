@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Database {
-	private String dbLocation = "jdbc:mysql://localhost:3307";
+	private String dbLocation = "jdbc:mysql://localhost:3306";
 	private String user = "root";
 	private String mdp = "lelena";
 	
@@ -29,6 +29,7 @@ public class Database {
             e.printStackTrace();
         }
 	}
+	
 
 	public List<Produit> getAllProd(){
 		 List<Produit> produits = new ArrayList<>();
@@ -100,7 +101,7 @@ public class Database {
 		            String addresse  = rs.getString("adresseClient");
 		            String ville  = rs.getString("villeClient");
 		            String pays  = rs.getString("paysClient");
-		            int tel  = rs.getInt("telClient");
+		            String tel  = rs.getString("telClient");
 		            clients.add(new Client(id, nom, prenom, ddn , addresse, ville, pays, tel));
 		        }
 		        connection.close();
