@@ -5,15 +5,20 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
+import javax.swing.JLabel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelSet2 extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField ancMdp;
+	private JTextField newMdp;
+	private ACC parent;
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelSet2() {
+	public PanelSet2(ACC s) {
+		parent = s;
 		setBackground(Color.LIGHT_GRAY);
 		setBounds(0,0,780,455);
 		setLayout(null);
@@ -28,18 +33,42 @@ public class PanelSet2 extends JPanel {
 		btnNewButton.setBackground(new Color(255, 165, 0));
 		btnNewButton.setBorderPainted(false);
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton.setBounds(281, 199, 109, 34);
+		btnNewButton.setBounds(290, 245, 109, 34);
 		panel.add(btnNewButton);
 		
-		textField = new JTextField();
-		textField.setBounds(208, 101, 249, 39);
-		panel.add(textField);
-		textField.setColumns(10);
+		ancMdp = new JTextField();
+		ancMdp.setBounds(222, 119, 249, 39);
+		panel.add(ancMdp);
+		ancMdp.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(208, 150, 249, 39);
-		panel.add(textField_1);
+		newMdp = new JTextField();
+		newMdp.setColumns(10);
+		newMdp.setBounds(222, 199, 249, 39);
+		panel.add(newMdp);
+		
+		JLabel lblNewLabel = new JLabel("Ancien mot de passe");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel.setBounds(222, 88, 146, 21);
+		panel.add(lblNewLabel);
+		
+		JLabel lblNouveauMotDe = new JLabel("Nouveau mot de passe");
+		lblNouveauMotDe.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNouveauMotDe.setBounds(222, 168, 146, 21);
+		panel.add(lblNouveauMotDe);
+		
+		JButton btnNewButton_1 = new JButton("Retour");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				parent.retourMenu();
+			}
+		});
+		btnNewButton_1.setForeground(Color.WHITE);
+		btnNewButton_1.setBackground(Color.LIGHT_GRAY);
+		btnNewButton_1.setBorderPainted(false);
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnNewButton_1.setBounds(22, 33, 118, 27);
+		panel.add(btnNewButton_1);
 		
 		
 	}

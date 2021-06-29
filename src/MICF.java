@@ -33,12 +33,10 @@ import javax.swing.DefaultComboBoxModel;
 public class MICF extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField username;
 	int xx,xy;
-	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
+	private JPasswordField psw;
+	private JPasswordField Cpsw;
 
 	/**
 	 * Launch the application.
@@ -97,10 +95,10 @@ public class MICF extends JFrame {
 		lblNewLabel_3.setIcon(new ImageIcon(MICF.class.getResource("/img/6.jpg")));
 		panel.add(lblNewLabel_3);
 		
-		textField = new JTextField();
-		textField.setBounds(414, 114, 249, 39);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		username = new JTextField();
+		username.setBounds(414, 114, 249, 39);
+		contentPane.add(username);
+		username.setColumns(10);
 		
 		JButton btnNewButton = new JButton("SIGN IN");
 		btnNewButton.setBackground(new Color(222, 184, 135));
@@ -117,11 +115,6 @@ public class MICF extends JFrame {
 		lblNewLabel.setBounds(414, 83, 77, 21);
 		contentPane.add(lblNewLabel);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(414, 194, 249, 39);
-		contentPane.add(textField_1);
-		
 		JLabel lblPassword = new JLabel("PASSWORD");
 		lblPassword.setBounds(414, 163, 77, 21);
 		contentPane.add(lblPassword);
@@ -129,11 +122,6 @@ public class MICF extends JFrame {
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(414, 237, 249, 2);
 		contentPane.add(separator_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(414, 268, 249, 39);
-		contentPane.add(textField_2);
 		
 		JLabel lblConfirmPassword = new JLabel("CONFIRM PASSWORD");
 		lblConfirmPassword.setBounds(414, 237, 139, 21);
@@ -173,13 +161,13 @@ public class MICF extends JFrame {
 		lblclose.setBounds(839, 0, 25, 21);
 		contentPane.add(lblclose);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(414, 194, 249, 39);
-		contentPane.add(passwordField);
+		psw = new JPasswordField();
+		psw.setBounds(414, 194, 249, 39);
+		contentPane.add(psw);
 		
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setBounds(414, 268, 249, 39);
-		contentPane.add(passwordField_1);
+		Cpsw = new JPasswordField();
+		Cpsw.setBounds(414, 268, 249, 39);
+		contentPane.add(Cpsw);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Admin", "Vendeur"}));

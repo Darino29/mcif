@@ -39,6 +39,8 @@ public class ACC extends JFrame {
 	private PanelClient panelClient;
 	private PanelStock panelStock;
 	private PanelSet panelSet;
+	private PanelSet2 panelSet2;
+	private PanelSet3 panelSet3;
 	private JPanel contentPane;
 	
 	
@@ -100,8 +102,9 @@ public class ACC extends JFrame {
 		panelVente = new PanelVente(this);
 		panelVente2 = new PanelVente2();
 		panelCompte = new PanelCompte();
-		panelSet = new PanelSet();
-		
+		panelSet = new PanelSet(this);
+		panelSet2 = new PanelSet2(this);
+		panelSet3 = new PanelSet3(this);
 		
 		JPanel panel0 = new JPanel();
 		panel0.setBounds(67, 21, 808, 506);
@@ -115,6 +118,7 @@ public class ACC extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if(JOptionPane.showConfirmDialog(null, "Voulez vous deconnecter ?") == 0) {
 				MICF2 dec = new MICF2();
+				dec.setUndecorated(true);
 				dec.setVisible(true);
 				ACC.this.dispose();
 				}
@@ -145,6 +149,8 @@ public class ACC extends JFrame {
 		paneMainContent.add(panelVente2);
 		paneMainContent.add(panelCompte);
 		paneMainContent.add(panelSet);
+		paneMainContent.add(panelSet2);
+		paneMainContent.add(panelSet3);
 		
 		menuClicked(panelCaisse);
 		
@@ -370,6 +376,8 @@ public class ACC extends JFrame {
 	 panelVente2.setVisible(false);
 	 panelCompte.setVisible(false);
 	 panelSet.setVisible(false);
+	 panelSet2.setVisible(false);
+	 panelSet3.setVisible(false);
 	 
 	 panel.setVisible(true);
 	 
@@ -381,11 +389,64 @@ public class ACC extends JFrame {
 	 panelStock.setVisible(false);
 	 panelPlann.setVisible(false);
 	 panelVente.setVisible(false);
+	 panelCompte.setVisible(false);
+	 panelSet.setVisible(false);
+	 panelSet3.setVisible(false);
+	 panelSet2.setVisible(false);
+	 
+	 panelVente2.setVisible(true);
+	 
+     
+     
+ }
+ 
+ public  void changerMenu2(){
+		
+	 panelCaisse.setVisible(false);
+	 panelClient.setVisible(false);
+	 panelStock.setVisible(false);
+	 panelPlann.setVisible(false);
+	 panelVente.setVisible(false);
 	 panelVente2.setVisible(false);
 	 panelCompte.setVisible(false);
 	 panelSet.setVisible(false);
+	 panelSet3.setVisible(false);
 	 
-	 panelVente2.setVisible(true);
+	 panelSet2.setVisible(true);
+	 
+     
+     
+ }
+ public  void changerMenu3(){
+		
+	 panelCaisse.setVisible(false);
+	 panelClient.setVisible(false);
+	 panelStock.setVisible(false);
+	 panelPlann.setVisible(false);
+	 panelVente.setVisible(false);
+	 panelVente2.setVisible(false);
+	 panelCompte.setVisible(false);
+	 panelSet.setVisible(false);
+	 panelSet2.setVisible(false);
+	 
+	 panelSet3.setVisible(true);
+	 
+     
+     
+ }
+ public  void retourMenu(){
+		
+	 panelCaisse.setVisible(false);
+	 panelClient.setVisible(false);
+	 panelStock.setVisible(false);
+	 panelPlann.setVisible(false);
+	 panelVente.setVisible(false);
+	 panelVente2.setVisible(false);
+	 panelCompte.setVisible(false);
+	 panelSet2.setVisible(false);
+	 panelSet3.setVisible(false);
+	 
+	 panelSet.setVisible(true);
 	 
      
      
