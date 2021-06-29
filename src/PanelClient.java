@@ -1,0 +1,191 @@
+import javax.swing.JPanel;
+import java.awt.event.ActionListener;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import java.awt.Color;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import javax.swing.JSeparator;
+import javax.swing.JList;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+
+public class PanelClient extends JPanel {
+	private JTextField txtNom;
+	private JTextField textNom;
+	private JTextField txtPrenom;
+	private JTable table;
+	private JTextField txtAdresse;
+	private JTextField txtVille;
+	private JTextField txtPhone;
+	private JTextField txtDdn;
+
+	/**
+	 * Create the panel.
+	 */
+	public PanelClient() {
+		setBackground(Color.WHITE);
+		setBounds(0,0,780,455);
+		setLayout(null);
+		setVisible(true);
+		
+		txtNom = new JTextField();
+		txtNom.setText("Nom/Prenom/Id");
+		txtNom.setForeground(Color.GRAY);
+		txtNom.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		txtNom.setColumns(10);
+		txtNom.setBounds(10, 10, 201, 40);
+		add(txtNom);
+		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setIcon(new ImageIcon(PanelClient.class.getResource("/img/icons8-search-24.png")));
+		btnNewButton.setBounds(212, 10, 50, 40);
+		add(btnNewButton);
+		
+		JButton btnCreer = new JButton("Imprimer");
+		btnCreer.setForeground(new Color(240, 255, 240));
+		btnCreer.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnCreer.setBorderPainted(false);
+		btnCreer.setBackground(new Color(255, 140, 0));
+		btnCreer.setBounds(603, 9, 167, 40);
+		btnCreer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                String Nom = txtNom.getText();
+                String Prenom = txtPrenom.getText();
+                String Ddn = txtDdn.getText();
+                String  Adresse = txtAdresse.getText();
+                String Ville = txtVille.getText();
+                String  Phone = txtPhone.getText();
+                
+                
+			}
+		});
+		add(btnCreer);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(4, 62, 772, 4);
+		add(separator);
+		
+		JPanel panel = new JPanel();
+		panel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Ajouter un client", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBounds(4, 68, 389, 340);
+		add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblCa = new JLabel("Nom");
+		lblCa.setBounds(10, 35, 80, 13);
+		panel.add(lblCa);
+		lblCa.setHorizontalAlignment(SwingConstants.LEFT);
+		lblCa.setFont(new Font("Tahoma", Font.BOLD, 14));
+		
+		JLabel lblDernierAchat = new JLabel("Prenom");
+		lblDernierAchat.setBounds(10, 67, 62, 13);
+		panel.add(lblDernierAchat);
+		lblDernierAchat.setHorizontalAlignment(SwingConstants.LEFT);
+		lblDernierAchat.setFont(new Font("Tahoma", Font.BOLD, 14));
+		
+		JLabel lblPays = new JLabel("Date de Naissance");
+		lblPays.setBounds(10, 99, 144, 13);
+		panel.add(lblPays);
+		lblPays.setHorizontalAlignment(SwingConstants.LEFT);
+		lblPays.setFont(new Font("Tahoma", Font.BOLD, 14));
+		
+		textNom = new JTextField();
+		textNom.setBounds(110, 27, 249, 24);
+		panel.add(textNom);
+		textNom.setColumns(10);
+		
+		txtPrenom = new JTextField();
+		txtPrenom.setColumns(10);
+		txtPrenom.setBounds(110, 60, 249, 23);
+		panel.add(txtPrenom);
+		
+		txtAdresse = new JTextField();
+		txtAdresse.setColumns(10);
+		txtAdresse.setBounds(130, 123, 229, 44);
+		panel.add(txtAdresse);
+		
+		JLabel lblAdresse = new JLabel("Adresse");
+		lblAdresse.setHorizontalAlignment(SwingConstants.LEFT);
+		lblAdresse.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblAdresse.setBounds(10, 136, 88, 13);
+		panel.add(lblAdresse);
+		
+		JLabel lblVille = new JLabel("Ville");
+		lblVille.setHorizontalAlignment(SwingConstants.CENTER);
+		lblVille.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblVille.setBounds(10, 180, 88, 13);
+		panel.add(lblVille);
+		
+		txtVille = new JTextField();
+		txtVille.setColumns(10);
+		txtVille.setBounds(130, 177, 229, 23);
+		panel.add(txtVille);
+		
+		JLabel lblPays_1 = new JLabel("Pays");
+		lblPays_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPays_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPays_1.setBounds(10, 215, 88, 13);
+		panel.add(lblPays_1);
+		
+		txtPhone = new JTextField();
+		txtPhone.setColumns(10);
+		txtPhone.setBounds(130, 243, 229, 23);
+		panel.add(txtPhone);
+		
+		JLabel lblPays_1_1 = new JLabel("Phone");
+		lblPays_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPays_1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPays_1_1.setBounds(10, 248, 88, 13);
+		panel.add(lblPays_1_1);
+		
+		
+		String[] choix = {"Afghanistan", "Afrique du Sud", "Akrotiri", "Albanie", "Alg\u00E9rie", "Allemagne", "Andorre", "Angola", "Anguilla", "Antarctique", "Antigua-et-Barbuda", "Arabie saoudite", "Arctic Ocean", "Argentine", "Arm\u00E9nie", "Aruba", "Ashmore and Cartier Islands", "Atlantic Ocean", "Australie", "Autriche", "Azerba\u00EFdjan", "Bahamas", "Bahre\u00EFn", "Bangladesh", "Barbade", "Belau", "Belgique", "Belize", "B\u00E9nin", "Bermudes", "Bhoutan", "Bi\u00E9lorussie", "Birmanie", "Bolivie", "Bosnie-Herz\u00E9govine", "Botswana", "Br\u00E9sil", "Brunei", "Bulgarie", "Burkina Faso", "Burundi", "Cambodge", "Cameroun", "Canada", "Cap-Vert", "Chili", "Chine", "Chypre", "Clipperton Island", "Colombie", "Comores", "Congo", "Coral Sea Islands", "Cor\u00E9e du Nord", "Cor\u00E9e du Sud", "Costa Rica", "C\u00F4te d'Ivoire", "Croatie", "Cuba", "Curacao", "Danemark", "Dhekelia", "Djibouti", "Dominique", "\u00C9gypte", "\u00C9mirats arabes unis", "\u00C9quateur", "\u00C9rythr\u00E9e", "Espagne", "Estonie", "\u00C9tats-Unis", "\u00C9thiopie", "ex-R\u00E9publique yougoslave de Mac\u00E9doine", "Finlande", "France", "Gabon", "Gambie", "Gaza Strip", "G\u00E9orgie", "Ghana", "Gibraltar", "Gr\u00E8ce", "Grenade", "Groenland", "Guam", "Guatemala", "Guernsey", "Guin\u00E9e", "Guin\u00E9e \u00E9quatoriale", "Guin\u00E9e-Bissao", "Guyana", "Ha\u00EFti", "Honduras", "Hong Kong", "Hongrie", "Ile Bouvet", "Ile Christmas", "Ile Norfolk", "Iles Cayman", "Iles Cook", "Iles des Cocos (Keeling)", "Iles Falkland", "Iles F\u00E9ro\u00E9", "Iles Fidji", "Iles G\u00E9orgie du Sud et Sandwich du Sud", "Iles Heard et McDonald", "Iles Marshall", "Iles Pitcairn", "Iles Salomon", "Iles Svalbard et Jan Mayen", "Iles Turks-et-Caicos", "Iles Vierges am\u00E9ricaines", "Iles Vierges britanniques", "Inde", "Indian Ocean", "Indon\u00E9sie", "Iran", "Iraq", "Irlande", "Islande", "Isra\u00EBl", "Italie", "Jama\u00EFque", "Jan Mayen", "Japon", "Jersey", "Jordanie", "Kazakhstan", "Kenya", "Kirghizistan", "Kiribati", "Kosovo", "Kowe\u00EFt", "Laos", "Lesotho", "Lettonie", "Liban", "Liberia", "Libye", "Liechtenstein", "Lituanie", "Luxembourg", "Macao", "Madagascar", "Malaisie", "Malawi", "Maldives", "Mali", "Malte", "Man, Isle of", "Mariannes du Nord", "Maroc", "Maurice", "Mauritanie", "Mexique", "Micron\u00E9sie", "Moldavie", "Monaco", "Monde", "Mongolie", "Mont\u00E9n\u00E9gro", "Montserrat", "Mozambique", "Namibie", "Nauru", "Navassa Island", "N\u00E9pal", "Nicaragua", "Niger", "Nigeria", "Niou\u00E9", "Norv\u00E8ge", "Nouvelle-Cal\u00E9donie", "Nouvelle-Z\u00E9lande", "Oman", "Ouganda", "Ouzb\u00E9kistan", "Pacific Ocean", "Pakistan", "Panama", "Papouasie-Nouvelle-Guin\u00E9e", "Paracel Islands", "Paraguay", "Pays-Bas", "P\u00E9rou", "Philippines", "Pologne", "Polyn\u00E9sie fran\u00E7aise", "Porto Rico", "Portugal", "Qatar", "R\u00E9publique centrafricaine", "R\u00E9publique d\u00E9mocratique du Congo", "R\u00E9publique dominicaine", "Roumanie", "Royaume-Uni", "Russie", "Rwanda", "Sahara occidental", "Saint-Barth\u00E9lemy", "Saint-Christophe-et-Ni\u00E9v\u00E8s", "Sainte-H\u00E9l\u00E8ne", "Sainte-Lucie", "Saint-Marin", "Saint-Martin", "Saint-Pierre-et-Miquelon", "Saint-Si\u00E8ge", "Saint-Vincent-et-les-Grenadines", "Salvador", "Samoa", "Samoa am\u00E9ricaines", "Sao Tom\u00E9-et-Principe", "S\u00E9n\u00E9gal", "Serbie", "Seychelles", "Sierra Leone", "Singapour", "Sint Maarten", "Slovaquie", "Slov\u00E9nie", "Somalie", "Soudan", "Soudan du Sud", "Southern Ocean", "Spratly Islands", "Sri Lanka", "Su\u00E8de", "Suisse", "Suriname", "Swaziland", "Syrie", "Tadjikistan", "Ta\u00EFwan", "Tanzanie", "Tchad", "Terres australes fran\u00E7aises", "Territoire britannique de l'Oc\u00E9an Indien", "Tha\u00EFlande", "Timor Oriental", "Togo", "Tok\u00E9laou", "Tonga", "Trinit\u00E9-et-Tobago", "Tunisie", "Turkm\u00E9nistan", "Turquie", "Tuvalu", "Ukraine", "Union europ\u00E9enne", "Uruguay", "Vanuatu", "Venezuela", "Vi\u00EAt Nam", "Wake Island", "Wallis-et-Futuna", "West Bank", "Y\u00E9men", "Zambie", "Zimbabwe"};
+		JComboBox combobox = new JComboBox(choix);
+		combobox.setBounds(130, 210, 229, 21);
+		panel.add(combobox);
+		
+		txtDdn = new JTextField();
+		txtDdn.setHorizontalAlignment(SwingConstants.CENTER);
+		txtDdn.setText("JJ/MM/AAAA");
+		txtDdn.setForeground(Color.GRAY);
+		txtDdn.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		txtDdn.setColumns(10);
+		txtDdn.setBounds(158, 95, 201, 23);
+		panel.add(txtDdn);
+		
+		JButton btnNewButton_1 = new JButton("Enregistrer");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnNewButton_1.setBounds(4, 410, 104, 35);
+		add(btnNewButton_1);
+		
+		JButton btnNewButton_1_1 = new JButton("Editer");
+		btnNewButton_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnNewButton_1_1.setBounds(154, 410, 104, 35);
+		add(btnNewButton_1_1);
+		
+		JButton btnNewButton_1_1_1 = new JButton("Supprimer");
+		btnNewButton_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnNewButton_1_1_1.setBounds(300, 410, 93, 35);
+		add(btnNewButton_1_1_1);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(397, 68, 379, 369);
+		add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+
+	}
+}
