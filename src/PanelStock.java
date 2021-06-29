@@ -14,14 +14,19 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+
+import Controlleur.StockControlleur;
+
 import javax.swing.border.EtchedBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelStock extends JPanel {
 	private JTextField txtNom;
 	private JTextField produit;
-	private JTextField prix;
+	private JTextField quantiter;
 	private JTextField description;
 	private JTable table;
 	DefaultTableModel model;
@@ -75,7 +80,7 @@ public class PanelStock extends JPanel {
 		lblCa.setHorizontalAlignment(SwingConstants.LEFT);
 		lblCa.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
-		JLabel lblDernierAchat = new JLabel("Prix");
+		JLabel lblDernierAchat = new JLabel("Quantiter");
 		lblDernierAchat.setBounds(10, 109, 62, 13);
 		panel.add(lblDernierAchat);
 		lblDernierAchat.setHorizontalAlignment(SwingConstants.LEFT);
@@ -92,10 +97,10 @@ public class PanelStock extends JPanel {
 		panel.add(produit);
 		produit.setColumns(10);
 		
-		prix = new JTextField();
-		prix.setColumns(10);
-		prix.setBounds(100, 106, 229, 23);
-		panel.add(prix);
+		quantiter = new JTextField();
+		quantiter.setColumns(10);
+		quantiter.setBounds(100, 106, 229, 23);
+		panel.add(quantiter);
 		
 		description = new JTextField();
 		description.setColumns(10);
@@ -114,6 +119,18 @@ public class PanelStock extends JPanel {
 		panel.add(lblId);
 		
 		JButton btnNewButton_1 = new JButton("Enregistrer");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String prod = produit.getText();
+				String idStock = id.getText();
+				String qte = quantiter.getText();
+				String descrp = description.getText();
+				StockControlleur stck = new StockControlleur();
+				
+				
+			}
+		});
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
