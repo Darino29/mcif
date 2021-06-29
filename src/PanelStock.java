@@ -13,14 +13,20 @@ import javax.swing.border.LineBorder;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.border.EtchedBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelStock extends JPanel {
 	private JTextField txtNom;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField produit;
+	private JTextField prix;
+	private JTextField description;
 	private JTable table;
+	DefaultTableModel model;
+	private JTextField id;
+	final Object[] row = new Object[0];
 
 	/**
 	 * Create the panel.
@@ -64,39 +70,57 @@ public class PanelStock extends JPanel {
 		panel.setLayout(null);
 		
 		JLabel lblCa = new JLabel("Produit");
-		lblCa.setBounds(10, 53, 80, 13);
+		lblCa.setBounds(10, 75, 80, 13);
 		panel.add(lblCa);
 		lblCa.setHorizontalAlignment(SwingConstants.LEFT);
 		lblCa.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JLabel lblDernierAchat = new JLabel("Prix");
-		lblDernierAchat.setBounds(10, 87, 62, 13);
+		lblDernierAchat.setBounds(10, 109, 62, 13);
 		panel.add(lblDernierAchat);
 		lblDernierAchat.setHorizontalAlignment(SwingConstants.LEFT);
 		lblDernierAchat.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JLabel lblPays = new JLabel("Description");
-		lblPays.setBounds(10, 119, 97, 13);
+		lblPays.setBounds(10, 139, 97, 24);
 		panel.add(lblPays);
 		lblPays.setHorizontalAlignment(SwingConstants.LEFT);
 		lblPays.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
-		textField = new JTextField();
-		textField.setBounds(100, 52, 229, 24);
-		panel.add(textField);
-		textField.setColumns(10);
+		produit = new JTextField();
+		produit.setBounds(100, 72, 229, 24);
+		panel.add(produit);
+		produit.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(100, 86, 229, 23);
-		panel.add(textField_1);
+		prix = new JTextField();
+		prix.setColumns(10);
+		prix.setBounds(100, 106, 229, 23);
+		panel.add(prix);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(100, 118, 229, 180);
-		panel.add(textField_2);
+		description = new JTextField();
+		description.setColumns(10);
+		description.setBounds(100, 139, 229, 180);
+		panel.add(description);
+		
+		id = new JTextField();
+		id.setColumns(10);
+		id.setBounds(100, 38, 229, 24);
+		panel.add(id);
+		
+		JLabel lblId = new JLabel("Id");
+		lblId.setHorizontalAlignment(SwingConstants.LEFT);
+		lblId.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblId.setBounds(10, 43, 80, 13);
+		panel.add(lblId);
 		
 		JButton btnNewButton_1 = new JButton("Enregistrer");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				model.addRow(row) ;
+				
+			}
+		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnNewButton_1.setBounds(4, 410, 104, 35);
 		add(btnNewButton_1);
@@ -116,6 +140,11 @@ public class PanelStock extends JPanel {
 		add(scrollPane);
 		
 		table = new JTable();
+		model = new DefaultTableModel();
+		Object[] column = {"ID","Produit","Prix","Description"};
+		
+		model.setColumnIdentifiers(column);
+		table.setModel(model);
 		scrollPane.setViewportView(table);
 
 	}

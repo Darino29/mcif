@@ -18,24 +18,24 @@ public class PanelSet extends JPanel {
 		add(panel);
 		panel.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Choix de langue");
+		JButton btnNewButton = new JButton("A propos");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewButton.setBounds(136, 106, 501, 38);
+		btnNewButton.setBounds(136, 251, 501, 38);
 		panel.add(btnNewButton);
 		
 		JButton btnModifierLeMot = new JButton("Modifier le mot de passe");
 		btnModifierLeMot.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnModifierLeMot.setBounds(136, 162, 501, 38);
+		btnModifierLeMot.setBounds(136, 107, 501, 38);
 		panel.add(btnModifierLeMot);
 		
 		JButton btnRemises = new JButton("Remises");
 		btnRemises.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnRemises.setBounds(136, 220, 501, 38);
+		btnRemises.setBounds(136, 155, 501, 38);
 		panel.add(btnRemises);
 		
 		JButton btnPointsDeVente = new JButton("Points de ventes");
 		btnPointsDeVente.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnPointsDeVente.setBounds(136, 276, 501, 38);
+		btnPointsDeVente.setBounds(136, 203, 501, 38);
 		panel.add(btnPointsDeVente);
 	}
 }

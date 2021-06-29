@@ -6,7 +6,6 @@ public class Test {
 
 	public static void main(String[] args) {
 		Database db = new Database();
-		System.out.println(getPath());
 
 		Produit prod = new Produit("'makorelina'", 1.52 , "'minono ftsn zany'" );
 		System.out.println(prod.createTable());
