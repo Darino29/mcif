@@ -40,9 +40,6 @@ public class MICF extends JFrame {
 	private JTextField mdpTxt;
 	private JTextField confirmMdpTxt;
 	private JComboBox comboBox ;
-	int xx,xy;
-	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
 
 	/**
 	 * Launch the application.
@@ -135,11 +132,12 @@ public class MICF extends JFrame {
 		lblNewLabel.setBounds(414, 83, 77, 21);
 		contentPane.add(lblNewLabel);
 		
+
 		mdpTxt = new JTextField();
 		mdpTxt.setColumns(10);
 		mdpTxt.setBounds(414, 194, 249, 39);
 		contentPane.add(mdpTxt);
-		
+    
 		JLabel lblPassword = new JLabel("PASSWORD");
 		lblPassword.setBounds(414, 163, 77, 21);
 		contentPane.add(lblPassword);
@@ -152,7 +150,6 @@ public class MICF extends JFrame {
 		confirmMdpTxt.setColumns(10);
 		confirmMdpTxt.setBounds(414, 268, 249, 39);
 		contentPane.add(confirmMdpTxt);
-		
 		JLabel lblConfirmPassword = new JLabel("CONFIRM PASSWORD");
 		lblConfirmPassword.setBounds(414, 237, 139, 21);
 		contentPane.add(lblConfirmPassword);
@@ -191,13 +188,13 @@ public class MICF extends JFrame {
 		lblclose.setBounds(839, 0, 25, 21);
 		contentPane.add(lblclose);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(414, 194, 249, 39);
-		contentPane.add(passwordField);
+		psw = new JPasswordField();
+		psw.setBounds(414, 194, 249, 39);
+		contentPane.add(psw);
 		
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setBounds(414, 268, 249, 39);
-		contentPane.add(passwordField_1);
+		Cpsw = new JPasswordField();
+		Cpsw.setBounds(414, 268, 249, 39);
+		contentPane.add(Cpsw);
 		
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Admin", "Vendeur"}));
