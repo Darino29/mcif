@@ -58,6 +58,11 @@ public class PanelStock extends JPanel {
 		search.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if (model.getRowCount() > 0) {
+				    for (int i = model.getRowCount() - 1; i > -1; i--) {
+				        model.removeRow(i);
+				    }
+				}
 				 List<Stock> stock = new ArrayList<>();
 				 try {
 					 StockControlleur stck = new StockControlleur();
@@ -74,7 +79,6 @@ public class PanelStock extends JPanel {
 						row[3] = stk.getDesc();
 						model.addRow(row) ;
 					}
-				 
 			}
 		});
 		search.setIcon(new ImageIcon(PanelStock.class.getResource("/img/icons8-search-24.png")));
