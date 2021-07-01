@@ -111,6 +111,30 @@ public class Database {
 		    return clients;	
 	}
 	
+	public List<Client> searchClient(String mot){
+		 List<Client> clients = new ArrayList<>();
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        ResultSet rs = statement.executeQuery("select * from Client WHERE nomClient LIKE " + mot );
+		        while (rs.next()) {
+		            int id = rs.getInt("idClient");
+		            String nom = rs.getString("nomClient");
+		            String prenom  = rs.getString("PrenomClient");
+		            String ddn  = rs.getString("ddnClient");
+		            String addresse  = rs.getString("adresseClient");
+		            String ville  = rs.getString("villeClient");
+		            String pays  = rs.getString("paysClient");
+		            String tel  = rs.getString("telClient");
+		            clients.add(new Client(id, nom, prenom, ddn , addresse, ville, pays, tel));
+		        }
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return clients;	
+	}
+	
 	public void addClient (Client clt) {
 		  try {
 		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
@@ -123,12 +147,12 @@ public class Database {
 	    }
 	}
 	
-	public void updateClient (Client clt, int id) {
+	public void updateClient (Client clt, String nom, String prenom) {
 		 try {
 		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
 		        Statement statement = connection.createStatement();
 		        statement.execute(clt.createTable());
-		        statement.executeUpdate(clt.update(id));
+		        statement.executeUpdate(clt.update(nom, prenom));
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
