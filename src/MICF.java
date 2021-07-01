@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Controlleur.UtilisateurControleur;
+
 import java.awt.Toolkit;
 import java.awt.GridLayout;
 import javax.swing.GroupLayout;
@@ -35,10 +38,11 @@ import java.awt.event.ActionEvent;
 public class MICF extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField username;
+	private JTextField nomTxt;
+	private JTextField mdpTxt;
+	private JTextField confirmMdpTxt;
+	private JComboBox comboBox ;
 	int xx,xy;
-	private JPasswordField psw;
-	private JPasswordField Cpsw;
 
 	/**
 	 * Launch the application.
@@ -97,15 +101,23 @@ public class MICF extends JFrame {
 		lblNewLabel_3.setIcon(new ImageIcon(MICF.class.getResource("/img/6.jpg")));
 		panel.add(lblNewLabel_3);
 		
-		username = new JTextField();
-		username.setBounds(414, 114, 249, 39);
-		contentPane.add(username);
-		username.setColumns(10);
+		nomTxt = new JTextField();
+		nomTxt.setBounds(414, 114, 249, 39);
+		contentPane.add(nomTxt);
+		nomTxt.setColumns(10);
 		
-		JButton btnNewButton = new JButton("SIGN IN");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			
+		JButton btnNewButton = new JButton("Create");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String nom = nomTxt.getText();
+				String mdp = mdpTxt.getText();
+				String confirmMdp =confirmMdpTxt.getText();
+				Object postO = comboBox.getSelectedItem();
+				String post = postO.toString();
+				UtilisateurControleur control = new UtilisateurControleur();
+				Boolean result = control.createUtilisateur(nom, mdp, confirmMdp, post);
+				System.out.println(result);
 				
 			}
 		});
@@ -123,6 +135,12 @@ public class MICF extends JFrame {
 		lblNewLabel.setBounds(414, 83, 77, 21);
 		contentPane.add(lblNewLabel);
 		
+
+		mdpTxt = new JTextField();
+		mdpTxt.setColumns(10);
+		mdpTxt.setBounds(414, 194, 249, 39);
+		contentPane.add(mdpTxt);
+    
 		JLabel lblPassword = new JLabel("PASSWORD");
 		lblPassword.setBounds(414, 163, 77, 21);
 		contentPane.add(lblPassword);
@@ -131,6 +149,10 @@ public class MICF extends JFrame {
 		separator_1.setBounds(414, 237, 249, 2);
 		contentPane.add(separator_1);
 		
+		confirmMdpTxt = new JTextField();
+		confirmMdpTxt.setColumns(10);
+		confirmMdpTxt.setBounds(414, 268, 249, 39);
+		contentPane.add(confirmMdpTxt);
 		JLabel lblConfirmPassword = new JLabel("CONFIRM PASSWORD");
 		lblConfirmPassword.setBounds(414, 237, 139, 21);
 		contentPane.add(lblConfirmPassword);
@@ -169,15 +191,9 @@ public class MICF extends JFrame {
 		lblclose.setBounds(839, 0, 25, 21);
 		contentPane.add(lblclose);
 		
-		psw = new JPasswordField();
-		psw.setBounds(414, 194, 249, 39);
-		contentPane.add(psw);
+
 		
-		Cpsw = new JPasswordField();
-		Cpsw.setBounds(414, 268, 249, 39);
-		contentPane.add(Cpsw);
-		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Admin", "Vendeur"}));
 		comboBox.setBounds(414, 317, 111, 21);
 		contentPane.add(comboBox);
