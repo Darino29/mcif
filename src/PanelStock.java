@@ -21,12 +21,12 @@ import java.awt.event.ActionEvent;
 public class PanelStock extends JPanel {
 	private JTextField txtNom;
 	private JTextField produit;
-	private JTextField prix;
+	private JTextField quantite;
 	private JTextField description;
 	private JTable table;
 	DefaultTableModel model;
 	private JTextField id;
-	final Object[] row = new Object[0];
+	final Object[] row = new Object[4];
 
 	/**
 	 * Create the panel.
@@ -75,8 +75,8 @@ public class PanelStock extends JPanel {
 		lblCa.setHorizontalAlignment(SwingConstants.LEFT);
 		lblCa.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
-		JLabel lblDernierAchat = new JLabel("Prix");
-		lblDernierAchat.setBounds(10, 109, 62, 13);
+		JLabel lblDernierAchat = new JLabel("Quantite");
+		lblDernierAchat.setBounds(10, 109, 97, 13);
 		panel.add(lblDernierAchat);
 		lblDernierAchat.setHorizontalAlignment(SwingConstants.LEFT);
 		lblDernierAchat.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -92,10 +92,10 @@ public class PanelStock extends JPanel {
 		panel.add(produit);
 		produit.setColumns(10);
 		
-		prix = new JTextField();
-		prix.setColumns(10);
-		prix.setBounds(100, 106, 229, 23);
-		panel.add(prix);
+		quantite = new JTextField();
+		quantite.setColumns(10);
+		quantite.setBounds(100, 106, 229, 23);
+		panel.add(quantite);
 		
 		description = new JTextField();
 		description.setColumns(10);
@@ -116,7 +116,10 @@ public class PanelStock extends JPanel {
 		JButton btnNewButton_1 = new JButton("Enregistrer");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				row[0]=id.getText();
+				row[1]=produit.getText();
+				row[2]=quantite.getText();
+				row[3]=description.getText();
 				model.addRow(row) ;
 				
 			}
