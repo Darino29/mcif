@@ -29,6 +29,8 @@ import javax.swing.JPasswordField;
 import javax.swing.AbstractListModel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MICF extends JFrame {
 
@@ -101,6 +103,12 @@ public class MICF extends JFrame {
 		username.setColumns(10);
 		
 		JButton btnNewButton = new JButton("SIGN IN");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				
+			}
+		});
 		btnNewButton.setBackground(new Color(222, 184, 135));
 		btnNewButton.setBounds(466, 388, 162, 39);
 		contentPane.add(btnNewButton);
