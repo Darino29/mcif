@@ -43,22 +43,8 @@ public class MICF2 extends JFrame {
 	int xx,xy;
 	private JPasswordField passwordField;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MICF2 frame = new MICF2();
-					frame.setUndecorated(true);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
+	
 
 	/**
 	 * Create the frame.
@@ -179,7 +165,7 @@ public class MICF2 extends JFrame {
 			lblclose.setForeground(Color.WHITE);
 		}
 		});
-		lblclose.setForeground(Color.WHITE);
+		lblclose.setForeground(Color.RED);
 		lblclose.setBackground(Color.WHITE);
 		lblclose.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblclose.setBounds(839, 0, 25, 21);
@@ -188,5 +174,20 @@ public class MICF2 extends JFrame {
 		passwordField = new JPasswordField();
 		passwordField.setBounds(414, 194, 249, 39);
 		contentPane.add(passwordField);
+		
+		JLabel lblNewLabel_2 = new JLabel("Don't have account? Create");
+		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MICF m = new MICF();
+				m.setUndecorated(true);
+				m.setVisible(true);
+				dispose();
+			}
+		});
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel_2.setBounds(414, 342, 245, 13);
+		contentPane.add(lblNewLabel_2);
 	}
 }

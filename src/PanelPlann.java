@@ -13,6 +13,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.border.EtchedBorder;
 
 public class PanelPlann extends JPanel {
@@ -21,6 +22,7 @@ public class PanelPlann extends JPanel {
 	private JTextField textField_2;
 	private JTable table;
 	private JTextField txtJjmmaaaa;
+	DefaultTableModel model;
 	private String name = "PanelPlann";
 
 	public String getName() {
@@ -30,7 +32,6 @@ public class PanelPlann extends JPanel {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	/**
 	 * Create the panel.
 	 */
@@ -121,6 +122,11 @@ public class PanelPlann extends JPanel {
 		add(scrollPane);
 		
 		table = new JTable();
+		model = new DefaultTableModel();
+		Object[] column = {"Titre","Date","Commentaire"};
+		
+		model.setColumnIdentifiers(column);
+		table.setModel(model);
 		scrollPane.setViewportView(table);
 
 	}
