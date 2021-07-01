@@ -189,6 +189,8 @@ public class MICF extends JFrame {
 		lblclose.setBackground(Color.WHITE);
 		lblclose.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblclose.setBounds(839, 0, 25, 21);
+		contentPane.add(lblclose);
+		
 		
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Admin", "Vendeur"}));

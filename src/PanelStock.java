@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JSeparator;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JTable;
@@ -30,7 +31,7 @@ import java.util.List;
 public class PanelStock extends JPanel {
 	private JTextField txtNom;
 	private JTextField produit;
-	private JTextField quantiter;
+	private JTextField quantite;
 	private JTextField description;
 	private JTable table;
 	DefaultTableModel model;
@@ -110,8 +111,8 @@ public class PanelStock extends JPanel {
 		lblCa.setHorizontalAlignment(SwingConstants.LEFT);
 		lblCa.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
-		JLabel lblDernierAchat = new JLabel("Quantiter");
-		lblDernierAchat.setBounds(10, 109, 62, 13);
+		JLabel lblDernierAchat = new JLabel("Quantite");
+		lblDernierAchat.setBounds(10, 109, 97, 13);
 		panel.add(lblDernierAchat);
 		lblDernierAchat.setHorizontalAlignment(SwingConstants.LEFT);
 		lblDernierAchat.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -127,12 +128,13 @@ public class PanelStock extends JPanel {
 		panel.add(produit);
 		produit.setColumns(10);
 		
-		quantiter = new JTextField();
-		quantiter.setColumns(10);
-		quantiter.setBounds(100, 106, 229, 23);
-		panel.add(quantiter);
+		quantite = new JTextField();
+		quantite.setColumns(10);
+		quantite.setBounds(100, 106, 229, 23);
+		panel.add(quantite);
 		
 		description = new JTextField();
+		description.setHorizontalAlignment(SwingConstants.CENTER);
 		description.setColumns(10);
 		description.setBounds(100, 139, 229, 180);
 		panel.add(description);
@@ -152,19 +154,26 @@ public class PanelStock extends JPanel {
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+        if(id.getText().equals("") || produit.getText().equals("") || quantite.getText().equals("") || description.getText().equals(""))
+				{
+					JOptionPane.showMessageDialog(null, "Completer les cases vides");
+				}
+				else
+				{
 				String prod = produit.getText();
 				String idStock = id.getText();
 				String qte = quantiter.getText();
 				String descrp = description.getText();
 				StockControlleur stck = new StockControlleur();
 				stck.CreateStock(idStock, prod, qte, descrp);
-				
+        id.setText("");
+				produit.setText("");
+				quantite.setText("");
+				description.setText("");
+				JOptionPane.showMessageDialog(null, "Enregistr� avec Succ�s");
+        }
 				
 			}
-		});
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
 				
 				
 			}
@@ -173,12 +182,37 @@ public class PanelStock extends JPanel {
 		btnNewButton_1.setBounds(4, 410, 104, 35);
 		add(btnNewButton_1);
 		
-		JButton btnNewButton_1_1 = new JButton("Edit");
+		JButton btnNewButton_1_1 = new JButton("Editer");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int i=table.getSelectedRow();
+				model.setValueAt(id.getText(), i, 0);
+				model.setValueAt(produit.getText(), i, 1);
+				model.setValueAt(quantite.getText(), i, 2);
+				model.setValueAt(description.getText(), i, 3);
+				
+				
+			}
+		});
 		btnNewButton_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnNewButton_1_1.setBounds(154, 410, 104, 35);
 		add(btnNewButton_1_1);
 		
 		JButton btnNewButton_1_1_1 = new JButton("Supprimer");
+		btnNewButton_1_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int i = table.getSelectedRow();
+				if(i>=0)
+				{
+					model.removeRow(i);
+					JOptionPane.showMessageDialog(null, "Supprim�");
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Selection� l'�lement a supprim�");
+				}
+			}
+		});
 		btnNewButton_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnNewButton_1_1_1.setBounds(300, 410, 93, 35);
 		add(btnNewButton_1_1_1);
@@ -188,6 +222,16 @@ public class PanelStock extends JPanel {
 		add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int i=table.getSelectedRow();
+				id.setText(model.getValueAt(i, 0).toString());
+				produit.setText(model.getValueAt(i, 1).toString());
+				quantite.setText(model.getValueAt(i, 2).toString());
+				description.setText(model.getValueAt(i, 3).toString());
+			}
+		});
 		model = new DefaultTableModel();
 		Object[] column = {"ID","Produit","Prix","Description"};
 		
