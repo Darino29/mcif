@@ -52,7 +52,7 @@ public class Stock {
 	
 	public String update(String idStock, String idProduit ) {
 		return("UPDATE " + this.table + " SET  idStock = " + this.idStock+ " , idProduit = " + this.idProduit + " , qteStock = " + this.qteStock +
-				 ", description = " + this.desc + " WHERE idStock = " + this.idStock + " AND idProduit = " + idProduit);
+				 ", description = " + this.desc + " WHERE idStock = " + idStock + " AND idProduit = " + idProduit);
 	}
 	
 	public String delete() {

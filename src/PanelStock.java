@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PanelStock extends JPanel {
-	private JTextField txtNom;
+	private JTextField searchTxt;
 	private JTextField produit;
 	private JTextField quantite;
 	private JTextField description;
@@ -47,13 +47,13 @@ public class PanelStock extends JPanel {
 		setLayout(null);
 		setVisible(true);
 		
-		txtNom = new JTextField();
-		txtNom.setText("Produit/Prix/Id");
-		txtNom.setForeground(Color.GRAY);
-		txtNom.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtNom.setColumns(10);
-		txtNom.setBounds(10, 10, 201, 40);
-		add(txtNom);
+		searchTxt = new JTextField();
+		searchTxt.setText("Produit/Prix/Id");
+		searchTxt.setForeground(Color.GRAY);
+		searchTxt.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		searchTxt.setColumns(10);
+		searchTxt.setBounds(10, 10, 201, 40);
+		add(searchTxt);
 		
 		JButton search = new JButton("");
 		search.addMouseListener(new MouseAdapter() {
@@ -65,21 +65,32 @@ public class PanelStock extends JPanel {
 				    }
 				}
 				 List<Stock> stock = new ArrayList<>();
-				 try {
-					 StockControlleur stck = new StockControlleur();
-					 stock = stck.allStock();
-					 
-				 }catch(Exception e1) {
-					 System.out.println("not found");
-				 }
-				 for (Stock stk : stock) {
-					 	System.out.println(stk.toString());
-						row[0] = stk.getIdStock();
-						row[1] = stk.getIdProduit();
-						row[2] = stk.getQteStock();
-						row[3] = stk.getDesc();
-						model.addRow(row) ;
-					}
+				 StockControlleur stck = new StockControlleur();
+				if(searchTxt.getText().equals("")) {	
+					 try {
+						 stock = stck.allStock();
+						 
+					 }catch(Exception e1) {
+						 System.out.println("not found");
+					 }
+				}
+				else {
+					try {
+						 
+						 stock = stck.searchStock(searchTxt.getText());
+						 
+					 }catch(Exception e1) {
+						 System.out.println("not found");
+					 }
+				}
+					 for (Stock stk : stock) {
+						 	System.out.println(stk.toString());
+							row[0] = stk.getIdStock();
+							row[1] = stk.getIdProduit();
+							row[2] = stk.getQteStock();
+							row[3] = stk.getDesc();
+							model.addRow(row) ;
+						}
 			}
 		});
 		search.setIcon(new ImageIcon(PanelStock.class.getResource("/img/icons8-search-24.png")));
@@ -162,11 +173,11 @@ public class PanelStock extends JPanel {
 				{
 				String prod = produit.getText();
 				String idStock = id.getText();
-				String qte = quantiter.getText();
+				String qte = quantite.getText();
 				String descrp = description.getText();
 				StockControlleur stck = new StockControlleur();
 				stck.CreateStock(idStock, prod, qte, descrp);
-        id.setText("");
+				id.setText("");
 				produit.setText("");
 				quantite.setText("");
 				description.setText("");
@@ -176,27 +187,41 @@ public class PanelStock extends JPanel {
 			}
 				
 				
-			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnNewButton_1.setBounds(4, 410, 104, 35);
 		add(btnNewButton_1);
 		
-		JButton btnNewButton_1_1 = new JButton("Editer");
-		btnNewButton_1_1.addActionListener(new ActionListener() {
+		JButton edite = new JButton("Editer");
+		edite.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int i=table.getSelectedRow();
-				model.setValueAt(id.getText(), i, 0);
-				model.setValueAt(produit.getText(), i, 1);
-				model.setValueAt(quantite.getText(), i, 2);
-				model.setValueAt(description.getText(), i, 3);
-				
+				if(id.getText().equals("") || produit.getText().equals("") || quantite.getText().equals("") || description.getText().equals(""))
+				{
+					JOptionPane.showMessageDialog(null, "Completer les cases vides");
+				}
+				else
+				{
+					int i=table.getSelectedRow();
+					String idStock = id.getText();
+					String qte = quantite.getText();
+					String prod = produit.getText();
+					String descrp = description.getText();
+					StockControlleur stck = new StockControlleur();
+					try {
+						String oldStock = model.getValueAt(i, 1).toString();
+						String oldId = model.getValueAt(i, 0).toString();
+						stck.editStock(idStock, prod, qte, descrp, oldId, oldStock);
+					}catch(Exception e1) {
+						JOptionPane.showMessageDialog(null, "selectionner un elements");
+					}
+					
+				}
 				
 			}
 		});
-		btnNewButton_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnNewButton_1_1.setBounds(154, 410, 104, 35);
-		add(btnNewButton_1_1);
+		edite.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		edite.setBounds(154, 410, 104, 35);
+		add(edite);
 		
 		JButton btnNewButton_1_1_1 = new JButton("Supprimer");
 		btnNewButton_1_1_1.addActionListener(new ActionListener() {
@@ -204,6 +229,12 @@ public class PanelStock extends JPanel {
 				int i = table.getSelectedRow();
 				if(i>=0)
 				{
+					String idStock = id.getText();
+					String qte = quantite.getText();
+					String prod = produit.getText();
+					String descrp = description.getText();
+					StockControlleur stck = new StockControlleur();
+					stck.supprStock(idStock, prod, qte, descrp);
 					model.removeRow(i);
 					JOptionPane.showMessageDialog(null, "Supprim�");
 				}
@@ -230,6 +261,7 @@ public class PanelStock extends JPanel {
 				produit.setText(model.getValueAt(i, 1).toString());
 				quantite.setText(model.getValueAt(i, 2).toString());
 				description.setText(model.getValueAt(i, 3).toString());
+				
 			}
 		});
 		model = new DefaultTableModel();

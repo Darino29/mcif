@@ -281,6 +281,26 @@ public class Database {
 		    return commandes ;	
 	}
 	
+	public List<Stock> searchStock(String motClee){
+		 List<Stock> commandes = new ArrayList<>();
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        ResultSet rs = statement.executeQuery("SELECT * from Stock WHERE idStock LIKE " + motClee);
+		        while (rs.next()) {
+		            int stockqte = rs.getInt("qteStock");
+		            String idStock = rs.getString("idStock");
+		            String idProduit  = rs.getString("idProduit");
+		            String desc= rs.getString("Description");
+		            commandes.add(new Stock(idStock, idProduit, stockqte, desc));
+		        }
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return commandes ;	
+	}
+	
 	public void addStock (Stock stock) {
 		  try {
 		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
@@ -305,12 +325,12 @@ public class Database {
 	    }
 	}
 	
-	public void deleteStock (CommandeProduit cmdPro) {
+	public void deleteStock (Stock stock) {
 		try {
 	        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
 	        Statement statement = connection.createStatement();
-	        statement.execute(cmdPro.createTable());
-	        statement.executeUpdate(cmdPro.delete());
+	        statement.execute(stock.createTable());
+	        statement.executeUpdate(stock.delete());
 	  }
 	 catch (SQLException e) {
 	  e.printStackTrace();
