@@ -1,5 +1,7 @@
 package Controlleur;
 
+import java.util.List;
+
 import model.Database;
 import model.Stock;
 
@@ -21,6 +23,7 @@ public class StockControlleur {
 			int quantiter = Integer.parseInt(qte);
 			Stock stck = new Stock(util.quote(id),util.quote(prod), quantiter, util.quote(desc) );
 			db.addStock(stck);
+			System.out.println("stocker");
 			return true;
 			
 		}
@@ -28,6 +31,10 @@ public class StockControlleur {
 			return false;
 		}
 		
+	}
+	public List<Stock> allStock(){
+		List<Stock> stock = db.getAllStock();
+		return stock;
 		
 	}
 

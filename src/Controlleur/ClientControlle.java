@@ -1,5 +1,4 @@
 package Controlleur;
-
 import model.Client;
 import model.Database;
 
@@ -10,6 +9,14 @@ public class ClientControlle {
 		db = new Database();
 		util = new UtilitaireControleur();
 		
+	}
+	
+	public  String quote(String s) {
+	    return new StringBuilder()
+	        .append('\'')
+	        .append(s)
+	        .append('\'')
+	        .toString();
 	}
 	
 	public void CreateClient( String nomClient, String prenomClient, String ddnClient, String adresseClient,

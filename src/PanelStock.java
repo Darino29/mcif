@@ -15,11 +15,18 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+
+import Controlleur.StockControlleur;
+import model.Produit;
+import model.Stock;
+
 import javax.swing.border.EtchedBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PanelStock extends JPanel {
 	private JTextField txtNom;
@@ -48,10 +55,36 @@ public class PanelStock extends JPanel {
 		txtNom.setBounds(10, 10, 201, 40);
 		add(txtNom);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon(PanelStock.class.getResource("/img/icons8-search-24.png")));
-		btnNewButton.setBounds(212, 10, 50, 40);
-		add(btnNewButton);
+		JButton search = new JButton("");
+		search.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (model.getRowCount() > 0) {
+				    for (int i = model.getRowCount() - 1; i > -1; i--) {
+				        model.removeRow(i);
+				    }
+				}
+				 List<Stock> stock = new ArrayList<>();
+				 try {
+					 StockControlleur stck = new StockControlleur();
+					 stock = stck.allStock();
+					 
+				 }catch(Exception e1) {
+					 System.out.println("not found");
+				 }
+				 for (Stock stk : stock) {
+					 	System.out.println(stk.toString());
+						row[0] = stk.getIdStock();
+						row[1] = stk.getIdProduit();
+						row[2] = stk.getQteStock();
+						row[3] = stk.getDesc();
+						model.addRow(row) ;
+					}
+			}
+		});
+		search.setIcon(new ImageIcon(PanelStock.class.getResource("/img/icons8-search-24.png")));
+		search.setBounds(212, 10, 50, 40);
+		add(search);
 		
 		JButton btnCreer = new JButton("Imprimer");
 		btnCreer.setForeground(new Color(240, 255, 240));
@@ -118,26 +151,29 @@ public class PanelStock extends JPanel {
 		panel.add(lblId);
 		
 		JButton btnNewButton_1 = new JButton("Enregistrer");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(id.getText().equals("") || produit.getText().equals("") || quantite.getText().equals("") || description.getText().equals(""))
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+        if(id.getText().equals("") || produit.getText().equals("") || quantite.getText().equals("") || description.getText().equals(""))
 				{
 					JOptionPane.showMessageDialog(null, "Completer les cases vides");
 				}
 				else
 				{
-					row[0]=id.getText();
-					row[1]=produit.getText();
-					row[2]=quantite.getText();
-					row[3]=description.getText();
-					model.addRow(row) ;
-					
-					id.setText("");
-					produit.setText("");
-					quantite.setText("");
-					description.setText("");
-					JOptionPane.showMessageDialog(null, "Enregistré avec Succès");
-				}
+				String prod = produit.getText();
+				String idStock = id.getText();
+				String qte = quantiter.getText();
+				String descrp = description.getText();
+				StockControlleur stck = new StockControlleur();
+				stck.CreateStock(idStock, prod, qte, descrp);
+        id.setText("");
+				produit.setText("");
+				quantite.setText("");
+				description.setText("");
+				JOptionPane.showMessageDialog(null, "Enregistrï¿½ avec Succï¿½s");
+        }
+				
+			}
 				
 				
 			}
@@ -169,11 +205,11 @@ public class PanelStock extends JPanel {
 				if(i>=0)
 				{
 					model.removeRow(i);
-					JOptionPane.showMessageDialog(null, "Supprimé");
+					JOptionPane.showMessageDialog(null, "Supprimï¿½");
 				}
 				else
 				{
-					JOptionPane.showMessageDialog(null, "Selectioné l'élement a supprimé");
+					JOptionPane.showMessageDialog(null, "Selectionï¿½ l'ï¿½lement a supprimï¿½");
 				}
 			}
 		});
