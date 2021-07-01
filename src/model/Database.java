@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Database {
-	private String dbLocation = "jdbc:mysql://localhost:3307";
+	private String dbLocation = "jdbc:mysql://localhost:3306";
 	private String user = "root";
 	private String mdp = "lelena";
 	
@@ -100,7 +100,7 @@ public class Database {
 		            String addresse  = rs.getString("adresseClient");
 		            String ville  = rs.getString("villeClient");
 		            String pays  = rs.getString("paysClient");
-		            int tel  = rs.getInt("telClient");
+		            String tel  = rs.getString("telClient");
 		            clients.add(new Client(id, nom, prenom, ddn , addresse, ville, pays, tel));
 		        }
 		        connection.close();
@@ -270,8 +270,8 @@ public class Database {
 		            int stockqte = rs.getInt("qteStock");
 		            String idStock = rs.getString("idStock");
 		            String idProduit  = rs.getString("idProduit");
-		            int minimum = rs.getInt("Minimum");
-		            commandes.add(new Stock(idStock, idProduit, stockqte, minimum));
+		            String desc= rs.getString("Description");
+		            commandes.add(new Stock(idStock, idProduit, stockqte, desc));
 		        }
 		        connection.close();
 		    } catch (SQLException e) {
@@ -327,10 +327,8 @@ public class Database {
 		            int id = rs.getInt("idUtilisateur");
 		            String nom = rs.getString("nomUtilisateur");
 		            String mdp  = rs.getString("mdpUtilisateur");
-		            String email  = rs.getString("email");
-		            String tel  = rs.getString("telUtilisateur");
 		            String post  = rs.getString("postUtilisateur");
-		            utilisateurs.add(new Utilisateur(id, nom, mdp, email , tel, post));
+		            utilisateurs.add(new Utilisateur(id, nom, mdp, post));
 		        }
 		        connection.close();
 		    } catch (SQLException e) {
