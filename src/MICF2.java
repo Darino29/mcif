@@ -4,6 +4,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Controlleur.Auth;
+import model.Utilisateur;
+
 import java.awt.Toolkit;
 import java.awt.GridLayout;
 import javax.swing.GroupLayout;
@@ -101,38 +105,39 @@ public class MICF2 extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("SIGN UP");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton connecte = new JButton("SIGN UP");
+		connecte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				String uname = textField.getText();
 				String pswd = passwordField.getText();
-			
-				if(uname.trim().equals("admin")&& pswd.trim().equals("admin")) {
-					ACC n = new ACC();
+				Auth auth = new Auth();
+				Utilisateur user = auth.connection(uname, pswd);
+				if(user != null) {
+					ACC n = new ACC(user);
 					n.setUndecorated(true);
 					n.setVisible(true);
 					dispose();
 				}
 				else if(uname.length()==0) {
-					JOptionPane.showMessageDialog(btnNewButton,"Username invalid");
+					JOptionPane.showMessageDialog(connecte,"Username invalid");
 				}
 				else if(pswd.length()== 0) {
-					JOptionPane.showMessageDialog(btnNewButton,"Password invalid");	
+					JOptionPane.showMessageDialog(connecte,"Password invalid");	
 				}
 				else if((uname.length()==0) && (pswd.length()== 0)) {
-					JOptionPane.showMessageDialog(btnNewButton,"Username and Password invalid");
+					JOptionPane.showMessageDialog(connecte,"Username and Password invalid");
 				}
 				
 				else
 				{
-					JOptionPane.showMessageDialog(btnNewButton,"Invalid Login");
+					JOptionPane.showMessageDialog(connecte,"Invalid Login");
 				}
 			}
 		});
-		btnNewButton.setBackground(new Color(222, 184, 135));
-		btnNewButton.setBounds(462, 285, 162, 39);
-		contentPane.add(btnNewButton);
+		connecte.setBackground(new Color(222, 184, 135));
+		connecte.setBounds(462, 285, 162, 39);
+		contentPane.add(connecte);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(414, 157, 249, 2);

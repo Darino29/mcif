@@ -34,6 +34,15 @@ public class PanelStock extends JPanel {
 	private JTextField quantite;
 	private JTextField description;
 	private JTable table;
+	private String name = "Stock";
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	DefaultTableModel model;
 	private JTextField id;
 	final Object[] row = new Object[4];
@@ -181,7 +190,7 @@ public class PanelStock extends JPanel {
 				produit.setText("");
 				quantite.setText("");
 				description.setText("");
-				JOptionPane.showMessageDialog(null, "Enregistr� avec Succ�s");
+				JOptionPane.showMessageDialog(null, "Enregistrer");
         }
 				
 			}

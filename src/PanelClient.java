@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JSeparator;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JTable;
@@ -36,6 +37,15 @@ public class PanelClient extends JPanel {
 	private JComboBox combobox;
 	DefaultTableModel model;
 	final Object[] row = new Object[0];
+	private String name = "client";
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	/**
 	 * Create the panel.
@@ -54,10 +64,16 @@ public class PanelClient extends JPanel {
 		txtNom.setBounds(10, 10, 201, 40);
 		add(txtNom);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon(PanelClient.class.getResource("/img/icons8-search-24.png")));
-		btnNewButton.setBounds(212, 10, 50, 40);
-		add(btnNewButton);
+		JButton search = new JButton("");
+		search.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+		search.setIcon(new ImageIcon(PanelClient.class.getResource("/img/icons8-search-24.png")));
+		search.setBounds(212, 10, 50, 40);
+		add(search);
 		
 		JButton btnCreer = new JButton("Imprimer");
 		btnCreer.setForeground(new Color(240, 255, 240));
@@ -164,6 +180,11 @@ public class PanelClient extends JPanel {
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if(textNom.getText().equals("") || txtPrenom.getText().equals("") || txtDdn.getText().equals("") || 
+						txtAdresse.getText().equals("") || txtVille.getText().equals("") || txtPhone.getText().equals("") ) {
+					JOptionPane.showMessageDialog(null, "Completer les cases vides");
+				}
+				else {
 	                String Nom = textNom.getText();
 	                String Prenom = txtPrenom.getText();
 	                String Ddn = txtDdn.getText();
@@ -176,6 +197,14 @@ public class PanelClient extends JPanel {
 	                System.out.println(Nom +"    "+ Prenom + " "+ Ddn +" "+ Adresse + " " + Ville + " "+ Phone + " " + pays + " " + date);
 	                ClientControlle cC = new ClientControlle();
 	                cC.CreateClient( Nom, Prenom, Ddn, Adresse, Ville, paysS, Phone);
+	                JOptionPane.showMessageDialog(null, "Enregistrer");
+	                textNom.setText("");
+	                txtPrenom.setText("");
+	                txtDdn.setText("");
+	                txtAdresse.setText("");
+	                txtVille.setText("");
+	                txtPhone.setText("");
+				}
 	                
 			}
 		});

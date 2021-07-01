@@ -7,6 +7,15 @@ import java.awt.event.MouseEvent;
 
 public class PanelSet extends JPanel {
 	private ACC parent;
+	private String name = "set";
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	/**
 	 * Create the panel.

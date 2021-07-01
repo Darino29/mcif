@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.Utilisateur;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -42,6 +45,7 @@ public class ACC extends JFrame {
 	private PanelSet2 panelSet2;
 	private PanelSet3 panelSet3;
 	private JPanel contentPane;
+	private static Utilisateur user;
 	
 	
 	/**
@@ -51,7 +55,7 @@ public class ACC extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ACC frame = new ACC();
+					ACC frame = new ACC(user);
 					frame.setUndecorated(true);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -64,7 +68,8 @@ public class ACC extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ACC() {
+	public ACC(Utilisateur userI) {
+		user = userI;
 		setForeground(SystemColor.controlDkShadow);
 		setBackground(SystemColor.controlDkShadow);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\23058\\OneDrive\\Images\\S-Assistant2\\S-Assistant2\\S-Assistant2\\app\\src\\main\\res\\drawable\\launch.PNG"));
@@ -368,18 +373,24 @@ public class ACC extends JFrame {
 		
 	}	
  public void menuClicked(JPanel panel) {
-	 panelCaisse.setVisible(false);
-	 panelClient.setVisible(false);
-	 panelStock.setVisible(false);
-	 panelPlann.setVisible(false);
-	 panelVente.setVisible(false);
-	 panelVente2.setVisible(false);
-	 panelCompte.setVisible(false);
-	 panelSet.setVisible(false);
-	 panelSet2.setVisible(false);
-	 panelSet3.setVisible(false);
-	 
-	 panel.setVisible(true);
+	 System.out.println(user.getPostUtilisateur());
+	 if((panel.getClass() == PanelSet.class || panel.getClass() == PanelCompte.class) && (user.getPostUtilisateur().equals("Vendeur")) ) {
+		 JOptionPane.showMessageDialog(null, "Admin only");
+	 }
+	 else {
+		 panelCaisse.setVisible(false);
+		 panelClient.setVisible(false);
+		 panelStock.setVisible(false);
+		 panelPlann.setVisible(false);
+		 panelVente.setVisible(false);
+		 panelVente2.setVisible(false);
+		 panelCompte.setVisible(false);
+		 panelSet.setVisible(false);
+		 panelSet2.setVisible(false);
+		 panelSet3.setVisible(false);
+		 
+		 panel.setVisible(true);
+	 }
  }
 	 
  public  void changerMenu(){

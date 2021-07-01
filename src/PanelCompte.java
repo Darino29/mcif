@@ -23,8 +23,19 @@ import java.awt.event.MouseEvent;
 public class PanelCompte extends JPanel {
 	private JTable table;
 	DefaultTableModel model;
+	private String name = "compte";
 	
 	
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
 	/**
 	 * Create the panel.
 	 */

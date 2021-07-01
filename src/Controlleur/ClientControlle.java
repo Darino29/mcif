@@ -9,6 +9,7 @@ public class ClientControlle {
 		db = new Database();
 		util = new UtilitaireControleur();
 		
+		
 	}
 	
 	public  String quote(String s) {

@@ -358,6 +358,28 @@ public class Database {
 		    return utilisateurs;	
 	}
 	
+	public Utilisateur getUtilisateur(String username, String mdpIn){
+		Utilisateur utilisateur = null;
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        ResultSet rs = statement.executeQuery("select * from Utilisateurs Where nomUtilisateur = " + username);
+		        while (rs.next()) {
+		        	if(rs.getString("mdpUtilisateur").equals(mdpIn)) { 
+		            int id = rs.getInt("idUtilisateur");
+		            String nom = rs.getString("nomUtilisateur");
+		            String mdp  = rs.getString("mdpUtilisateur");
+		            String post  = rs.getString("postUtilisateur");
+		            utilisateur = new Utilisateur(id, nom, mdp, post);
+		        	}
+		        }
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return utilisateur;	
+	}
+	
 	public void addUtilisateur (Utilisateur util) {
 		  try {
 		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
