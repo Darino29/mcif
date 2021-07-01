@@ -146,7 +146,7 @@ public class PanelStock extends JPanel {
 		btnNewButton_1.setBounds(4, 410, 104, 35);
 		add(btnNewButton_1);
 		
-		JButton btnNewButton_1_1 = new JButton("Edit");
+		JButton btnNewButton_1_1 = new JButton("Editer");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int i=table.getSelectedRow();
