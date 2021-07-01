@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JSeparator;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JTable;
@@ -17,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.border.EtchedBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelStock extends JPanel {
 	private JTextField txtNom;
@@ -98,6 +101,7 @@ public class PanelStock extends JPanel {
 		panel.add(quantite);
 		
 		description = new JTextField();
+		description.setHorizontalAlignment(SwingConstants.CENTER);
 		description.setColumns(10);
 		description.setBounds(100, 139, 229, 180);
 		panel.add(description);
@@ -116,11 +120,25 @@ public class PanelStock extends JPanel {
 		JButton btnNewButton_1 = new JButton("Enregistrer");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				row[0]=id.getText();
-				row[1]=produit.getText();
-				row[2]=quantite.getText();
-				row[3]=description.getText();
-				model.addRow(row) ;
+				if(id.getText().equals("") || produit.getText().equals("") || quantite.getText().equals("") || description.getText().equals(""))
+				{
+					JOptionPane.showMessageDialog(null, "Completer les cases vides");
+				}
+				else
+				{
+					row[0]=id.getText();
+					row[1]=produit.getText();
+					row[2]=quantite.getText();
+					row[3]=description.getText();
+					model.addRow(row) ;
+					
+					id.setText("");
+					produit.setText("");
+					quantite.setText("");
+					description.setText("");
+					JOptionPane.showMessageDialog(null, "Enregistré avec Succès");
+				}
+				
 				
 			}
 		});
@@ -129,11 +147,36 @@ public class PanelStock extends JPanel {
 		add(btnNewButton_1);
 		
 		JButton btnNewButton_1_1 = new JButton("Edit");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int i=table.getSelectedRow();
+				model.setValueAt(id.getText(), i, 0);
+				model.setValueAt(produit.getText(), i, 1);
+				model.setValueAt(quantite.getText(), i, 2);
+				model.setValueAt(description.getText(), i, 3);
+				
+				
+			}
+		});
 		btnNewButton_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnNewButton_1_1.setBounds(154, 410, 104, 35);
 		add(btnNewButton_1_1);
 		
 		JButton btnNewButton_1_1_1 = new JButton("Supprimer");
+		btnNewButton_1_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int i = table.getSelectedRow();
+				if(i>=0)
+				{
+					model.removeRow(i);
+					JOptionPane.showMessageDialog(null, "Supprimé");
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Selectioné l'élement a supprimé");
+				}
+			}
+		});
 		btnNewButton_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnNewButton_1_1_1.setBounds(300, 410, 93, 35);
 		add(btnNewButton_1_1_1);
@@ -143,6 +186,16 @@ public class PanelStock extends JPanel {
 		add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int i=table.getSelectedRow();
+				id.setText(model.getValueAt(i, 0).toString());
+				produit.setText(model.getValueAt(i, 1).toString());
+				quantite.setText(model.getValueAt(i, 2).toString());
+				description.setText(model.getValueAt(i, 3).toString());
+			}
+		});
 		model = new DefaultTableModel();
 		Object[] column = {"ID","Produit","Prix","Description"};
 		
