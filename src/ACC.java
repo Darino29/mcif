@@ -41,25 +41,10 @@ public class ACC extends JFrame {
 	private PanelSet panelSet;
 	private PanelSet2 panelSet2;
 	private PanelSet3 panelSet3;
+	private PanelSet4 panelSet4;
 	private JPanel contentPane;
 	
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ACC frame = new ACC();
-					frame.setUndecorated(true);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -105,6 +90,7 @@ public class ACC extends JFrame {
 		panelSet = new PanelSet(this);
 		panelSet2 = new PanelSet2(this);
 		panelSet3 = new PanelSet3(this);
+		panelSet4 = new PanelSet4(this);
 		
 		JPanel panel0 = new JPanel();
 		panel0.setBounds(67, 21, 808, 506);
@@ -151,6 +137,7 @@ public class ACC extends JFrame {
 		paneMainContent.add(panelSet);
 		paneMainContent.add(panelSet2);
 		paneMainContent.add(panelSet3);
+		paneMainContent.add(panelSet4);
 		
 		menuClicked(panelCaisse);
 		
@@ -378,6 +365,7 @@ public class ACC extends JFrame {
 	 panelSet.setVisible(false);
 	 panelSet2.setVisible(false);
 	 panelSet3.setVisible(false);
+	 panelSet4.setVisible(false);
 	 
 	 panel.setVisible(true);
 	 
@@ -393,6 +381,7 @@ public class ACC extends JFrame {
 	 panelSet.setVisible(false);
 	 panelSet3.setVisible(false);
 	 panelSet2.setVisible(false);
+	 panelSet4.setVisible(false);
 	 
 	 panelVente2.setVisible(true);
 	 
@@ -411,6 +400,7 @@ public class ACC extends JFrame {
 	 panelCompte.setVisible(false);
 	 panelSet.setVisible(false);
 	 panelSet3.setVisible(false);
+	 panelSet4.setVisible(false);
 	 
 	 panelSet2.setVisible(true);
 	 
@@ -428,8 +418,26 @@ public class ACC extends JFrame {
 	 panelCompte.setVisible(false);
 	 panelSet.setVisible(false);
 	 panelSet2.setVisible(false);
+	 panelSet4.setVisible(false);
 	 
 	 panelSet3.setVisible(true);
+	 
+     
+     
+ }
+ public  void changerMenu4(){
+		
+	 panelCaisse.setVisible(false);
+	 panelClient.setVisible(false);
+	 panelStock.setVisible(false);
+	 panelPlann.setVisible(false);
+	 panelVente.setVisible(false);
+	 panelVente2.setVisible(false);
+	 panelCompte.setVisible(false);
+	 panelSet.setVisible(false);
+	 panelSet2.setVisible(false);
+	 panelSet3.setVisible(false);
+	 panelSet4.setVisible(true);
 	 
      
      

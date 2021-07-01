@@ -34,7 +34,7 @@ public class PanelVente2 extends JPanel {
 		setVisible(true);
 		
 		txtNom = new JTextField();
-		txtNom.setText("Produit/Prix/Id");
+		txtNom.setText("Produit");
 		txtNom.setForeground(Color.GRAY);
 		txtNom.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		txtNom.setColumns(10);
@@ -45,14 +45,6 @@ public class PanelVente2 extends JPanel {
 		btnNewButton.setIcon(new ImageIcon(PanelVente2.class.getResource("/img/icons8-search-24.png")));
 		btnNewButton.setBounds(212, 10, 50, 40);
 		add(btnNewButton);
-		
-		JButton btnCreer = new JButton("Imprimer");
-		btnCreer.setForeground(new Color(240, 255, 240));
-		btnCreer.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnCreer.setBorderPainted(false);
-		btnCreer.setBackground(new Color(255, 140, 0));
-		btnCreer.setBounds(603, 9, 167, 40);
-		add(btnCreer);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(4, 62, 772, 4);
@@ -114,18 +106,18 @@ public class PanelVente2 extends JPanel {
 		lblClient.setBounds(237, 153, 97, 13);
 		panel.add(lblClient);
 		
-		JLabel lblPaiement = new JLabel("Paiement");
-		lblPaiement.setHorizontalAlignment(SwingConstants.LEFT);
-		lblPaiement.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblPaiement.setBounds(237, 187, 97, 13);
-		panel.add(lblPaiement);
+		JLabel lblPrix = new JLabel("Prix");
+		lblPrix.setHorizontalAlignment(SwingConstants.LEFT);
+		lblPrix.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPrix.setBounds(237, 187, 97, 13);
+		panel.add(lblPrix);
 		
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);
 		textField_5.setBounds(321, 218, 229, 24);
 		panel.add(textField_5);
 		
-		JLabel lblTotal = new JLabel("Total");
+		JLabel lblTotal = new JLabel("Quantite");
 		lblTotal.setHorizontalAlignment(SwingConstants.LEFT);
 		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblTotal.setBounds(237, 221, 97, 13);

@@ -44,22 +44,6 @@ public class MICF extends JFrame {
 	private JComboBox comboBox ;
 	int xx,xy;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MICF frame = new MICF();
-					frame.setUndecorated(true);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -197,5 +181,21 @@ public class MICF extends JFrame {
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Admin", "Vendeur"}));
 		comboBox.setBounds(414, 317, 111, 21);
 		contentPane.add(comboBox);
+		
+		JLabel lblNewLabel_2 = new JLabel("Have an account?Sign Up ");
+		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MICF2 m = new MICF2();
+				m.setVisible(true);
+				m.setUndecorated(true);
+				dispose();
+				
+			}
+		});
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setBounds(414, 445, 249, 21);
+		contentPane.add(lblNewLabel_2);
 	}
 }

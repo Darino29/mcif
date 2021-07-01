@@ -101,7 +101,7 @@ public class PanelStock extends JPanel {
 		panel.add(quantite);
 		
 		description = new JTextField();
-		description.setHorizontalAlignment(SwingConstants.CENTER);
+		description.setHorizontalAlignment(SwingConstants.TRAILING);
 		description.setColumns(10);
 		description.setBounds(100, 139, 229, 180);
 		panel.add(description);
@@ -173,7 +173,7 @@ public class PanelStock extends JPanel {
 				}
 				else
 				{
-					JOptionPane.showMessageDialog(null, "Selectioné l'élement a supprimé");
+					JOptionPane.showMessageDialog(null, "Selectioné l'élement à supprimer");
 				}
 			}
 		});

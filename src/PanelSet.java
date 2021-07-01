@@ -30,7 +30,7 @@ public class PanelSet extends JPanel {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewButton.setBounds(136, 203, 501, 38);
+		btnNewButton.setBounds(136, 262, 501, 38);
 		panel.add(btnNewButton);
 		
 		JButton btnModifierLeMot = new JButton("Modifier le mot de passe");
@@ -43,5 +43,16 @@ public class PanelSet extends JPanel {
 		btnModifierLeMot.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnModifierLeMot.setBounds(136, 127, 501, 38);
 		panel.add(btnModifierLeMot);
+		
+		JButton btnGestionDesVendeurs = new JButton("Gestion des vendeurs");
+		btnGestionDesVendeurs.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				parent.changerMenu4();
+			}
+		});
+		btnGestionDesVendeurs.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnGestionDesVendeurs.setBounds(136, 195, 501, 38);
+		panel.add(btnGestionDesVendeurs);
 	}
 }
