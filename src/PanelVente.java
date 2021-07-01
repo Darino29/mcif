@@ -23,8 +23,19 @@ public class PanelVente extends JPanel {
 	private JTextField txtNom;
 	private JTable table;
 	private ACC parent;
+	private String name = "Vente";
 	
 	
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
 	/**
 	 * Create the panel.
 	 */

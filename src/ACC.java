@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.Utilisateur;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -43,13 +46,15 @@ public class ACC extends JFrame {
 	private PanelSet3 panelSet3;
 	private PanelSet4 panelSet4;
 	private JPanel contentPane;
+	private static Utilisateur user;
 	
 	
 
 	/**
 	 * Create the frame.
 	 */
-	public ACC() {
+	public ACC(Utilisateur userI) {
+		user = userI;
 		setForeground(SystemColor.controlDkShadow);
 		setBackground(SystemColor.controlDkShadow);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\23058\\OneDrive\\Images\\S-Assistant2\\S-Assistant2\\S-Assistant2\\app\\src\\main\\res\\drawable\\launch.PNG"));
@@ -355,21 +360,27 @@ public class ACC extends JFrame {
 		
 	}	
  public void menuClicked(JPanel panel) {
-	 panelCaisse.setVisible(false);
-	 panelClient.setVisible(false);
-	 panelStock.setVisible(false);
-	 panelPlann.setVisible(false);
-	 panelVente.setVisible(false);
-	 panelVente2.setVisible(false);
-	 panelCompte.setVisible(false);
-	 panelSet.setVisible(false);
-	 panelSet2.setVisible(false);
-	 panelSet3.setVisible(false);
-	 panelSet4.setVisible(false);
-	 
-	 panel.setVisible(true);
-	 
+	 if((panel.getClass() == PanelSet.class || panel.getClass() == PanelCompte.class) && (user.getPostUtilisateur().equals("Vendeur")) ) {
+		 JOptionPane.showMessageDialog(null, "Admin only");
+	 }
+	 else {
+		 panelCaisse.setVisible(false);
+		 panelClient.setVisible(false);
+		 panelStock.setVisible(false);
+		 panelPlann.setVisible(false);
+		 panelVente.setVisible(false);
+		 panelVente2.setVisible(false);
+		 panelCompte.setVisible(false);
+		 panelSet.setVisible(false);
+		 panelSet2.setVisible(false);
+		 panelSet3.setVisible(false);
+     panelSet4.setVisible(false);
+		 
+		 panel.setVisible(true);
+	 }
+
  }
+	 
  public  void changerMenu(){
 	
 	 panelCaisse.setVisible(false);
@@ -456,11 +467,7 @@ public class ACC extends JFrame {
 	 
 	 panelSet.setVisible(true);
 	 
-     
+ }
      
  }
-  
-
  
- 
-}

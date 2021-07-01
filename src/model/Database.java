@@ -29,6 +29,7 @@ public class Database {
             e.printStackTrace();
         }
 	}
+	
 
 	public List<Produit> getAllProd(){
 		 List<Produit> produits = new ArrayList<>();
@@ -280,6 +281,26 @@ public class Database {
 		    return commandes ;	
 	}
 	
+	public List<Stock> searchStock(String motClee){
+		 List<Stock> commandes = new ArrayList<>();
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        ResultSet rs = statement.executeQuery("SELECT * from Stock WHERE idStock LIKE " + motClee);
+		        while (rs.next()) {
+		            int stockqte = rs.getInt("qteStock");
+		            String idStock = rs.getString("idStock");
+		            String idProduit  = rs.getString("idProduit");
+		            String desc= rs.getString("Description");
+		            commandes.add(new Stock(idStock, idProduit, stockqte, desc));
+		        }
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return commandes ;	
+	}
+	
 	public void addStock (Stock stock) {
 		  try {
 		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
@@ -304,12 +325,12 @@ public class Database {
 	    }
 	}
 	
-	public void deleteStock (CommandeProduit cmdPro) {
+	public void deleteStock (Stock stock) {
 		try {
 	        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
 	        Statement statement = connection.createStatement();
-	        statement.execute(cmdPro.createTable());
-	        statement.executeUpdate(cmdPro.delete());
+	        statement.execute(stock.createTable());
+	        statement.executeUpdate(stock.delete());
 	  }
 	 catch (SQLException e) {
 	  e.printStackTrace();
@@ -335,6 +356,28 @@ public class Database {
 		        e.printStackTrace();
 		    }
 		    return utilisateurs;	
+	}
+	
+	public Utilisateur getUtilisateur(String username, String mdpIn){
+		Utilisateur utilisateur = null;
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        ResultSet rs = statement.executeQuery("select * from Utilisateurs Where nomUtilisateur = " + username);
+		        while (rs.next()) {
+		        	if(rs.getString("mdpUtilisateur").equals(mdpIn)) { 
+		            int id = rs.getInt("idUtilisateur");
+		            String nom = rs.getString("nomUtilisateur");
+		            String mdp  = rs.getString("mdpUtilisateur");
+		            String post  = rs.getString("postUtilisateur");
+		            utilisateur = new Utilisateur(id, nom, mdp, post);
+		        	}
+		        }
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return utilisateur;	
 	}
 	
 	public void addUtilisateur (Utilisateur util) {

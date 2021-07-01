@@ -13,6 +13,15 @@ public class PanelSet2 extends JPanel {
 	private JTextField ancMdp;
 	private JTextField newMdp;
 	private ACC parent;
+	private String name = "set2";
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	/**
 	 * Create the panel.

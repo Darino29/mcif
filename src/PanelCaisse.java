@@ -19,6 +19,15 @@ import javax.swing.AbstractListModel;
 public class PanelCaisse extends JPanel {
 	private JTextField txtMnt;
 	private JTextField txtCmt;
+	private String name = "caisse";
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	/**
 	 * Create the panel.

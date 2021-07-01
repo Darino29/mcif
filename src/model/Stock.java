@@ -34,16 +34,16 @@ public class Stock {
 	public void setQteStock(int qteStock) {
 		this.qteStock = qteStock;
 	}
-	public String getQteMin() {
+	public String getDesc() {
 		return desc;
 	}
-	public void setQteMin(String desc) {
+	public void setDesc(String desc) {
 		this.desc = desc;
 	}
 	
 	public String createTable() {
 		return ("CREATE TABLE IF NOT EXISTS " + this.table + " ( idStock VARCHAR(50), idProduit VARCHAR(50), qteStock INTEGER, description VARCHAR(100),"
-				+ " PRIMARY KEY(idStock, idProduit), FOREIGN KEY(idProduit) REFERENCES Produits(idProduit))" );
+				+ " PRIMARY KEY(idStock, idProduit))" );
 	}
 	
 	public String addToDb () {
@@ -52,7 +52,7 @@ public class Stock {
 	
 	public String update(String idStock, String idProduit ) {
 		return("UPDATE " + this.table + " SET  idStock = " + this.idStock+ " , idProduit = " + this.idProduit + " , qteStock = " + this.qteStock +
-				 ", description = " + this.desc + " WHERE idStock = " + this.idStock + " AND idProduit = " + idProduit);
+				 ", description = " + this.desc + " WHERE idStock = " + idStock + " AND idProduit = " + idProduit);
 	}
 	
 	public String delete() {

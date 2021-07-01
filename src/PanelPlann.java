@@ -22,9 +22,16 @@ public class PanelPlann extends JPanel {
 	private JTextField textField_2;
 	private JTable table;
 	private JTextField txtJjmmaaaa;
-	
 	DefaultTableModel model;
+	private String name = "PanelPlann";
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 	/**
 	 * Create the panel.
 	 */
