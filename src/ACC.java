@@ -380,8 +380,8 @@ public class ACC extends JFrame {
 	 panelSet3.setVisible(false);
 	 
 	 panel.setVisible(true);
-	 
  }
+	 
  public  void changerMenu(){
 	
 	 panelCaisse.setVisible(false);
@@ -448,11 +448,7 @@ public class ACC extends JFrame {
 	 
 	 panelSet.setVisible(true);
 	 
-     
+ }
      
  }
-  
-
  
- 
-}
