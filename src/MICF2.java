@@ -29,12 +29,13 @@ import javax.swing.JPasswordField;
 import javax.swing.AbstractListModel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MICF2 extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
 	int xx,xy;
 	private JPasswordField passwordField;
 
@@ -101,6 +102,34 @@ public class MICF2 extends JFrame {
 		textField.setColumns(10);
 		
 		JButton btnNewButton = new JButton("SIGN UP");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String uname = textField.getText();
+				String pswd = passwordField.getText();
+			
+				if(uname.trim().equals("admin")&& pswd.trim().equals("admin")) {
+					ACC n = new ACC();
+					n.setUndecorated(true);
+					n.setVisible(true);
+					dispose();
+				}
+				else if(uname.length()==0) {
+					JOptionPane.showMessageDialog(btnNewButton,"Username invalid");
+				}
+				else if(pswd.length()== 0) {
+					JOptionPane.showMessageDialog(btnNewButton,"Password invalid");	
+				}
+				else if((uname.length()==0) && (pswd.length()== 0)) {
+					JOptionPane.showMessageDialog(btnNewButton,"Username and Password invalid");
+				}
+				
+				else
+				{
+					JOptionPane.showMessageDialog(btnNewButton,"Invalid Login");
+				}
+			}
+		});
 		btnNewButton.setBackground(new Color(222, 184, 135));
 		btnNewButton.setBounds(462, 285, 162, 39);
 		contentPane.add(btnNewButton);
@@ -112,11 +141,6 @@ public class MICF2 extends JFrame {
 		JLabel lblNewLabel = new JLabel("USERNAME");
 		lblNewLabel.setBounds(414, 83, 77, 21);
 		contentPane.add(lblNewLabel);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(414, 194, 249, 39);
-		contentPane.add(textField_1);
 		
 		JLabel lblPassword = new JLabel("PASSWORD");
 		lblPassword.setBounds(414, 163, 77, 21);

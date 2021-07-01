@@ -16,9 +16,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
-
 import Controlleur.ClientControlle;
-
+import javax.swing.table.DefaultTableModel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -35,6 +34,8 @@ public class PanelClient extends JPanel {
 	private JTextField txtPhone;
 	private JTextField txtDdn;
 	private JComboBox combobox;
+	DefaultTableModel model;
+	final Object[] row = new Object[0];
 
 	/**
 	 * Create the panel.
@@ -73,7 +74,7 @@ public class PanelClient extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Ajouter un client", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(4, 68, 389, 340);
+		panel.setBounds(4, 68, 371, 340);
 		add(panel);
 		panel.setLayout(null);
 		
@@ -184,19 +185,24 @@ public class PanelClient extends JPanel {
 		
 		JButton btnNewButton_1_1 = new JButton("Editer");
 		btnNewButton_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnNewButton_1_1.setBounds(154, 410, 104, 35);
+		btnNewButton_1_1.setBounds(142, 410, 104, 35);
 		add(btnNewButton_1_1);
 		
 		JButton btnNewButton_1_1_1 = new JButton("Supprimer");
 		btnNewButton_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnNewButton_1_1_1.setBounds(300, 410, 93, 35);
+		btnNewButton_1_1_1.setBounds(282, 410, 93, 35);
 		add(btnNewButton_1_1_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(397, 68, 379, 369);
+		scrollPane.setBounds(377, 68, 399, 369);
 		add(scrollPane);
 		
 		table = new JTable();
+		model = new DefaultTableModel();
+		Object[] column = {"Nom","Prenom","Ddn","Adresse","Ville","Pays","Phone"};
+		
+		model.setColumnIdentifiers(column);
+		table.setModel(model);
 		scrollPane.setViewportView(table);
 
 	}

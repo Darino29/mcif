@@ -14,15 +14,22 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+
 
 public class PanelVente extends JPanel {
 	private JTextField txtNom;
 	private JTable table;
-
+	private ACC parent;
+	
+	
 	/**
 	 * Create the panel.
 	 */
-	public PanelVente() {
+	public PanelVente(ACC par) {
+		parent = par;
 		setBackground(Color.WHITE);
 		setBounds(0,0,780,455);
 		setLayout(null);
@@ -42,6 +49,14 @@ public class PanelVente extends JPanel {
 		add(btnNewButton);
 		
 		JButton btnCreer = new JButton("Nouvelle Vente  +");
+		btnCreer.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				parent.changerMenu();
+			}
+			
+		});
 		btnCreer.setForeground(new Color(240, 255, 240));
 		btnCreer.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnCreer.setBorderPainted(false);
@@ -137,4 +152,5 @@ public class PanelVente extends JPanel {
 		add(lblVentesValidees);
 
 	}
+	
 }

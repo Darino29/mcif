@@ -75,7 +75,7 @@ public class Client {
 	}
 	
 	public String addToDb () {
-		return("INSERT INTO " + this.table + " VALUES (" + this.nomClient + ", " + this.prenomClient + ", " + this.ddnClient + ", " + this.adresseClient
+		return("INSERT INTO " + this.table + "(nomClient, prenomClient, ddnClient, adresseClient, villeClient, paysClient, telClient)" +" VALUES (" + this.nomClient + ", " + this.prenomClient + ", " + this.ddnClient + ", " + this.adresseClient
 				+ ", " + this.villeClient + ", " + this.paysClient + ", " + this.telClient+ ")");
 	}
 	
@@ -85,7 +85,7 @@ public class Client {
 	}
 	
 	public String update(int id) {
-		return("UPDATE " + this.table + " SET  nomClient = " + this.nomClient + " , prenomClient = " + this.prenomClient +
+		return("UPDATE " + this.table + " SET nomClient = " + this.nomClient + " , prenomClient = " + this.prenomClient +
 				 ", ddnClient = " + this.ddnClient + ", adresseClient = " + this.adresseClient +", villeClient = "+ this.villeClient + ",paysClient = "+ this.paysClient
 				 + ", telClient = " + this.telClient + " WHERE idClient = " + id  );
 	}

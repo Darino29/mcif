@@ -271,8 +271,8 @@ public class Database {
 		            int stockqte = rs.getInt("qteStock");
 		            String idStock = rs.getString("idStock");
 		            String idProduit  = rs.getString("idProduit");
-		            int minimum = rs.getInt("Minimum");
-		            commandes.add(new Stock(idStock, idProduit, stockqte, minimum));
+		            String desc= rs.getString("Description");
+		            commandes.add(new Stock(idStock, idProduit, stockqte, desc));
 		        }
 		        connection.close();
 		    } catch (SQLException e) {
@@ -328,10 +328,8 @@ public class Database {
 		            int id = rs.getInt("idUtilisateur");
 		            String nom = rs.getString("nomUtilisateur");
 		            String mdp  = rs.getString("mdpUtilisateur");
-		            String email  = rs.getString("email");
-		            String tel  = rs.getString("telUtilisateur");
 		            String post  = rs.getString("postUtilisateur");
-		            utilisateurs.add(new Utilisateur(id, nom, mdp, email , tel, post));
+		            utilisateurs.add(new Utilisateur(id, nom, mdp, post));
 		        }
 		        connection.close();
 		    } catch (SQLException e) {
