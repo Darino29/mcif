@@ -509,6 +509,7 @@ public class Database {
 		  try {
 		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
 		        Statement statement = connection.createStatement();
+
 		        ResultSet rs = statement.executeQuery("select * from comptabiliter");
 		        while (rs.next()) {
 		        	int id = rs.getInt("id");

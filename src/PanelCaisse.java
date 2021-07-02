@@ -4,6 +4,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 
 import Controlleur.DepotRetraitContolleur;
+import Controlleur.UtilitaireControleur;
 
 import java.awt.Color;
 import javax.swing.JButton;
@@ -21,6 +22,8 @@ import java.awt.event.FocusEvent;
 import javax.swing.AbstractListModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelCaisse extends JPanel {
 	private JTextField txtMnt;
@@ -132,7 +135,7 @@ public class PanelCaisse extends JPanel {
 		btnSave.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(txtMnt.getText().equals("") || txtCmt.getText().equals(""))
+				if(txtMnt.getText().equals(" ") || txtCmt.getText().equals(" "))
 				{
 					JOptionPane.showMessageDialog(null, "Completer les cases vides");
 				}
@@ -144,6 +147,7 @@ public class PanelCaisse extends JPanel {
 	                String type = typeS.toString();
 	                DepotRetraitContolleur dr = new DepotRetraitContolleur();
 	                dr.CreateDR(type, montant, commentaire);
+	                JOptionPane.showMessageDialog(null, "enregistrer");
 			}
 			}
 		});
@@ -185,14 +189,61 @@ public class PanelCaisse extends JPanel {
 		lblNewLabel_1.setBounds(394, 83, 128, 25);
 		add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("0");
-		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_1_1.setBounds(652, 83, 128, 25);
-		add(lblNewLabel_1_1);
+		JLabel rp2000 = new JLabel("0");
+		rp2000.setHorizontalAlignment(SwingConstants.CENTER);
+		rp2000.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		rp2000.setBounds(652, 83, 128, 25);
+		add(rp2000);
+		
+		JLabel rp1000 = new JLabel("0");
+		rp1000.setHorizontalAlignment(SwingConstants.CENTER);
+		rp1000.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		rp1000.setBounds(652, 118, 128, 25);
+		add(rp1000);
+		
+
+		JLabel rp500 = new JLabel("0");
+		rp500.setHorizontalAlignment(SwingConstants.CENTER);
+		rp500.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		rp500.setBounds(652, 152, 128, 25);
+		add(rp500);
+		
+
+		JLabel rp200 = new JLabel("0");
+		rp200.setHorizontalAlignment(SwingConstants.CENTER);
+		rp200.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		rp200.setBounds(652, 187, 128, 25);
+		add(rp200);
+		
+		JLabel rp100 = new JLabel("0");
+		rp100.setHorizontalAlignment(SwingConstants.CENTER);
+		rp100.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		rp100.setBounds(652, 222, 128, 25);
+		add(rp100);
+		
+		JSeparator separator_3_1 = new JSeparator();
+		separator_3_1.setBounds(400, 145, 375, 3);
+		add(separator_3_1);
+		
+		JLabel lblNewLabel_1_2_1 = new JLabel("500 rupees");
+		lblNewLabel_1_2_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_2_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel_1_2_1.setBackground(Color.WHITE);
+		lblNewLabel_1_2_1.setBounds(394, 152, 128, 25);
+		add(lblNewLabel_1_2_1);
+		
 		
 		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		comboBox_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				 Object valeur = comboBox_1.getSelectedItem();
+	             String stringvalue = valeur.toString();
+	             UtilitaireControleur utilitaire = new UtilitaireControleur();
+	             String total = utilitaire.calculer(2000, stringvalue);
+	             rp2000.setText(total);
+			}
+		});
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
 		comboBox_1.setBounds(531, 83, 100, 25);
 		add(comboBox_1);
 		
@@ -207,38 +258,36 @@ public class PanelCaisse extends JPanel {
 		lblNewLabel_1_2.setBounds(394, 118, 128, 25);
 		add(lblNewLabel_1_2);
 		
-		JComboBox comboBox_1_1 = new JComboBox();
-		comboBox_1_1.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
-		comboBox_1_1.setBounds(531, 118, 100, 25);
-		add(comboBox_1_1);
+		JComboBox comboBox1000 = new JComboBox();
+		comboBox1000.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 Object valeur = comboBox1000.getSelectedItem();
+	             String stringvalue = valeur.toString();
+	             UtilitaireControleur utilitaire = new UtilitaireControleur();
+	             String total = utilitaire.calculer(1000, stringvalue);
+	             rp1000.setText(total);
+			}
+		});
+		comboBox1000.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		comboBox1000.setBounds(531, 118, 100, 25);
+		add(comboBox1000);
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("0");
-		lblNewLabel_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_1_1_1.setBounds(652, 118, 128, 25);
-		add(lblNewLabel_1_1_1);
 		
-		JSeparator separator_3_1 = new JSeparator();
-		separator_3_1.setBounds(400, 145, 375, 3);
-		add(separator_3_1);
+		JComboBox comboBox500 = new JComboBox();
+		comboBox500.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object valeur = comboBox500.getSelectedItem();
+	             String stringvalue = valeur.toString();
+	             UtilitaireControleur utilitaire = new UtilitaireControleur();
+	             String total = utilitaire.calculer(500, stringvalue);
+	             rp500.setText(total);
+			}
+
+		});
+		comboBox500.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		comboBox500.setBounds(531, 155, 100, 25);
+		add(comboBox500);
 		
-		JLabel lblNewLabel_1_2_1 = new JLabel("500 rupees");
-		lblNewLabel_1_2_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_2_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_1_2_1.setBackground(Color.WHITE);
-		lblNewLabel_1_2_1.setBounds(394, 152, 128, 25);
-		add(lblNewLabel_1_2_1);
-		
-		JComboBox comboBox_1_1_1 = new JComboBox();
-		comboBox_1_1_1.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
-		comboBox_1_1_1.setBounds(531, 155, 100, 25);
-		add(comboBox_1_1_1);
-		
-		JLabel lblNewLabel_1_1_1_1 = new JLabel("0");
-		lblNewLabel_1_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_1_1_1_1.setBounds(652, 152, 128, 25);
-		add(lblNewLabel_1_1_1_1);
 		
 		JSeparator separator_3_1_1 = new JSeparator();
 		separator_3_1_1.setBounds(400, 182, 375, 3);
@@ -251,16 +300,20 @@ public class PanelCaisse extends JPanel {
 		lblNewLabel_1_2_1_1.setBounds(394, 187, 128, 25);
 		add(lblNewLabel_1_2_1_1);
 		
-		JComboBox comboBox_1_1_1_1 = new JComboBox();
-		comboBox_1_1_1_1.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
-		comboBox_1_1_1_1.setBounds(531, 190, 100, 25);
-		add(comboBox_1_1_1_1);
+		JComboBox comboBox200 = new JComboBox();
+		comboBox200.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object valeur = comboBox200.getSelectedItem();
+	             String stringvalue = valeur.toString();
+	             UtilitaireControleur utilitaire = new UtilitaireControleur();
+	             String total = utilitaire.calculer(200, stringvalue);
+	             rp200.setText(total);
+			}
+		});
+		comboBox200.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		comboBox200.setBounds(531, 190, 100, 25);
+		add(comboBox200);
 		
-		JLabel lblNewLabel_1_1_1_1_1 = new JLabel("0");
-		lblNewLabel_1_1_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_1_1_1_1_1.setBounds(652, 187, 128, 25);
-		add(lblNewLabel_1_1_1_1_1);
 		
 		JSeparator separator_3_1_1_1 = new JSeparator();
 		separator_3_1_1_1.setBounds(400, 218, 375, 3);
@@ -273,25 +326,42 @@ public class PanelCaisse extends JPanel {
 		lblNewLabel_1_2_1_1_1.setBounds(394, 222, 128, 25);
 		add(lblNewLabel_1_2_1_1_1);
 		
-		JComboBox comboBox_1_1_1_1_1 = new JComboBox();
-		comboBox_1_1_1_1_1.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
-		comboBox_1_1_1_1_1.setBounds(531, 225, 100, 25);
-		add(comboBox_1_1_1_1_1);
+		JComboBox comboBox100 = new JComboBox();
+		comboBox100.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 Object valeur = comboBox100.getSelectedItem();
+	             String stringvalue = valeur.toString();
+	             UtilitaireControleur utilitaire = new UtilitaireControleur();
+	             String total = utilitaire.calculer(100, stringvalue);
+	             rp100.setText(total);
+			}
+		});
+		comboBox100.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		comboBox100.setBounds(531, 225, 100, 25);
+		add(comboBox100);
 		
-		JLabel lblNewLabel_1_1_1_1_1_1 = new JLabel("0");
-		lblNewLabel_1_1_1_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_1_1_1_1_1_1.setBounds(652, 222, 128, 25);
-		add(lblNewLabel_1_1_1_1_1_1);
 		
-		JButton btnNewButton_2 = new JButton("                                             Total 0");
-		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnNewButton_2.setBorderPainted(false);
-		btnNewButton_2.setBackground(Color.ORANGE);
-		btnNewButton_2.setBounds(394, 257, 386, 25);
-		add(btnNewButton_2);
+		
+		JButton txtTotal = new JButton("                                             Total 0");
+		txtTotal.setFont(new Font("Tahoma", Font.BOLD, 12));
+		txtTotal.setBorderPainted(false);
+		txtTotal.setBackground(Color.ORANGE);
+		txtTotal.setBounds(394, 257, 386, 25);
+		add(txtTotal);
 		
 		JButton btnCalculer = new JButton("Calculer");
+		btnCalculer.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String total2000 = rp2000.getText();
+				String total1000 = rp1000.getText();
+				String total500 = rp500.getText();
+				String total200 = rp200.getText();
+				String total100 = rp100.getText();
+				UtilitaireControleur utilitaire = new UtilitaireControleur();
+				txtTotal.setText(utilitaire.calculeTotale(total2000, total1000, total500, total200, total100));
+			}
+		});
 		btnCalculer.setForeground(new Color(240, 255, 240));
 		btnCalculer.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnCalculer.setBorderPainted(false);

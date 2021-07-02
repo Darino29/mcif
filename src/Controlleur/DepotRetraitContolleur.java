@@ -26,6 +26,7 @@ public class DepotRetraitContolleur {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		 
 		String date = currentDateTime.format(formatter);
+		System.out.println(date);
 			try {
 				int quantiter = Integer.parseInt(montant);
 				DepotRetrait dr = new DepotRetrait(util.quote(type), quantiter, util.quote(date), util.quote(commentaire) );
@@ -49,7 +50,7 @@ public class DepotRetraitContolleur {
 	
 	public List<DepotRetrait> allDR(){
 		List<DepotRetrait> drs = db.getAllDR();
-		return dr;
+		return drs;
 		
 	}
 

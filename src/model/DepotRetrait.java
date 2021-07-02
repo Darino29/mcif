@@ -52,7 +52,7 @@ public class DepotRetrait {
 	
 	public String createTable() {
 		return ("CREATE TABLE IF NOT EXISTS " + this.table + " ( id INTEGER NOT NULL AUTO_INCREMENT , type VARCHAR(50),  montant INTEGER, date VARCHAR(100), commentaire VARCHAR(50)"
-				+ " PRIMARY KEY(id))" );
+				+ ", PRIMARY KEY (id))" );
 	}
 	
 	public String addToDb () {
