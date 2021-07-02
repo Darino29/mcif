@@ -360,6 +360,9 @@ public class ACC extends JFrame {
 		
 	}	
  public void menuClicked(JPanel panel) {
+	 if((panel.getClass()== PanelCompte.class) && (user.getPostUtilisateur().equals("Admin"))) {
+		 panelCompte.load();
+	 }
 	 if((panel.getClass() == PanelSet.class || panel.getClass() == PanelCompte.class) && (user.getPostUtilisateur().equals("Vendeur")) ) {
 		 JOptionPane.showMessageDialog(null, "Admin only");
 	 }
