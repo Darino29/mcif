@@ -24,9 +24,11 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class PanelClient extends JPanel {
-	private JTextField txtNom;
+	private JTextField searchTxt;
 	private JTextField textNom;
 	private JTextField txtPrenom;
 	private JTable table;
@@ -56,13 +58,27 @@ public class PanelClient extends JPanel {
 		setLayout(null);
 		setVisible(true);
 		
-		txtNom = new JTextField();
-		txtNom.setText("Nom/Prenom/Id");
-		txtNom.setForeground(Color.GRAY);
-		txtNom.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtNom.setColumns(10);
-		txtNom.setBounds(10, 10, 201, 40);
-		add(txtNom);
+		searchTxt = new JTextField();
+		searchTxt.setText("Nom");
+		searchTxt.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(searchTxt.getText().equals("Nom")) {
+					searchTxt.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(searchTxt.getText().equals("")) {
+					searchTxt.setText("Nom");
+				}
+			}
+		});
+		searchTxt.setForeground(Color.GRAY);
+		searchTxt.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		searchTxt.setColumns(10);
+		searchTxt.setBounds(10, 10, 201, 40);
+		add(searchTxt);
 		
 		JButton search = new JButton("");
 		search.addMouseListener(new MouseAdapter() {

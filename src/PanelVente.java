@@ -13,17 +13,22 @@ import javax.swing.border.LineBorder;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.border.EtchedBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 
 
 public class PanelVente extends JPanel {
-	private JTextField txtNom;
+	private JTextField searchTxt;
 	private JTable table;
 	private ACC parent;
 	private String name = "Vente";
+	DefaultTableModel model;
+	final Object[] row = new Object[7];
 	
 	
 	public String getName() {
@@ -46,13 +51,27 @@ public class PanelVente extends JPanel {
 		setLayout(null);
 		setVisible(true);
 		
-		txtNom = new JTextField();
-		txtNom.setText("Client/Produit");
-		txtNom.setForeground(Color.GRAY);
-		txtNom.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtNom.setColumns(10);
-		txtNom.setBounds(10, 10, 201, 40);
-		add(txtNom);
+		searchTxt = new JTextField();
+		searchTxt.setText("Produit");
+		searchTxt.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(searchTxt.getText().equals("Produit")) {
+					searchTxt.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(searchTxt.getText().equals("")) {
+					searchTxt.setText("");
+				}
+			}
+		});
+		searchTxt.setForeground(Color.GRAY);
+		searchTxt.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		searchTxt.setColumns(10);
+		searchTxt.setBounds(10, 10, 201, 40);
+		add(searchTxt);
 		
 		JButton btnNewButton = new JButton("");
 		btnNewButton.setIcon(new ImageIcon(PanelVente.class.getResource("/img/icons8-search-24.png")));
@@ -80,79 +99,16 @@ public class PanelVente extends JPanel {
 		add(separator);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(4, 121, 772, 334);
+		scrollPane.setBounds(4, 99, 772, 356);
 		add(scrollPane);
 		
 		table = new JTable();
+		model = new DefaultTableModel();
+		Object[] column = {"Produit","Date","Vendeur","Client","Prix","Quantite","idStock"};
+		
+		model.setColumnIdentifiers(column);
+		table.setModel(model);
 		scrollPane.setViewportView(table);
-		
-		JLabel lblNewLabel = new JLabel("Produit");
-		lblNewLabel.setForeground(Color.BLACK);
-		lblNewLabel.setBackground(Color.WHITE);
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel.setBounds(4, 99, 128, 19);
-		add(lblNewLabel);
-		
-		JLabel lblDate = new JLabel("Date");
-		lblDate.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDate.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDate.setBounds(134, 99, 128, 19);
-		add(lblDate);
-		
-		JLabel lblVendeur = new JLabel("Vendeur");
-		lblVendeur.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVendeur.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblVendeur.setBounds(262, 99, 128, 19);
-		add(lblVendeur);
-		
-		JLabel lblDate_1_1 = new JLabel("Client");
-		lblDate_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDate_1_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDate_1_1.setBounds(390, 99, 128, 19);
-		add(lblDate_1_1);
-		
-		JLabel lblDate_1_1_1 = new JLabel("Paiement");
-		lblDate_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDate_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDate_1_1_1.setBounds(520, 99, 128, 19);
-		add(lblDate_1_1_1);
-		
-		JLabel lblDate_1_1_1_1 = new JLabel("Total");
-		lblDate_1_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDate_1_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDate_1_1_1_1.setBounds(648, 99, 128, 19);
-		add(lblDate_1_1_1_1);
-		
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setOrientation(SwingConstants.VERTICAL);
-		separator_1.setBackground(Color.WHITE);
-		separator_1.setBounds(134, 92, 1, 28);
-		add(separator_1);
-		
-		JSeparator separator_1_1 = new JSeparator();
-		separator_1_1.setOrientation(SwingConstants.VERTICAL);
-		separator_1_1.setBackground(Color.WHITE);
-		separator_1_1.setBounds(262, 92, 1, 28);
-		add(separator_1_1);
-		
-		JSeparator separator_1_2 = new JSeparator();
-		separator_1_2.setOrientation(SwingConstants.VERTICAL);
-		separator_1_2.setBackground(Color.WHITE);
-		separator_1_2.setBounds(390, 92, 1, 28);
-		add(separator_1_2);
-		
-		JSeparator separator_1_3 = new JSeparator();
-		separator_1_3.setOrientation(SwingConstants.VERTICAL);
-		separator_1_3.setBackground(Color.WHITE);
-		separator_1_3.setBounds(520, 92, 1, 28);
-		add(separator_1_3);
-		
-		JSeparator separator_1_4 = new JSeparator();
-		separator_1_4.setOrientation(SwingConstants.VERTICAL);
-		separator_1_4.setBackground(Color.WHITE);
-		separator_1_4.setBounds(647, 92, 1, 28);
-		add(separator_1_4);
 		
 		JLabel lblVentesValidees = new JLabel("Ventes validees ");
 		lblVentesValidees.setHorizontalAlignment(SwingConstants.CENTER);

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Database {
-	private String dbLocation = "jdbc:mysql://localhost:3306";
+	private String dbLocation = "jdbc:mysql://localhost:3307";
 	private String user = "root";
 	private String mdp = "lelena";
 	
@@ -477,6 +477,82 @@ public class Database {
 	  e.printStackTrace();
   }
 		
+	}
+
+	public List<Planning> getAllPlann(){
+		 List<Planning> plannings = new ArrayList<>();
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        ResultSet rs = statement.executeQuery("select * from Planning");
+		        while (rs.next()) {
+		        	String titre= rs.getString("titre");
+		            
+		            String date  = rs.getString("date");
+		            String commentaire= rs.getString("Commentaire");
+		            plannings.add(new Planning(titre, date, commentaire));
+		        }
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return plannings ;	
+	}
+	
+	public List<Planning> searchPlann(String motClee){
+		 List<Planning> plannings = new ArrayList<>();
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        ResultSet rs = statement.executeQuery("SELECT * from Planning WHERE titre LIKE " + motClee);
+		        while (rs.next()) {
+		        	String titre= rs.getString("titre");
+		            
+		            String date  = rs.getString("date");
+		            String commentaire= rs.getString("Commentaire");
+		            plannings.add(new Planning(titre, date, commentaire));
+		        }
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return plannings ;	
+	}
+	
+	public void addPlann (Planning plann) {
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        statement.execute(plann.createTable());
+		        statement.executeUpdate(plann.addToDb());
+		  }
+	  	 catch (SQLException e) {
+		  e.printStackTrace();
+	    }
+	}
+	
+	public void updatePlanning (Planning plann, String titre) {
+		 try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        statement.execute(plann.createTable());
+		        statement.executeUpdate(plann.update(titre));
+		  }
+	  	 catch (SQLException e) {
+		  e.printStackTrace();
+	    }
+	}
+	
+	public void deletePlann (Planning plann) {
+		try {
+	        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+	        Statement statement = connection.createStatement();
+	        statement.execute(plann.createTable());
+	        statement.executeUpdate(plann.delete());
+	  }
+	 catch (SQLException e) {
+	  e.printStackTrace();
+}
 	}
 	
 }

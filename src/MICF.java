@@ -39,10 +39,10 @@ public class MICF extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nomTxt;
-	private JTextField mdpTxt;
-	private JTextField confirmMdpTxt;
 	private JComboBox comboBox ;
 	int xx,xy;
+	private JPasswordField mdpTxt;
+	private JPasswordField confirmMdpTxt;
 
 
 	/**
@@ -118,12 +118,6 @@ public class MICF extends JFrame {
 		JLabel lblNewLabel = new JLabel("USERNAME");
 		lblNewLabel.setBounds(414, 83, 77, 21);
 		contentPane.add(lblNewLabel);
-		
-
-		mdpTxt = new JTextField();
-		mdpTxt.setColumns(10);
-		mdpTxt.setBounds(414, 194, 249, 39);
-		contentPane.add(mdpTxt);
     
 		JLabel lblPassword = new JLabel("PASSWORD");
 		lblPassword.setBounds(414, 163, 77, 21);
@@ -132,11 +126,6 @@ public class MICF extends JFrame {
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(414, 237, 249, 2);
 		contentPane.add(separator_1);
-		
-		confirmMdpTxt = new JTextField();
-		confirmMdpTxt.setColumns(10);
-		confirmMdpTxt.setBounds(414, 268, 249, 39);
-		contentPane.add(confirmMdpTxt);
 		JLabel lblConfirmPassword = new JLabel("CONFIRM PASSWORD");
 		lblConfirmPassword.setBounds(414, 237, 139, 21);
 		contentPane.add(lblConfirmPassword);
@@ -196,5 +185,13 @@ public class MICF extends JFrame {
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setBounds(414, 445, 249, 21);
 		contentPane.add(lblNewLabel_2);
+		
+		mdpTxt = new JPasswordField();
+		mdpTxt.setBounds(414, 194, 249, 39);
+		contentPane.add(mdpTxt);
+		
+		confirmMdpTxt = new JPasswordField();
+		confirmMdpTxt.setBounds(414, 268, 249, 39);
+		contentPane.add(confirmMdpTxt);
 	}
 }
