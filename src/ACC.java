@@ -90,7 +90,7 @@ public class ACC extends JFrame {
 		panelStock = new PanelStock();
 		panelPlann = new PanelPlann();
 		panelVente = new PanelVente(this);
-		panelVente2 = new PanelVente2();
+		panelVente2 = new PanelVente2(this.user);
 		panelCompte = new PanelCompte();
 		panelSet = new PanelSet(this);
 		panelSet2 = new PanelSet2(this);

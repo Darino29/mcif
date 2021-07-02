@@ -71,14 +71,18 @@ public class PanelSet4 extends JPanel {
 				int i = table.getSelectedRow();
 				if(i>=0)
 				{
+					 String id = model.getValueAt(i, 0).toString();
+					 UtilisateurControleur usr = new UtilisateurControleur();
+					 usr.supprUtilisateur(id);
+					 
 					
 					
 					model.removeRow(i);
-					JOptionPane.showMessageDialog(null, "Supprimé");
+					JOptionPane.showMessageDialog(null, "Supprimï¿½");
 				}
 				else
 				{
-					JOptionPane.showMessageDialog(null, "Selectioné l'utilisateur à supprimer");
+					JOptionPane.showMessageDialog(null, "Selectionï¿½ l'utilisateur ï¿½ supprimer");
 				}
 			}
 		});

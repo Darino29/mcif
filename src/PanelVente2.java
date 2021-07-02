@@ -16,16 +16,17 @@ import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
 import Controlleur.StockControlleur;
+import Controlleur.VenteControlleur;
+import model.Utilisateur;
 
 import javax.swing.border.EtchedBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class PanelVente2 extends JPanel {
+	private Utilisateur user;
 	private JTextField txtNom;
 	private JTextField produit;
-	private JTextField date;
-	private JTextField vendeur;
 	private JTextField client;
 	private JTextField prix;
 	private JTextField quantite;
@@ -43,7 +44,8 @@ public class PanelVente2 extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelVente2() {
+	public PanelVente2(Utilisateur user) {
+		this.user = user;
 		setBackground(Color.WHITE);
 		setBounds(0,0,780,455);
 		setLayout(null);
@@ -74,41 +76,19 @@ public class PanelVente2 extends JPanel {
 		panel.setLayout(null);
 		
 		JLabel lblCa = new JLabel("Produit");
-		lblCa.setBounds(237, 53, 80, 13);
+		lblCa.setBounds(237, 121, 80, 13);
 		panel.add(lblCa);
 		lblCa.setHorizontalAlignment(SwingConstants.LEFT);
 		lblCa.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
-		JLabel lblDernierAchat = new JLabel("Date");
-		lblDernierAchat.setBounds(237, 87, 62, 13);
-		panel.add(lblDernierAchat);
-		lblDernierAchat.setHorizontalAlignment(SwingConstants.LEFT);
-		lblDernierAchat.setFont(new Font("Tahoma", Font.BOLD, 14));
-		
-		JLabel lblPays = new JLabel("Vendeur");
-		lblPays.setBounds(237, 119, 97, 13);
-		panel.add(lblPays);
-		lblPays.setHorizontalAlignment(SwingConstants.LEFT);
-		lblPays.setFont(new Font("Tahoma", Font.BOLD, 14));
-		
 		produit = new JTextField();
-		produit.setBounds(321, 50, 229, 24);
+		produit.setBounds(321, 117, 229, 24);
 		panel.add(produit);
 		produit.setColumns(10);
 		
-		date = new JTextField();
-		date.setColumns(10);
-		date.setBounds(321, 84, 229, 23);
-		panel.add(date);
-		
-		vendeur = new JTextField();
-		vendeur.setColumns(10);
-		vendeur.setBounds(321, 116, 229, 24);
-		panel.add(vendeur);
-		
 		client = new JTextField();
 		client.setColumns(10);
-		client.setBounds(321, 150, 229, 24);
+		client.setBounds(321, 152, 229, 24);
 		panel.add(client);
 		
 		prix = new JTextField();
@@ -153,22 +133,25 @@ public class PanelVente2 extends JPanel {
 		JButton btnNewButton_1 = new JButton("Enregistrer");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(produit.getText().equals("") || date.getText().equals("") || vendeur.getText().equals("") || client.getText().equals("") || quantite.getText().equals(""))
+				if(produit.getText().equals("")  || client.getText().equals("") || quantite.getText().equals(""))
 				{
 					JOptionPane.showMessageDialog(null, "Completer les cases vides");
 				}
 				else
 				{
-				String prod = produit.getText();
-				String dates = date.getText();
-				String vend = vendeur.getText();
-				String clt = quantite.getText();
-				
-				date.setText("");
-				produit.setText("");
-				quantite.setText("");
-				vendeur.setText("");
-				JOptionPane.showMessageDialog(null, "Enregistrer");
+					String prod = produit.getText();
+					String clt = client.getText();
+					String prixvente = prix.getText();
+					String qte = quantite.getText();
+					String stk = idStock.getText();
+					VenteControlleur vC = new VenteControlleur ();
+					String resultat = vC.createVente(prod, clt, prixvente, qte, stk, user);
+					produit.setText("");
+					quantite.setText("");
+					prix.setText("");
+					client.setText("");
+					idStock.setText("");
+					JOptionPane.showMessageDialog(null, resultat);
         }
 				
 			}

@@ -14,10 +14,9 @@ public class Vente {
 	private String note;
 	private String table = "Ventes";
 	
-	public Vente(int idVente, String nomClient, String idProduit, int idUtilisateur, String idStock, double prixVente,
-			int quantiter, String dateVente, String note) {
+	public Vente( String nomClient, String idProduit, int idUtilisateur, String idStock, double prixVente,
+			int quantiter, String dateVente) {
 		super();
-		this.idVente = idVente;
 		this.nomClient = nomClient;
 		this.idProduit = idProduit;
 		this.idUtilisateur = idUtilisateur;
@@ -25,7 +24,6 @@ public class Vente {
 		this.prixVente = prixVente;
 		this.quantiter = quantiter;
 		this.dateVente = dateVente;
-		this.note = note;
 	}
 
 	public int getIdVente() {
@@ -101,14 +99,14 @@ public class Vente {
 	}
 	
 	public String addToDb () {
-		return("INSERT INTO " + this.table + " VALUES (" + this.idVente + ", " + this.nomClient + ", " + this.idProduit + ", " + this.idUtilisateur + ", " + this.idStock
-				+ ", " + this.prixVente + ", " + this.quantiter + ", " + this.dateVente +  ", " + this.note  +")");
+		return("INSERT INTO " + this.table + "(nomClient,  idProduit, idUtilisateur, idStock, prixVente, quantiter, dateVente)" + " VALUES (" + this.nomClient + ", " + this.idProduit + ", " + this.idUtilisateur + ", " + this.idStock
+				+ ", " + this.prixVente + ", " + this.quantiter + ", " + this.dateVente  +")");
 	}
 	
 	public String createTable() {
-		return ("CREATE TABLE IF NOT EXISTS " + this.table + " ( idVente INTEGER Auto, nomClient VARCHAR(50),  idProduit VARCHAR(50), idUtilisateur INTEGER , idStock VARCHAR(50),"
-				+ " prixVente FLOAT, quantiter INTEGER, dateVente VARCHAR(50), note VARCHAR(50), PRIMARY KEY(nomClient, idVente, idProduit, idUtilisateur, idStock), "
-				+ "FOREIGN KEY(idProduit) REFERENCES Produits(idProduit), FOREIGN KEY(idUtilisateur) REFERENCES Utilisateurs(idUtilisateur), "
+		return ("CREATE TABLE IF NOT EXISTS " + this.table + " ( idVente INTEGER NOT NULL AUTO_INCREMENT, nomClient VARCHAR(50),  idProduit VARCHAR(50), idUtilisateur INTEGER , idStock VARCHAR(50),"
+				+ " prixVente FLOAT, quantiter INTEGER, dateVente VARCHAR(50), PRIMARY KEY( idVente), "
+				+ " FOREIGN KEY(idUtilisateur) REFERENCES Utilisateurs(idUtilisateur), "
 				+ " FOREIGN KEY(idStock) REFERENCES Stock(idStock)) " );
 	}
 	

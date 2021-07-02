@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Database {
-	private String dbLocation = "jdbc:mysql://localhost:3307";
+	private String dbLocation = "jdbc:mysql://localhost:3306";
 	private String user = "root";
 	private String mdp = "lelena";
 	
@@ -325,6 +325,30 @@ public class Database {
 		    return commandes ;	
 	}
 	
+	public Stock useStock(String id, String produit) {
+		
+		try {
+	        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+	        Statement statement = connection.createStatement();
+	        ResultSet rs = statement.executeQuery("SELECT * from Stock WHERE idStock = " + id + " and idProduit = " + produit);
+	        while (rs.next()) {
+	            int stockqte = rs.getInt("qteStock");
+	            String idStock = rs.getString("idStock");
+	            String idProduit  = rs.getString("idProduit");
+	            String desc= rs.getString("Description");
+	            Stock stock = new Stock(idStock, idProduit, stockqte, desc);
+	            return stock;
+	        }
+	        connection.close();
+	        return null;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+
+		
+	}
+	
 	public void addStock (Stock stock) {
 		  try {
 		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
@@ -428,12 +452,11 @@ public class Database {
 	    }
 	}
 	
-	public void deleteUtilisateur ( Utilisateur util) {
+	public void deleteUtilisateur ( String id) {
 		try {
 	        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
 	        Statement statement = connection.createStatement();
-	        statement.execute(util.createTable());
-	        statement.executeUpdate(util.delete());
+	        statement.executeUpdate(Utilisateur.delete(id));
 	  }
  	 catch (SQLException e) {
 	  e.printStackTrace();
@@ -456,8 +479,31 @@ public class Database {
 		            Double prixVente  = rs.getDouble("prixVente");
 		            int quantiter = rs.getInt("quantiter");
 		            String date  = rs.getString("dateVente");
-		            String note  = rs.getString("note");
-		            ventes.add(new Vente(idVente, nomClient, idProduit, idUtilisateur, idStock, prixVente, quantiter, date, note));
+		            ventes.add(new Vente( nomClient, idProduit, idUtilisateur, idStock, prixVente, quantiter, date));
+		        }
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return ventes;	
+	}
+	
+	public List<Vente> searchVente(String motClee){
+		 List<Vente> ventes = new ArrayList<>();
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        ResultSet rs = statement.executeQuery("select * from Ventes WHERE idProduit LIKE " + motClee);
+		        while (rs.next()) {
+		        	int idVente = rs.getInt("idVente");
+		            String nomClient = rs.getString("nomClient");
+		            String idProduit = rs.getString("idProduit");
+		            int idUtilisateur = rs.getInt("idUtilisateur");
+		            String idStock  = rs.getString("idStock");
+		            Double prixVente  = rs.getDouble("prixVente");
+		            int quantiter = rs.getInt("quantiter");
+		            String date  = rs.getString("dateVente");
+		            ventes.add(new Vente( nomClient, idProduit, idUtilisateur, idStock, prixVente, quantiter, date));
 		        }
 		        connection.close();
 		    } catch (SQLException e) {

@@ -55,8 +55,8 @@ public class Utilisateur {
 				 ",postUtilisateur = " + this.postUtilisateur  + " WHERE idUtilisateur = " + id  );
 	}
 	
-	public String delete() {
-		return( "DELETE FROM " + this.table + " WHERE idUtilisateur = " + this.idUtilisateur );
+	public static String delete(String id) {
+		return( "DELETE FROM " + "Utilisateurs"+ " WHERE idUtilisateur = " + id);
 	}
 	@Override
 	public String toString() {

@@ -8,15 +8,24 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JSeparator;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+
+import Controlleur.ClientControlle;
+import Controlleur.VenteControlleur;
+import model.Client;
+import model.Vente;
+
 import javax.swing.border.EtchedBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
@@ -74,6 +83,47 @@ public class PanelVente extends JPanel {
 		add(searchTxt);
 		
 		JButton btnNewButton = new JButton("");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (model.getRowCount() > 0) {
+				    for (int i = model.getRowCount() - 1; i > -1; i--) {
+				        model.removeRow(i);
+				    }
+				}
+				 List<Vente> ventes = new ArrayList<>();
+				 VenteControlleur vC = new VenteControlleur();
+				if(searchTxt.getText().equals("")) {	
+					 try {
+						 ventes = vC.allVente();
+						 
+					 }catch(Exception e1) {
+						 JOptionPane.showMessageDialog(null, "base de donner introuvable");
+					 }
+				}
+				else {
+					try {
+						 
+						 ventes = vC.searchVente(searchTxt.getText());
+						 
+					 }catch(Exception e1) {
+						 System.out.println("not found");
+					 }
+				}
+					 for (Vente vt : ventes) {
+						 	
+							row[0] = vt.getIdProduit();
+							row[1] = vt.getDateVente();
+							row[2] = vt.getIdUtilisateur();
+							row[3] = vt.getnomClient();
+							row[4] =vt.getPrixVente();
+							row[5] = vt.getQuantiter();
+							row[6] = vt.getIdStock();
+							model.addRow(row) ;
+						}
+			}
+
+		});
 		btnNewButton.setIcon(new ImageIcon(PanelVente.class.getResource("/img/icons8-search-24.png")));
 		btnNewButton.setBounds(212, 10, 50, 40);
 		add(btnNewButton);

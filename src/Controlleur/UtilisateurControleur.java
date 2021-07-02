@@ -39,17 +39,16 @@ public class UtilisateurControleur {
 		
 	}
 	
-	//public boolean supprUtilisateur(int id, String nom, String mdp , String confirmMdp , String post) {
-	//	try {
-	//		Utilisateur user = new Utilisateur(id,util.quote(nom), util.quote(mdp), util.quote(confirmMdp), util.quote(post));
-		//	
-			//db.deleteUtilisateur(user);
-		//	System.out.println("supprimer");
-		//	return true;
+	public boolean supprUtilisateur(String id) {
+		try {
 			
-	//	}
-	//	catch(Exception e){
-	//		return false;
-		//}
-//	}
+			db.deleteUtilisateur(util.quote(id));
+			System.out.println("supprimer");
+			return true;
+			
+		}
+		catch(Exception e){
+			return false;
+		}
+	}
 }
