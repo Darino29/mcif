@@ -49,7 +49,7 @@ public class DepotRetraitContolleur {
 	
 	public List<DepotRetrait> allDR(){
 		List<DepotRetrait> drs = db.getAllDR();
-		return drs;
+		return dr;
 		
 	}
 
