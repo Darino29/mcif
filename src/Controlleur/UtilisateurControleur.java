@@ -1,6 +1,9 @@
 package Controlleur;
 
+import java.util.List;
+
 import model.Database;
+import model.Planning;
 import model.Utilisateur;
 
 public class UtilisateurControleur {
@@ -30,4 +33,23 @@ public class UtilisateurControleur {
 			return false;
 		}
 	}
+	public List<Utilisateur> allUtilisateur(){
+		List<Utilisateur> user = db.getAllUtilisateur();
+		return user;
+		
+	}
+	
+	//public boolean supprUtilisateur(int id, String nom, String mdp , String confirmMdp , String post) {
+	//	try {
+	//		Utilisateur user = new Utilisateur(id,util.quote(nom), util.quote(mdp), util.quote(confirmMdp), util.quote(post));
+		//	
+			//db.deleteUtilisateur(user);
+		//	System.out.println("supprimer");
+		//	return true;
+			
+	//	}
+	//	catch(Exception e){
+	//		return false;
+		//}
+//	}
 }

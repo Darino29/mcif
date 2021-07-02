@@ -35,6 +35,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JProgressBar;
+import java.awt.SystemColor;
 
 public class Splash extends JFrame {
 
@@ -80,7 +81,7 @@ public class Splash extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Splash.class.getResource("/img/launch.PNG")));
 		setBounds(100, 100, 868, 532);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
+		contentPane.setBackground(SystemColor.inactiveCaptionBorder);
 		contentPane.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -105,6 +106,7 @@ public class Splash extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setForeground(Color.WHITE);
 		ImageIcon icon = new ImageIcon(this.getClass().getResource("/img/darc.gif"));
 		lblNewLabel.setIcon(icon);
 		lblNewLabel.setBounds(200, 100, 450, 350);

@@ -28,9 +28,10 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.util.ArrayList;
 import java.util.List;
-
 public class PanelClient extends JPanel {
 	private JTextField searchTxt;
 	private JTextField textNom;
@@ -63,7 +64,21 @@ public class PanelClient extends JPanel {
 		setVisible(true);
 		
 		searchTxt = new JTextField();
-		searchTxt.setText("Nom/Prenom/Id");
+		searchTxt.setText("Nom");
+		searchTxt.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(searchTxt.getText().equals("Nom")) {
+					searchTxt.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(searchTxt.getText().equals("")) {
+					searchTxt.setText("Nom");
+				}
+			}
+		});
 		searchTxt.setForeground(Color.GRAY);
 		searchTxt.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		searchTxt.setColumns(10);

@@ -377,7 +377,7 @@ public class ACC extends JFrame {
 		 panelSet.setVisible(false);
 		 panelSet2.setVisible(false);
 		 panelSet3.setVisible(false);
-     panelSet4.setVisible(false);
+		 panelSet4.setVisible(false);
 		 
 		 panel.setVisible(true);
 	 }
@@ -467,6 +467,7 @@ public class ACC extends JFrame {
 	 panelCompte.setVisible(false);
 	 panelSet2.setVisible(false);
 	 panelSet3.setVisible(false);
+	 panelSet4.setVisible(false);
 	 
 	 panelSet.setVisible(true);
 	 

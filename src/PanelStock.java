@@ -27,6 +27,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class PanelStock extends JPanel {
 	private JTextField searchTxt;
@@ -57,7 +59,21 @@ public class PanelStock extends JPanel {
 		setVisible(true);
 		
 		searchTxt = new JTextField();
-		searchTxt.setText("Produit/Prix/Id");
+		searchTxt.setText("id");
+		searchTxt.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(searchTxt.getText().equals("id")) {
+					searchTxt.setText("");
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(searchTxt.getText().equals("")) {
+					searchTxt.setText("id");
+				}
+			}
+		});
 		searchTxt.setForeground(Color.GRAY);
 		searchTxt.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		searchTxt.setColumns(10);
