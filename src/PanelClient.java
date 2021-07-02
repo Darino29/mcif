@@ -18,6 +18,10 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 import Controlleur.ClientControlle;
+import Controlleur.StockControlleur;
+import model.Client;
+import model.Stock;
+
 import javax.swing.table.DefaultTableModel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JComboBox;
@@ -26,7 +30,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-
+import java.util.ArrayList;
+import java.util.List;
 public class PanelClient extends JPanel {
 	private JTextField searchTxt;
 	private JTextField textNom;
@@ -38,7 +43,7 @@ public class PanelClient extends JPanel {
 	private JTextField txtDdn;
 	private JComboBox combobox;
 	DefaultTableModel model;
-	final Object[] row = new Object[0];
+	final Object[] row = new Object[7];
 	private String name = "client";
 
 	public String getName() {
@@ -84,8 +89,43 @@ public class PanelClient extends JPanel {
 		search.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				if (model.getRowCount() > 0) {
+				    for (int i = model.getRowCount() - 1; i > -1; i--) {
+				        model.removeRow(i);
+				    }
+				}
+				 List<Client> client = new ArrayList<>();
+				 ClientControlle clt = new ClientControlle();
+				if(searchTxt.getText().equals("")) {	
+					 try {
+						 client = clt.allClient();
+						 
+					 }catch(Exception e1) {
+						 System.out.println("not found");
+					 }
+				}
+				else {
+					try {
+						 
+						 client = clt.searchClient(searchTxt.getText());
+						 
+					 }catch(Exception e1) {
+						 System.out.println("not found");
+					 }
+				}
+					 for (Client cl : client) {
+						 	System.out.println(cl.toString());
+							row[0] = cl.getNomClient();
+							row[1] = cl.getPrenomClient();
+							row[2] = cl.getDdnClient();
+							row[3] = cl.getAdresseClient();
+							row[4] = cl.getVilleClient();
+							row[5] = cl.getPaysClient();
+							row[6] = cl.getTelClient();
+							model.addRow(row) ;
+						}
 			}
+				
 		});
 		search.setIcon(new ImageIcon(PanelClient.class.getResource("/img/icons8-search-24.png")));
 		search.setBounds(212, 10, 50, 40);
@@ -228,21 +268,95 @@ public class PanelClient extends JPanel {
 		btnNewButton_1.setBounds(4, 410, 104, 35);
 		add(btnNewButton_1);
 		
-		JButton btnNewButton_1_1 = new JButton("Editer");
-		btnNewButton_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnNewButton_1_1.setBounds(142, 410, 104, 35);
-		add(btnNewButton_1_1);
+		JButton edit = new JButton("Editer");
+		edit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(textNom.getText().equals("") || txtPrenom.getText().equals("") || txtDdn.getText().equals("") || 
+						txtAdresse.getText().equals("") || txtVille.getText().equals("") || txtPhone.getText().equals("") ) {
+					JOptionPane.showMessageDialog(null, "Completer les cases vides");
+				}
+				else {
+					int i=table.getSelectedRow();
+					 String Nom = textNom.getText();
+		             String Prenom = txtPrenom.getText();
+		             String Ddn = txtDdn.getText();
+		             String  Adresse = txtAdresse.getText();
+		             String Ville = txtVille.getText();
+		             String  Phone = txtPhone.getText();
+		             Object pays = combobox.getSelectedItem();
+		             String date = txtDdn.getText();
+		             String paysS = pays.toString();
+		             ClientControlle cC = new ClientControlle();
+		             try {
+							String oldNom = model.getValueAt(i, 0).toString();
+							String oldPrenom = model.getValueAt(i, 1).toString();
+							cC.editClient(Nom, Prenom, Ddn, Adresse, Ville, Phone, paysS, date, oldNom, oldPrenom);
+						}catch(Exception e1) {
+							JOptionPane.showMessageDialog(null, "selectionner un elements");
+						}
+			}
+		}
+		});
+		edit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		edit.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		edit.setBounds(142, 410, 104, 35);
+		add(edit);
 		
-		JButton btnNewButton_1_1_1 = new JButton("Supprimer");
-		btnNewButton_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnNewButton_1_1_1.setBounds(282, 410, 93, 35);
-		add(btnNewButton_1_1_1);
+		JButton suppr = new JButton("Supprimer");
+		suppr.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int i = table.getSelectedRow();
+				if(i>=0)
+				{
+					 String Nom = textNom.getText();
+		             String Prenom = txtPrenom.getText();
+		             String Ddn = txtDdn.getText();
+		             String  Adresse = txtAdresse.getText();
+		             String Ville = txtVille.getText();
+		             String  Phone = txtPhone.getText();
+		             Object pays = combobox.getSelectedItem();
+		             String date = txtDdn.getText();
+		             String paysS = pays.toString();
+		             StockControlleur stck = new StockControlleur();
+		             ClientControlle cC = new ClientControlle();
+		             cC.supprClient(Nom, Prenom, Ddn, Adresse, Ville, paysS, paysS);
+					 model.removeRow(i);
+					 JOptionPane.showMessageDialog(null, "Supprim�");
+					}
+				else
+					{
+					JOptionPane.showMessageDialog(null, "Selection� l'�lement � supprimer");
+
+					}
+			}
+		});
+		suppr.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		suppr.setBounds(282, 410, 93, 35);
+		add(suppr);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		
 		scrollPane.setBounds(377, 68, 399, 369);
 		add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int i=table.getSelectedRow();
+				textNom.setText(model.getValueAt(i, 0).toString());
+				txtPrenom.setText(model.getValueAt(i, 1).toString());
+				txtDdn.setText(model.getValueAt(i, 2).toString());
+				txtAdresse.setText(model.getValueAt(i, 3).toString());
+				txtVille.setText(model.getValueAt(i, 4).toString());
+				txtPhone.setText(model.getValueAt(i, 6).toString());
+			}
+		});
 		model = new DefaultTableModel();
 		Object[] column = {"Nom","Prenom","Ddn","Adresse","Ville","Pays","Phone"};
 		

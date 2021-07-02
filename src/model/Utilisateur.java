@@ -42,7 +42,7 @@ public class Utilisateur {
 	}
 	
 	public String addToDb () {
-		return("INSERT INTO " + this.table + "(nomUtilisateur, mdpUtilisateur, postUtilisateur ) "+ " VALUES  ( " + this.nomUtilisateur + ", " + this.mdpUtilisateur + ", " + this.postUtilisateur + ")");
+		return("INSERT INTO " + this.table + "(nomUtilisateur, mdpUtilisateur, postUtilisateur )  VALUES  ( " + this.nomUtilisateur + ", " + this.mdpUtilisateur + ", " + this.postUtilisateur + ")");
 	}
 	
 	public String createTable() {

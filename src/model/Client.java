@@ -84,20 +84,22 @@ public class Client {
 				+ " villeClient VARCHAR(50), paysClient VARCHAR(50), telClient VARCHAR(50), PRIMARY KEY(idClient)) " );
 	}
 	
-	public String update(int id) {
+	public String update(String nom, String prenom) {
+		System.out.println(nom + ","+ prenom +" or "+ this.nomClient + "," + this.prenomClient);
 		return("UPDATE " + this.table + " SET nomClient = " + this.nomClient + " , prenomClient = " + this.prenomClient +
 				 ", ddnClient = " + this.ddnClient + ", adresseClient = " + this.adresseClient +", villeClient = "+ this.villeClient + ",paysClient = "+ this.paysClient
-				 + ", telClient = " + this.telClient + " WHERE idClient = " + id  );
+				 + ", telClient = " + this.telClient + " WHERE nomClient = " + nom + " AND prenomClient = " + prenom  );
 	}
 	
 	public String delete() {
-		return("DELETE FROM " + this.table + " WHERE idClient = " + this.idClient);
+		System.out.println(this.nomClient +" , " + this.prenomClient);
+		return("DELETE FROM " + this.table + " WHERE nomClient = " + this.nomClient + " AND prenomClient = " + this.prenomClient );
 	}
 	@Override
 	public String toString() {
 		return "Client [idClient=" + idClient + ", nomClient=" + nomClient + ", prenomClient=" + prenomClient
 				+ ", ddnClient=" + ddnClient + ", adresseClient=" + adresseClient + ", villeClient=" + villeClient
-				+ ", paysClient=" + paysClient + ", telClient=" + telClient + ", table=" + table + "]";
+				+ ", paysClient=" + paysClient + ", telClient=" + telClient + ", table=" + table +  "]";
 	}
 	
 	
