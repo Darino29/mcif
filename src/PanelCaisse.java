@@ -2,12 +2,16 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import Controlleur.DepotRetraitContolleur;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.JSeparator;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Cursor;
@@ -15,6 +19,8 @@ import javax.swing.JTextField;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.AbstractListModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelCaisse extends JPanel {
 	private JTextField txtMnt;
@@ -63,13 +69,13 @@ public class PanelCaisse extends JPanel {
 		separator_1.setBounds(394, 44, 386, 4);
 		add(separator_1);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setFocusable(false);
-		comboBox.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Retrait", "Depot"}));
-		comboBox.setBounds(0, 58, 384, 40);
-		add(comboBox);
+		JComboBox txttype = new JComboBox();
+		txttype.setFocusable(false);
+		txttype.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		txttype.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		txttype.setModel(new DefaultComboBoxModel(new String[] {"Retrait", "Depot"}));
+		txttype.setBounds(0, 58, 384, 40);
+		add(txttype);
 		
 		txtMnt = new JTextField();
 		txtMnt.addFocusListener(new FocusAdapter() {
@@ -123,6 +129,24 @@ public class PanelCaisse extends JPanel {
 		addPlaceholderStyle(txtCmt);
 		
 		JButton btnSave = new JButton("Sauvegarder");
+		btnSave.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(txtMnt.getText().equals("") || txtCmt.getText().equals(""))
+				{
+					JOptionPane.showMessageDialog(null, "Completer les cases vides");
+				}
+				else
+				{
+					String  montant = txtMnt.getText();
+	                Object typeS = txttype.getSelectedItem();
+	                String commentaire = txtCmt.getText();
+	                String type = typeS.toString();
+	                DepotRetraitContolleur dr = new DepotRetraitContolleur();
+	                dr.CreateDR(type, montant, commentaire);
+			}
+			}
+		});
 		btnSave.setForeground(new Color(240, 255, 240));
 		btnSave.setBorderPainted(false);
 		btnSave.setBackground(new Color(255, 140, 0));

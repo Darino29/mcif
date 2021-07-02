@@ -56,7 +56,7 @@ public class PanelCompte extends JPanel {
 		
 		table = new JTable();
 		model = new DefaultTableModel();
-		Object[] column = {"Ventes","Total HT","Taxe","Total TTC"};
+		Object[] column = {"Types","Montant","Date","Commentaire"};
 		Object[] row = new Object[0];
 		
 		model.setColumnIdentifiers(column);

@@ -448,8 +448,8 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        ResultSet rs = statement.executeQuery("select * from Ventes");
 		        while (rs.next()) {
-		            String idVente = rs.getString("idVente");
-		            int idClient = rs.getInt("idClient");
+		        	int idVente = rs.getInt("idVente");
+		            String nomClient = rs.getString("nomClient");
 		            String idProduit = rs.getString("idProduit");
 		            int idUtilisateur = rs.getInt("idUtilisateur");
 		            String idStock  = rs.getString("idStock");
@@ -457,7 +457,7 @@ public class Database {
 		            int quantiter = rs.getInt("quantiter");
 		            String date  = rs.getString("dateVente");
 		            String note  = rs.getString("note");
-		            ventes.add(new Vente(idVente, idClient, idProduit, idUtilisateur, idStock, prixVente, quantiter, date, note));
+		            ventes.add(new Vente(idVente, nomClient, idProduit, idUtilisateur, idStock, prixVente, quantiter, date, note));
 		        }
 		        connection.close();
 		    } catch (SQLException e) {
@@ -478,7 +478,7 @@ public class Database {
 	    }
 	}
 	
-	public void updateVente (Vente vt, String idVente, int idClient, String idProduit, int idUtilisateur, String idStock) {
+	public void updateVente (Vente vt, int idVente, String idClient, String idProduit, int idUtilisateur, String idStock) {
 		 try {
 		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
 		        Statement statement = connection.createStatement();
@@ -501,6 +501,40 @@ public class Database {
 	  e.printStackTrace();
   }
 		
+	}
+	
+	
+	public List<DepotRetrait> getAllDR(){
+		 List<DepotRetrait> dr = new ArrayList<>();
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        ResultSet rs = statement.executeQuery("select * from comptabiliter");
+		        while (rs.next()) {
+		        	int id = rs.getInt("id");
+		            String type = rs.getString("type");
+		            int montant = rs.getInt("montant");
+		            String date = rs.getString("date");
+		            String commentaire  = rs.getString("commentaire");       
+		            dr.add(new DepotRetrait(type, montant, date, commentaire));
+		        }
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return dr;	
+	}
+	
+	public void addDr (DepotRetrait dr) {
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        statement.execute(dr.createTable());
+		        statement.executeUpdate(dr.addToDb());
+		  }
+	  	 catch (SQLException e) {
+		  e.printStackTrace();
+	    }
 	}
 	
 }

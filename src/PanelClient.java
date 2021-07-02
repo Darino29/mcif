@@ -325,7 +325,12 @@ public class PanelClient extends JPanel {
 		add(suppr);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.addMouseListener(new MouseAdapter() {
+		
+		scrollPane.setBounds(377, 68, 399, 369);
+		add(scrollPane);
+		
+		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int i=table.getSelectedRow();
@@ -335,13 +340,8 @@ public class PanelClient extends JPanel {
 				txtAdresse.setText(model.getValueAt(i, 3).toString());
 				txtVille.setText(model.getValueAt(i, 4).toString());
 				txtPhone.setText(model.getValueAt(i, 6).toString());
-
 			}
 		});
-		scrollPane.setBounds(377, 68, 399, 369);
-		add(scrollPane);
-		
-		table = new JTable();
 		model = new DefaultTableModel();
 		Object[] column = {"Nom","Prenom","Ddn","Adresse","Ville","Pays","Phone"};
 		
