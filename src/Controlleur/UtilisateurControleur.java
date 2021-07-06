@@ -51,4 +51,20 @@ public class UtilisateurControleur {
 			return false;
 		}
 	}
+	public String changeMdp(String newMdp, String oldMdp, Utilisateur user) {
+		if (user.getMdpUtilisateur().equals(oldMdp)) {
+			user.setMdpUtilisateur(util.quote(newMdp));
+			user.setNomUtilisateur(util.quote(user.getNomUtilisateur()));
+			user.setPostUtilisateur(util.quote(user.getPostUtilisateur()));
+			try {
+				db.updateUtilisateur(user, user.getIdUtilisateur());
+			}catch(Exception e) {
+				return "erreur base de donner";
+			}
+			return "chagement reussi";
+		}
+		else {
+			return "mot de passe non conforme";
+		}
+	}
 }

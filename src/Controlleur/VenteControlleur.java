@@ -3,6 +3,7 @@ package Controlleur;
 import java.awt.Panel;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -67,6 +68,19 @@ public class VenteControlleur {
 			return "prix et qte doit etre un chiffre ";
 		}
 		
+		
+	}
+	public String[] searchProdStock(String stk) {
+		
+		StockControlleur stkC = new StockControlleur();
+		List<Stock> prods =stkC.fullSearchStock(stk);
+		List<String> prodName = new ArrayList<String>();
+		for (Stock st : prods) {
+			prodName.add(st.getIdProduit());
+			System.out.println(st.getIdProduit());
+		}
+		String[] produit = prodName.toArray(new String[0]);
+		return produit;
 		
 	}
 	

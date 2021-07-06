@@ -43,7 +43,7 @@ public class Stock {
 	
 	public String createTable() {
 		return ("CREATE TABLE IF NOT EXISTS " + this.table + " ( idStock VARCHAR(50), idProduit VARCHAR(50), qteStock INTEGER, description VARCHAR(100),"
-				+ " PRIMARY KEY(idStock, idProduit))" );
+				+ " PRIMARY KEY(idStock, idProduit), FOREIGN KEY(idProduit) REFERENCES Produits(idProduit))" );
 	}
 	
 	public String addToDb () {

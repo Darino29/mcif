@@ -357,6 +357,30 @@ public class PanelClient extends JPanel {
 		scrollPane.setViewportView(table);
 		
 		JButton btnNewButton = new JButton("Refresh");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (model.getRowCount() > 0) {
+				    for (int i = model.getRowCount() - 1; i > -1; i--) {
+				        model.removeRow(i);
+				    }
+				}
+				 List<Client> client = new ArrayList<>();
+				 ClientControlle clt = new ClientControlle();
+				 client = clt.allClient();
+				 for (Client cl : client) {
+					 	System.out.println(cl.toString());
+						row[0] = cl.getNomClient();
+						row[1] = cl.getPrenomClient();
+						row[2] = cl.getDdnClient();
+						row[3] = cl.getAdresseClient();
+						row[4] = cl.getVilleClient();
+						row[5] = cl.getPaysClient();
+						row[6] = cl.getTelClient();
+						model.addRow(row) ;
+					}
+			}
+		});
 		btnNewButton.setBounds(685, 29, 85, 21);
 		add(btnNewButton);
 

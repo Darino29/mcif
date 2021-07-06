@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Database {
-	private String dbLocation = "jdbc:mysql://localhost:3307";
+	private String dbLocation = "jdbc:mysql://localhost:3306";
 	private String user = "root";
 	private String mdp = "lelena";
 	
@@ -24,7 +24,7 @@ public class Database {
         	
             stmt.execute();
             this.dbLocation += "/MICF";
-            
+            conn.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -50,12 +50,32 @@ public class Database {
 		    return produits;	
 	}
 	
+	public List<Produit> searchProd(String mot){
+		 List<Produit> produits = new ArrayList<>();
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        ResultSet rs = statement.executeQuery("select * from produits WHERE idProduit LIKE "  + mot);
+		        while (rs.next()) {
+		            String id = rs.getString("idProduit");
+		            String description = rs.getString("description");
+		            Double price = rs.getDouble("prix");
+		            produits.add(new Produit(id, price, description));
+		        }
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return produits;	
+	}
+	
 	public void addProduit (Produit prod) {
 		  try {
 		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
 		        Statement statement = connection.createStatement();
 		        statement.execute(prod.createTable());
 		        statement.executeUpdate(prod.addToDb());
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -68,6 +88,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(prod.createTable());
 		        statement.executeUpdate(prod.update(id));
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -80,6 +101,7 @@ public class Database {
 	        Statement statement = connection.createStatement();
 	        statement.execute(prod.createTable());
 	        statement.executeUpdate(prod.delete());
+	        connection.close();
 	  }
   	 catch (SQLException e) {
 	  e.printStackTrace();
@@ -141,6 +163,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(clt.createTable());
 		        statement.executeUpdate(clt.addToDb());
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -153,6 +176,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(clt.createTable());
 		        statement.executeUpdate(clt.update(nom, prenom));
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -165,6 +189,7 @@ public class Database {
 	        Statement statement = connection.createStatement();
 	        statement.execute(clt.createTable());
 	        statement.executeUpdate(clt.delete());
+	        connection.close();
 	  }
  	 catch (SQLException e) {
 	  e.printStackTrace();
@@ -198,6 +223,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(cmd.createTable());
 		        statement.executeUpdate(cmd.addToDb());
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -210,6 +236,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(cmd.createTable());
 		        statement.executeUpdate(cmd.update(id));
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -222,6 +249,7 @@ public class Database {
 	        Statement statement = connection.createStatement();
 	        statement.execute(cmd.createTable());
 	        statement.executeUpdate(cmd.delete());
+	        connection.close();
 	  }
 	 catch (SQLException e) {
 	  e.printStackTrace();
@@ -255,6 +283,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(cmdPro.createTable());
 		        statement.executeUpdate(cmdPro.addToDb());
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -267,6 +296,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(cmdPro.createTable());
 		        statement.executeUpdate(cmdPro.update(idCommande, idClient, idProduit));
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -279,6 +309,7 @@ public class Database {
 	        Statement statement = connection.createStatement();
 	        statement.execute(cmdPro.createTable());
 	        statement.executeUpdate(cmdPro.delete());
+	        connection.close();
 	  }
 	 catch (SQLException e) {
 	  e.printStackTrace();
@@ -355,6 +386,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(stock.createTable());
 		        statement.executeUpdate(stock.addToDb());
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -367,6 +399,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(stock.createTable());
 		        statement.executeUpdate(stock.update(idStock, idProduit));
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -379,6 +412,7 @@ public class Database {
 	        Statement statement = connection.createStatement();
 	        statement.execute(stock.createTable());
 	        statement.executeUpdate(stock.delete());
+	        connection.close();
 	  }
 	 catch (SQLException e) {
 	  e.printStackTrace();
@@ -434,6 +468,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(util.createTable());
 		        statement.executeUpdate(util.addToDb());
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -446,6 +481,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(util.createTable());
 		        statement.executeUpdate(util.update(id));
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -457,6 +493,7 @@ public class Database {
 	        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
 	        Statement statement = connection.createStatement();
 	        statement.executeUpdate(Utilisateur.delete(id));
+	        connection.close();
 	  }
  	 catch (SQLException e) {
 	  e.printStackTrace();
@@ -518,6 +555,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(vt.createTable());
 		        statement.executeUpdate(vt.addToDb());
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -530,6 +568,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(vt.createTable());
 		        statement.executeUpdate(vt.update(idVente, idClient, idProduit, idUtilisateur,idStock));
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -542,6 +581,7 @@ public class Database {
 	        Statement statement = connection.createStatement();
 	        statement.execute(vt.createTable());
 	        statement.executeUpdate(vt.delete());
+	        connection.close();
 	  }
 	 catch (SQLException e) {
 	  e.printStackTrace();
@@ -595,6 +635,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(plann.createTable());
 		        statement.executeUpdate(plann.addToDb());
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -607,6 +648,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(plann.createTable());
 		        statement.executeUpdate(plann.update(titre));
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -619,6 +661,7 @@ public class Database {
 	        Statement statement = connection.createStatement();
 	        statement.execute(plann.createTable());
 	        statement.executeUpdate(plann.delete());
+	        connection.close();
 	  }
 	 catch (SQLException e) {
 	  e.printStackTrace();
@@ -655,6 +698,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(dr.createTable());
 		        statement.executeUpdate(dr.addToDb());
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
