@@ -631,15 +631,16 @@ public class Database {
 		  try {
 		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
 		        Statement statement = connection.createStatement();
-
+		        statement.execute(DepotRetrait.createTable());
 		        ResultSet rs = statement.executeQuery("select * from comptabiliter");
 		        while (rs.next()) {
 		        	int id = rs.getInt("id");
 		            String type = rs.getString("type");
 		            int montant = rs.getInt("montant");
 		            String date = rs.getString("date");
-		            String commentaire  = rs.getString("commentaire");       
-		            dr.add(new DepotRetrait(type, montant, date, commentaire));
+		            String commentaire  = rs.getString("commentaire");
+		            int totale = rs.getInt("totale");
+		            dr.add(new DepotRetrait(type, montant, date, commentaire, totale));
 		        }
 		        connection.close();
 		    } catch (SQLException e) {
@@ -659,5 +660,6 @@ public class Database {
 		  e.printStackTrace();
 	    }
 	}
+	
 	
 }
