@@ -6,16 +6,28 @@ public class DepotRetrait {
 	private int montant;
 	private String date;
 	private String commentaire;
+	private int totale;
 	
+
+
 	private String table = "comptabiliter";
 	
 	
-	public DepotRetrait(String type, int montant, String date, String commentaire) {
+	public DepotRetrait(String type, int montant, String date, String commentaire, int totale) {
 		super();
 		this.type = type;
 		this.montant = montant;
 		this.date = date;
 		this.commentaire = commentaire;
+		this.totale = totale;
+	}
+	
+	public int getTotale() {
+		return totale;
+	}
+
+	public void setTotale(int totale) {
+		this.totale = totale;
 	}
 
 	public String getType() {
@@ -50,13 +62,13 @@ public class DepotRetrait {
 		this.commentaire = commentaire;
 	}
 	
-	public String createTable() {
-		return ("CREATE TABLE IF NOT EXISTS " + this.table + " ( id INTEGER NOT NULL AUTO_INCREMENT , type VARCHAR(50),  montant INTEGER, date VARCHAR(100), commentaire VARCHAR(50)"
+	public static String createTable() {
+		return ("CREATE TABLE IF NOT EXISTS " + "comptabiliter" + " ( id INTEGER NOT NULL AUTO_INCREMENT , type VARCHAR(50),  montant INTEGER, date VARCHAR(100), commentaire VARCHAR(50), totale INTEGER"
 				+ ", PRIMARY KEY (id))" );
 	}
 	
 	public String addToDb () {
-		return("INSERT INTO " + this.table + " (type, montant, date, commentaire) VALUES (" + this.type + ", " + this.montant + ", " + this.date +", " + this.commentaire + ")");
+		return("INSERT INTO " + this.table + " (type, montant, date, commentaire, totale) VALUES (" + this.type + ", " + this.montant + ", " + this.date +", " + this.commentaire + ", "+ this.totale + ")");
 	}
 
 

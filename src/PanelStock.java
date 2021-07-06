@@ -292,6 +292,27 @@ public class PanelStock extends JPanel {
 		scrollPane.setViewportView(table);
 		
 		JButton btnNewButton = new JButton("Refresh");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (model.getRowCount() > 0) {
+				    for (int i = model.getRowCount() - 1; i > -1; i--) {
+				        model.removeRow(i);
+				    }
+				}
+				List<Stock> stock = new ArrayList<>();
+				StockControlleur stck = new StockControlleur();
+				stock = stck.allStock();
+				 for (Stock stk : stock) {
+					 	System.out.println(stk.toString());
+						row[0] = stk.getIdStock();
+						row[1] = stk.getIdProduit();
+						row[2] = stk.getQteStock();
+						row[3] = stk.getDesc();
+						model.addRow(row) ;
+					}
+			}
+		});
 		btnNewButton.setBounds(685, 29, 85, 21);
 		add(btnNewButton);
 		

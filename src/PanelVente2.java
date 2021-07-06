@@ -5,6 +5,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JSeparator;
 import javax.swing.JList;
@@ -15,14 +16,24 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
+import Controlleur.ProduitControlleur;
 import Controlleur.StockControlleur;
 import Controlleur.VenteControlleur;
+import model.Client;
+import model.Produit;
+import model.Stock;
 import model.Utilisateur;
+import model.Vente;
 
 import javax.swing.border.EtchedBorder;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelVente2 extends JPanel {
 	private Utilisateur user;
@@ -32,6 +43,7 @@ public class PanelVente2 extends JPanel {
 	private JTextField quantite;
 	private String name = "vente2";
 	private JTextField idStock;
+	private String[] prod = {};
 
 	public String getName() {
 		return name;
@@ -114,42 +126,58 @@ public class PanelVente2 extends JPanel {
 		lblTotal.setBounds(237, 221, 97, 13);
 		panel.add(lblTotal);
 		
-		idStock = new JTextField();
+		idStock = new JTextField();;
 		idStock.setColumns(10);
-		idStock.setBounds(321, 252, 229, 24);
+		idStock.setBounds(321, 81, 229, 24);
 		panel.add(idStock);
 		
 		JLabel lblIdstock = new JLabel("idStock");
 		lblIdstock.setHorizontalAlignment(SwingConstants.LEFT);
 		lblIdstock.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblIdstock.setBounds(237, 257, 97, 13);
+		lblIdstock.setBounds(237, 85, 97, 13);
 		panel.add(lblIdstock);
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox comboBox = new JComboBox(this.prod);
 		comboBox.setBounds(321, 119, 229, 21);
 		panel.add(comboBox);
+		
+		JButton valider = new JButton("valider");
+		valider.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String stk = idStock.getText();	
+				VenteControlleur vC = new VenteControlleur();
+				prod = vC.searchProdStock(stk);
+				System.out.println(Arrays.toString(prod));
+				DefaultComboBoxModel model = new DefaultComboBoxModel(prod);
+				comboBox.setModel(model);
+				
+			}
+		});
+		valider.setBounds(602, 82, 89, 23);
+		panel.add(valider);
 		
 		JButton btnNewButton_1 = new JButton("Enregistrer");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(produit.getText().equals("")  || client.getText().equals("") || quantite.getText().equals(""))
+				if(client.getText().equals("") || quantite.getText().equals(""))
 				{
 					JOptionPane.showMessageDialog(null, "Completer les cases vides");
 				}
 				else
 				{
-					String prod = produit.getText();
+					String prod = comboBox.getSelectedItem().toString();
 					String clt = client.getText();
 					String prixvente = prix.getText();
 					String qte = quantite.getText();
 					String stk = idStock.getText();
 					VenteControlleur vC = new VenteControlleur ();
 					String resultat = vC.createVente(prod, clt, prixvente, qte, stk, user);
-					produit.setText("");
 					quantite.setText("");
 					prix.setText("");
 					client.setText("");
 					idStock.setText("");
+					DefaultComboBoxModel model = new DefaultComboBoxModel();
+					comboBox.setModel(model);
 					JOptionPane.showMessageDialog(null, resultat);
         }
 				

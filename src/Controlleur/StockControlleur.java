@@ -17,18 +17,18 @@ public class StockControlleur {
 	
 	
 	
-	public boolean CreateStock(String id , String prod, String qte , String desc ) {
+	public String CreateStock(String id , String prod, String qte , String desc ) {
 		
 		try {
 			int quantiter = Integer.parseInt(qte);
 			Stock stck = new Stock(util.quote(id),util.quote(prod), quantiter, util.quote(desc) );
 			db.addStock(stck);
 			System.out.println("stocker");
-			return true;
+			return "stocker";
 			
 		}
 		catch(Exception e){
-			return false;
+			return "erreur id stock ou produit non existant";
 		}
 		
 	}
@@ -69,6 +69,12 @@ public class StockControlleur {
 	
 	public List<Stock> searchStock(String mot){
 		String motClee = util.quote(mot+"%");
+		List<Stock> stock = db.searchStock(motClee);
+		return stock;
+		
+	}
+	public List<Stock> fullSearchStock(String mot){
+		String motClee = util.quote(mot);
 		List<Stock> stock = db.searchStock(motClee);
 		return stock;
 		

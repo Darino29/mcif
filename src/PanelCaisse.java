@@ -146,8 +146,8 @@ public class PanelCaisse extends JPanel {
 	                String commentaire = txtCmt.getText();
 	                String type = typeS.toString();
 	                DepotRetraitContolleur dr = new DepotRetraitContolleur();
-	                dr.CreateDR(type, montant, commentaire);
-	                JOptionPane.showMessageDialog(null, "enregistrer");
+	                String result = dr.CreateDR(type, montant, commentaire);
+	                JOptionPane.showMessageDialog(null, result);
 			}
 			}
 		});

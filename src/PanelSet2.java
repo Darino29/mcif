@@ -5,7 +5,15 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
+
+import com.mysql.cj.xdevapi.Result;
+
+import Controlleur.UtilisateurControleur;
+import model.Utilisateur;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -13,6 +21,7 @@ public class PanelSet2 extends JPanel {
 	private JTextField ancMdp;
 	private JTextField newMdp;
 	private ACC parent;
+	private Utilisateur user;
 	private String name = "set2";
 
 	public String getName() {
@@ -26,7 +35,8 @@ public class PanelSet2 extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelSet2(ACC s) {
+	public PanelSet2(ACC s,Utilisateur user) {
+		this.user = user;
 		parent = s;
 		setBackground(Color.LIGHT_GRAY);
 		setBounds(0,0,780,455);
@@ -41,7 +51,21 @@ public class PanelSet2 extends JPanel {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//database fonction change mdp
+				if(ancMdp.getText().equals("") || newMdp.getText().equals(""))
+				{
+					JOptionPane.showMessageDialog(null, "Completer les cases vides");
+				}
+				else
+				{
+					String anc = ancMdp.getText();
+					String nouv = newMdp.getText();
+					UtilisateurControleur usr = new UtilisateurControleur();
+					String result = usr.changeMdp(nouv, anc, user);
+					ancMdp.setText("");
+					newMdp.setText("");
+					JOptionPane.showMessageDialog(null, result);
+				}
+				
 			}
 		});
 		btnNewButton.setForeground(Color.WHITE);

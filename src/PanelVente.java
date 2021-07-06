@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 
@@ -167,6 +169,40 @@ public class PanelVente extends JPanel {
 		lblVentesValidees.setBackground(Color.WHITE);
 		lblVentesValidees.setBounds(4, 65, 128, 19);
 		add(lblVentesValidees);
+		
+		JButton btnNewButton_1 = new JButton("refresh");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (model.getRowCount() > 0) {
+				    for (int i = model.getRowCount() - 1; i > -1; i--) {
+				        model.removeRow(i);
+				    }
+				}
+				 List<Vente> ventes = new ArrayList<>();
+				 VenteControlleur vC = new VenteControlleur();
+				 ventes = vC.allVente();
+				 for (Vente vt : ventes) {
+					 	
+						row[0] = vt.getIdProduit();
+						row[1] = vt.getDateVente();
+						row[2] = vt.getIdUtilisateur();
+						row[3] = vt.getnomClient();
+						row[4] =vt.getPrixVente();
+						row[5] = vt.getQuantiter();
+						row[6] = vt.getIdStock();
+						model.addRow(row) ;
+					}
+				
+			}
+			
+		});
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewButton_1.setBounds(379, 19, 89, 23);
+		add(btnNewButton_1);
 
 	}
 	

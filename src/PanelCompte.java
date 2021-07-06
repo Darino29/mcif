@@ -33,7 +33,7 @@ public class PanelCompte extends JPanel {
 	private JTable table;
 	DefaultTableModel model;
 	private String name = "compte";
-	Object[] row = new Object[4];
+	Object[] row = new Object[5];
 	
 	
 	public String getName() {
@@ -66,7 +66,7 @@ public class PanelCompte extends JPanel {
 		
 		table = new JTable();
 		model = new DefaultTableModel();
-		Object[] column = {"Types","Montant","Date","Commentaire"};
+		Object[] column = {"Types","Montant","Date","Commentaire","Total"};
 		
 		model.setColumnIdentifiers(column);
 		table.setModel(model);
@@ -97,6 +97,7 @@ public class PanelCompte extends JPanel {
 					row[1] = dr.getMontant();
 					row[2] = dr.getDate();
 					row[3] = dr.getCommentaire();
+					row[4] = dr.getTotale();
 					model.addRow(row) ;
 				}
 			 
