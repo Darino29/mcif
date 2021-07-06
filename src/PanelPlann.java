@@ -51,7 +51,7 @@ public class PanelPlann extends JPanel {
 	public void setName(String name) {
 		this.name = name;
 	}
-	final Object[] row = new Object[3];
+	final Object[] row = new Object[4];
 	private JTextField heure;
 	/**
 	 * Create the panel.
@@ -117,6 +117,7 @@ public class PanelPlann extends JPanel {
 							row[0] = pln.getTitre();
 							row[1] = pln.getDate();
 							row[2] = pln.getCommentaire();
+							row[3] = pln.getHeure();
 							
 							model.addRow(row) ;
 						}
@@ -195,7 +196,7 @@ public class PanelPlann extends JPanel {
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(titre.getText().equals("") || date.getText().equals("") || commentaire.getText().equals(""))
+				if(titre.getText().equals("") || date.getText().equals("")|| heure.getText().equals("") || commentaire.getText().equals("") )
 				{
 					JOptionPane.showMessageDialog(null, "Completer les cases vides");
 				}
@@ -203,12 +204,14 @@ public class PanelPlann extends JPanel {
 				{
 				String titres = titre.getText();
 				String dates = date.getText();
+				String heures = heure.getText();
 				String coms = commentaire.getText();
 				PlanningControlleur plnn = new PlanningControlleur();
-				plnn.CreatePlanning(titres, dates,coms);
+				plnn.CreatePlanning(titres, dates,heures,coms);
 				
 				titre.setText("");
 				date.setText("");
+				heure.setText("");
 				commentaire.setText("");
 				
 				JOptionPane.showMessageDialog(null, "Enregistrer");
@@ -223,7 +226,7 @@ public class PanelPlann extends JPanel {
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(titre.getText().equals("") || date.getText().equals("") || commentaire.getText().equals(""))
+				if(titre.getText().equals("") || date.getText().equals("")| heure.getText().equals("") || commentaire.getText().equals(""))
 				{
 					JOptionPane.showMessageDialog(null, "Completer les cases vides");
 				}
@@ -232,15 +235,13 @@ public class PanelPlann extends JPanel {
 					int i=table.getSelectedRow();
 					String titres = titre.getText();
 					String dates = date.getText();
+					String heures = heure.getText();
 					String coms = commentaire.getText();
-					PlanningControlleur plnn = new PlanningControlleur();
-					
-					
-					
+					PlanningControlleur plnn = new PlanningControlleur();					
 					try {
 						String oldTitre= model.getValueAt(i, 0).toString();
 						
-						plnn.editPlann(titres, dates, coms,oldTitre);
+						plnn.editPlann(titres, dates,heures, coms,oldTitre);
 						
 					}catch(Exception e1) {
 						JOptionPane.showMessageDialog(null, "selectionner un element");
@@ -262,9 +263,10 @@ public class PanelPlann extends JPanel {
 					
 					String titres = titre.getText();
 					String dates = date.getText();
+					String heures = heure.getText();
 					String coms = commentaire.getText();
 					PlanningControlleur plnn = new PlanningControlleur();
-					plnn.supprPlann(titres, dates,coms);
+					plnn.supprPlann(titres, dates,heures,coms);
 					
 					model.removeRow(i);
 					JOptionPane.showMessageDialog(null, "Supprimé");
@@ -291,17 +293,25 @@ public class PanelPlann extends JPanel {
 				int i=table.getSelectedRow();
 				titre.setText(model.getValueAt(i, 0).toString());
 				date.setText(model.getValueAt(i, 1).toString());
-				commentaire.setText(model.getValueAt(i, 2).toString());
+				heure.setText(model.getValueAt(i, 2).toString());
+				commentaire.setText(model.getValueAt(i, 3).toString());
 			}
 		});
 		model = new DefaultTableModel();
-		Object[] column = {"Titre","Date","Commentaire"};
+		Object[] column = {"Titre","Date","Heure","Commentaire"};
 		
 		model.setColumnIdentifiers(column);
 		table.setModel(model);
 		scrollPane.setViewportView(table);
 		
 		JButton btnNewButton_2 = new JButton("Refresh");
+		btnNewButton_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//fonction refreshh
+			}
+			
+		});
 		btnNewButton_2.setBounds(691, 29, 85, 21);
 		add(btnNewButton_2);
 

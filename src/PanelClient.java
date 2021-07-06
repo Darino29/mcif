@@ -357,6 +357,12 @@ public class PanelClient extends JPanel {
 		scrollPane.setViewportView(table);
 		
 		JButton btnNewButton = new JButton("Refresh");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//refresh fonction
+			}
+		});
 		btnNewButton.setBounds(685, 29, 85, 21);
 		add(btnNewButton);
 

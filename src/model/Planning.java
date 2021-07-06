@@ -3,12 +3,23 @@ package model;
 public class Planning {
 	private String titre;
 	private String date;
+	private String heure;
+	
 	private String commentaire;
 	
 	private String table = "Planning";
 	
 	
+	public String getHeure() {
+		return heure;
+	}
 
+
+
+
+	public void setHeure(String heure) {
+		this.heure = heure;
+	}
 	
 
 
@@ -53,11 +64,12 @@ public class Planning {
 	}
 	
 	
-	public Planning(String titre, String date, String commentaire) {
+	public Planning(String titre, String date, String commentaire, String heure) {
 		super();
 		
 		this.titre = titre;
 		this.date = date;
+		this.heure = heure;
 		this.commentaire = commentaire;
 	}
 	
@@ -65,16 +77,16 @@ public class Planning {
 	
 	
 	public String createTable() {
-		return ("CREATE TABLE IF NOT EXISTS " + this.table + " (  titre VARCHAR(50), date VARCHAR(10) , commentaire VARCHAR(100),"
+		return ("CREATE TABLE IF NOT EXISTS " + this.table + " (  titre VARCHAR(50), date VARCHAR(10) , heure VARCHAR(50), commentaire VARCHAR(100),"
 				+ " PRIMARY KEY(titre))" );
 	}
 	
 	public String addToDb () {
-		return("INSERT INTO " + this.table + " VALUES ( " + this.titre + ", " + this.date +", " + this.commentaire + ")");
+		return("INSERT INTO " + this.table + " VALUES ( " + this.titre + ", " + this.date +"," + this.heure +", " + this.commentaire + ")");
 	}
 	
 	public String update(String titre) {
-		return("UPDATE " + this.table + " SET   titre = " + this.titre + " , date = " + this.date +" , commentaire = " + this.commentaire +
+		return("UPDATE " + this.table + " SET   titre = " + this.titre + " , date = " + this.date +", heure =" + this.heure +", commentaire = " + this.commentaire +
 				 " WHERE titre = " + titre);
 	}
 	
@@ -83,7 +95,7 @@ public class Planning {
 	}
 	@Override
 	public String toString() {
-		return "Planning [titre=" + titre + ", date=" + date + ", commentaire="
+		return "Planning [titre=" + titre + ", date=" + date + ", heure=" + heure + ", commentaire="
 				+ commentaire + ", table=" + table + "]";
 	}
 

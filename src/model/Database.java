@@ -559,8 +559,9 @@ public class Database {
 		        	String titre= rs.getString("titre");
 		            
 		            String date  = rs.getString("date");
+		            String heure  = rs.getString("heure");
 		            String commentaire= rs.getString("Commentaire");
-		            plannings.add(new Planning(titre, date, commentaire));
+		            plannings.add(new Planning(titre, date,heure, commentaire));
 		        }
 		        connection.close();
 		    } catch (SQLException e) {
@@ -576,11 +577,11 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        ResultSet rs = statement.executeQuery("SELECT * from Planning WHERE titre LIKE " + motClee);
 		        while (rs.next()) {
-		        	String titre= rs.getString("titre");
-		            
+		        	String titre= rs.getString("titre");    
 		            String date  = rs.getString("date");
+		            String heure  = rs.getString("heure");
 		            String commentaire= rs.getString("Commentaire");
-		            plannings.add(new Planning(titre, date, commentaire));
+		            plannings.add(new Planning(titre, date,heure, commentaire));
 		        }
 		        connection.close();
 		    } catch (SQLException e) {
