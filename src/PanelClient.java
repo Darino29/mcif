@@ -131,14 +131,6 @@ public class PanelClient extends JPanel {
 		search.setBounds(212, 10, 50, 40);
 		add(search);
 		
-		JButton btnCreer = new JButton("Imprimer");
-		btnCreer.setForeground(new Color(240, 255, 240));
-		btnCreer.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnCreer.setBorderPainted(false);
-		btnCreer.setBackground(new Color(255, 140, 0));
-		btnCreer.setBounds(603, 9, 167, 40);
-		add(btnCreer);
-		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(4, 62, 772, 4);
 		add(separator);
@@ -363,6 +355,10 @@ public class PanelClient extends JPanel {
 		model.setColumnIdentifiers(column);
 		table.setModel(model);
 		scrollPane.setViewportView(table);
+		
+		JButton btnNewButton = new JButton("Refresh");
+		btnNewButton.setBounds(685, 29, 85, 21);
+		add(btnNewButton);
 
 	}
 }

@@ -30,13 +30,13 @@ import java.util.List;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-public class PanelStock extends JPanel {
+public class PanelProduit extends JPanel {
 	private JTextField searchTxt;
 	private JTextField produit;
-	private ACC parent;
 	private JTextField quantite;
 	private JTextField description;
 	private JTable table;
+	private ACC parent;
 	private String name = "Stock";
 	public String getName() {
 		return name;
@@ -53,8 +53,8 @@ public class PanelStock extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelStock(ACC p) {
-		parent = p ;
+	public PanelProduit(ACC ppp) {
+		parent = ppp;
 		setBackground(Color.WHITE);
 		setBounds(0,0,780,455);
 		setLayout(null);
@@ -120,7 +120,7 @@ public class PanelStock extends JPanel {
 						}
 			}
 		});
-		search.setIcon(new ImageIcon(PanelStock.class.getResource("/img/icons8-search-24.png")));
+		search.setIcon(new ImageIcon(PanelProduit.class.getResource("/img/icons8-search-24.png")));
 		search.setBounds(212, 10, 50, 40);
 		add(search);
 		
@@ -130,7 +130,7 @@ public class PanelStock extends JPanel {
 		
 		JPanel panel = new JPanel();
 		panel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Ajouter un produit au Stock", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Ajouter un produit", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(4, 68, 389, 340);
 		add(panel);
 		panel.setLayout(null);
@@ -294,20 +294,6 @@ public class PanelStock extends JPanel {
 		JButton btnNewButton = new JButton("Refresh");
 		btnNewButton.setBounds(685, 29, 85, 21);
 		add(btnNewButton);
-		
-		JButton btnNouvelleProduit = new JButton("Nouvelle Produit  +");
-		btnNouvelleProduit.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				parent.changerMenu5();
-			}
-		});
-		btnNouvelleProduit.setForeground(new Color(240, 255, 240));
-		btnNouvelleProduit.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnNouvelleProduit.setBorderPainted(false);
-		btnNouvelleProduit.setBackground(new Color(255, 140, 0));
-		btnNouvelleProduit.setBounds(457, 10, 167, 40);
-		add(btnNouvelleProduit);
 
 	}
 }
