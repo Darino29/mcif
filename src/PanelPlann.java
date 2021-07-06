@@ -308,8 +308,8 @@ public class PanelPlann extends JPanel {
 		btnNewButton_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//fonction refreshh
-			}
+				//fonction refreshh atao eto		
+				}
 			
 		});
 		btnNewButton_2.setBounds(691, 29, 85, 21);
