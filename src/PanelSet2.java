@@ -38,6 +38,12 @@ public class PanelSet2 extends JPanel {
 		panel.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Changer");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//database fonction change mdp
+			}
+		});
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setBackground(new Color(255, 165, 0));
 		btnNewButton.setBorderPainted(false);
