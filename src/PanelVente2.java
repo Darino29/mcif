@@ -22,11 +22,11 @@ import model.Utilisateur;
 import javax.swing.border.EtchedBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class PanelVente2 extends JPanel {
 	private Utilisateur user;
 	private JTextField txtNom;
-	private JTextField produit;
 	private JTextField client;
 	private JTextField prix;
 	private JTextField quantite;
@@ -70,7 +70,7 @@ public class PanelVente2 extends JPanel {
 		
 		JPanel panel = new JPanel();
 		panel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Ajouter un produit", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Ajouter une Vente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(4, 68, 772, 340);
 		add(panel);
 		panel.setLayout(null);
@@ -80,11 +80,6 @@ public class PanelVente2 extends JPanel {
 		panel.add(lblCa);
 		lblCa.setHorizontalAlignment(SwingConstants.LEFT);
 		lblCa.setFont(new Font("Tahoma", Font.BOLD, 14));
-		
-		produit = new JTextField();
-		produit.setBounds(321, 117, 229, 24);
-		panel.add(produit);
-		produit.setColumns(10);
 		
 		client = new JTextField();
 		client.setColumns(10);
@@ -129,6 +124,10 @@ public class PanelVente2 extends JPanel {
 		lblIdstock.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblIdstock.setBounds(237, 257, 97, 13);
 		panel.add(lblIdstock);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(321, 119, 229, 21);
+		panel.add(comboBox);
 		
 		JButton btnNewButton_1 = new JButton("Enregistrer");
 		btnNewButton_1.addActionListener(new ActionListener() {

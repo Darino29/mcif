@@ -45,6 +45,7 @@ public class ACC extends JFrame {
 	private PanelSet2 panelSet2;
 	private PanelSet3 panelSet3;
 	private PanelSet4 panelSet4;
+	private PanelProduit panelProduit;
 	private JPanel contentPane;
 	private static Utilisateur user;
 	
@@ -87,7 +88,7 @@ public class ACC extends JFrame {
 		
 		panelCaisse = new PanelCaisse();
 		panelClient = new PanelClient();
-		panelStock = new PanelStock();
+		panelStock = new PanelStock(this);
 		panelPlann = new PanelPlann();
 		panelVente = new PanelVente(this);
 		panelVente2 = new PanelVente2(this.user);
@@ -96,6 +97,7 @@ public class ACC extends JFrame {
 		panelSet2 = new PanelSet2(this);
 		panelSet3 = new PanelSet3(this);
 		panelSet4 = new PanelSet4(this);
+		panelProduit = new PanelProduit(this);
 		
 		JPanel panel0 = new JPanel();
 		panel0.setBounds(67, 21, 808, 506);
@@ -143,6 +145,7 @@ public class ACC extends JFrame {
 		paneMainContent.add(panelSet2);
 		paneMainContent.add(panelSet3);
 		paneMainContent.add(panelSet4);
+		paneMainContent.add(panelProduit);
 		
 		menuClicked(panelCaisse);
 		
@@ -378,6 +381,7 @@ public class ACC extends JFrame {
 		 panelSet2.setVisible(false);
 		 panelSet3.setVisible(false);
 		 panelSet4.setVisible(false);
+		 panelProduit.setVisible(false);
 		 
 		 panel.setVisible(true);
 	 }
@@ -396,6 +400,7 @@ public class ACC extends JFrame {
 	 panelSet3.setVisible(false);
 	 panelSet2.setVisible(false);
 	 panelSet4.setVisible(false);
+	 panelProduit.setVisible(false);
 	 
 	 panelVente2.setVisible(true);
 	 
@@ -415,6 +420,7 @@ public class ACC extends JFrame {
 	 panelSet.setVisible(false);
 	 panelSet3.setVisible(false);
 	 panelSet4.setVisible(false);
+	 panelProduit.setVisible(false);
 	 
 	 panelSet2.setVisible(true);
 	 
@@ -432,6 +438,7 @@ public class ACC extends JFrame {
 	 panelCompte.setVisible(false);
 	 panelSet.setVisible(false);
 	 panelSet2.setVisible(false);
+	 panelProduit.setVisible(false);
 	 panelSet4.setVisible(false);
 	 
 	 panelSet3.setVisible(true);
@@ -456,6 +463,24 @@ public class ACC extends JFrame {
      
      
  }
+ public  void changerMenu5(){
+		
+	 panelCaisse.setVisible(false);
+	 panelClient.setVisible(false);
+	 panelStock.setVisible(false);
+	 panelPlann.setVisible(false);
+	 panelVente.setVisible(false);
+	 panelVente2.setVisible(false);
+	 panelCompte.setVisible(false);
+	 panelSet.setVisible(false);
+	 panelSet2.setVisible(false);
+	 panelSet3.setVisible(false);
+	 panelSet4.setVisible(false);
+	 panelProduit.setVisible(true);
+	 
+     
+     
+ }
  public  void retourMenu(){
 		
 	 panelCaisse.setVisible(false);
@@ -468,6 +493,7 @@ public class ACC extends JFrame {
 	 panelSet2.setVisible(false);
 	 panelSet3.setVisible(false);
 	 panelSet4.setVisible(false);
+	 panelProduit.setVisible(false);
 	 
 	 panelSet.setVisible(true);
 	 

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Database {
-	private String dbLocation = "jdbc:mysql://localhost:3306";
+	private String dbLocation = "jdbc:mysql://localhost:3307";
 	private String user = "root";
 	private String mdp = "lelena";
 	

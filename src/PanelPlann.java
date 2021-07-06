@@ -52,6 +52,7 @@ public class PanelPlann extends JPanel {
 		this.name = name;
 	}
 	final Object[] row = new Object[3];
+	private JTextField heure;
 	/**
 	 * Create the panel.
 	 */
@@ -151,7 +152,7 @@ public class PanelPlann extends JPanel {
 		lblDernierAchat.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JLabel lblPays = new JLabel("Commentaire");
-		lblPays.setBounds(10, 119, 116, 13);
+		lblPays.setBounds(10, 151, 116, 13);
 		panel.add(lblPays);
 		lblPays.setHorizontalAlignment(SwingConstants.LEFT);
 		lblPays.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -163,7 +164,7 @@ public class PanelPlann extends JPanel {
 		
 		commentaire = new JTextField();
 		commentaire.setColumns(10);
-		commentaire.setBounds(110, 119, 229, 180);
+		commentaire.setBounds(110, 148, 229, 151);
 		panel.add(commentaire);
 		
 		date = new JTextField();
@@ -174,6 +175,21 @@ public class PanelPlann extends JPanel {
 		date.setForeground(Color.GRAY);
 		date.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		date.setColumns(10);
+		
+		heure = new JTextField();
+		heure.setText("hh : mm");
+		heure.setHorizontalAlignment(SwingConstants.CENTER);
+		heure.setForeground(Color.GRAY);
+		heure.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		heure.setColumns(10);
+		heure.setBounds(110, 117, 229, 24);
+		panel.add(heure);
+		
+		JLabel lblHeure = new JLabel("Heure");
+		lblHeure.setHorizontalAlignment(SwingConstants.LEFT);
+		lblHeure.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblHeure.setBounds(10, 121, 62, 13);
+		panel.add(lblHeure);
 		
 		JButton btnNewButton_1 = new JButton("Enregistrer");
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
@@ -284,6 +300,10 @@ public class PanelPlann extends JPanel {
 		model.setColumnIdentifiers(column);
 		table.setModel(model);
 		scrollPane.setViewportView(table);
+		
+		JButton btnNewButton_2 = new JButton("Refresh");
+		btnNewButton_2.setBounds(691, 29, 85, 21);
+		add(btnNewButton_2);
 
 	}
 }
