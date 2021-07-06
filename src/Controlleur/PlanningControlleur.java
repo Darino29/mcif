@@ -18,11 +18,11 @@ public class PlanningControlleur {
 	
 	
 	
-	public boolean CreatePlanning( String titre, String date , String commentaire ) {
+	public boolean CreatePlanning( String titre, String date ,String heure, String commentaire) {
 		
 		try {
 			
-			Planning plnn = new Planning(util.quote(titre), util.quote(date), util.quote(commentaire) );
+			Planning plnn = new Planning(util.quote(titre), util.quote(date), util.quote(heure), util.quote(commentaire));
 			db.addPlann(plnn);
 			System.out.println("Planifier");
 			return true;
@@ -39,9 +39,9 @@ public class PlanningControlleur {
 		
 	}
 	
-	public boolean editPlann( String titre, String date, String commentaire ,String oldTitre) {
+	public boolean editPlann( String titre, String date,String heure, String commentaire ,String oldTitre) {
 		try {
-			Planning plnn = new Planning(util.quote(titre), util.quote(date), util.quote(commentaire) );
+			Planning plnn = new Planning(util.quote(titre), util.quote(date), util.quote(heure), util.quote(commentaire) );
 			
 			db.updatePlanning(plnn, util.quote(oldTitre));;
 			System.out.println("planifier");
@@ -53,9 +53,9 @@ public class PlanningControlleur {
 		}
 	}
 	
-	public boolean supprPlann( String titre, String date , String commentaire) {
+	public boolean supprPlann( String titre, String date ,String heure , String commentaire) {
 		try {
-			Planning plnn = new Planning(util.quote(titre), util.quote(date), util.quote(commentaire) );
+			Planning plnn = new Planning(util.quote(titre), util.quote(date), util.quote(heure), util.quote(commentaire));
 			
 			db.deletePlann(plnn);
 			System.out.println("supprimer");
