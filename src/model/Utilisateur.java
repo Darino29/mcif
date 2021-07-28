@@ -42,7 +42,7 @@ public class Utilisateur {
 	}
 	
 	public String addToDb () {
-		return("INSERT INTO " + this.table + "(nomUtilisateur, mdpUtilisateur, postUtilisateur ) "+ " VALUES  ( " + this.nomUtilisateur + ", " + this.mdpUtilisateur + ", " + this.postUtilisateur + ")");
+		return("INSERT INTO " + this.table + "(nomUtilisateur, mdpUtilisateur, postUtilisateur )  VALUES  ( " + this.nomUtilisateur + ", " + this.mdpUtilisateur + ", " + this.postUtilisateur + ")");
 	}
 	
 	public String createTable() {
@@ -55,8 +55,8 @@ public class Utilisateur {
 				 ",postUtilisateur = " + this.postUtilisateur  + " WHERE idUtilisateur = " + id  );
 	}
 	
-	public String delete() {
-		return( "DELETE FROM " + this.table + " WHERE idUtilisateur = " + this.idUtilisateur );
+	public static String delete(String id) {
+		return( "DELETE FROM " + "Utilisateurs"+ " WHERE idUtilisateur = " + id);
 	}
 	@Override
 	public String toString() {

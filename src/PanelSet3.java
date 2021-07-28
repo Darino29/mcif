@@ -12,6 +12,15 @@ import javax.swing.JTextPane;
 
 public class PanelSet3 extends JPanel {
 	private ACC parent;
+	private String name = "set3";
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	/**
 	 * Create the panel.

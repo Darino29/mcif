@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.Utilisateur;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -41,30 +44,18 @@ public class ACC extends JFrame {
 	private PanelSet panelSet;
 	private PanelSet2 panelSet2;
 	private PanelSet3 panelSet3;
+	private PanelSet4 panelSet4;
+	private PanelProduit panelProduit;
 	private JPanel contentPane;
+	private static Utilisateur user;
 	
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ACC frame = new ACC();
-					frame.setUndecorated(true);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public ACC() {
+	public ACC(Utilisateur userI) {
+		user = userI;
 		setForeground(SystemColor.controlDkShadow);
 		setBackground(SystemColor.controlDkShadow);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\23058\\OneDrive\\Images\\S-Assistant2\\S-Assistant2\\S-Assistant2\\app\\src\\main\\res\\drawable\\launch.PNG"));
@@ -97,14 +88,16 @@ public class ACC extends JFrame {
 		
 		panelCaisse = new PanelCaisse();
 		panelClient = new PanelClient();
-		panelStock = new PanelStock();
+		panelStock = new PanelStock(this);
 		panelPlann = new PanelPlann();
 		panelVente = new PanelVente(this);
-		panelVente2 = new PanelVente2();
+		panelVente2 = new PanelVente2(this.user);
 		panelCompte = new PanelCompte();
 		panelSet = new PanelSet(this);
-		panelSet2 = new PanelSet2(this);
+		panelSet2 = new PanelSet2(this, this.user);
 		panelSet3 = new PanelSet3(this);
+		panelSet4 = new PanelSet4(this);
+		panelProduit = new PanelProduit(this);
 		
 		JPanel panel0 = new JPanel();
 		panel0.setBounds(67, 21, 808, 506);
@@ -151,6 +144,8 @@ public class ACC extends JFrame {
 		paneMainContent.add(panelSet);
 		paneMainContent.add(panelSet2);
 		paneMainContent.add(panelSet3);
+		paneMainContent.add(panelSet4);
+		paneMainContent.add(panelProduit);
 		
 		menuClicked(panelCaisse);
 		
@@ -368,18 +363,29 @@ public class ACC extends JFrame {
 		
 	}	
  public void menuClicked(JPanel panel) {
-	 panelCaisse.setVisible(false);
-	 panelClient.setVisible(false);
-	 panelStock.setVisible(false);
-	 panelPlann.setVisible(false);
-	 panelVente.setVisible(false);
-	 panelVente2.setVisible(false);
-	 panelCompte.setVisible(false);
-	 panelSet.setVisible(false);
-	 panelSet2.setVisible(false);
-	 panelSet3.setVisible(false);
-	 
-	 panel.setVisible(true);
+	 if((panel.getClass()== PanelCompte.class) && (user.getPostUtilisateur().equals("Admin"))) {
+		 panelCompte.load();
+	 }
+	 if((panel.getClass() == PanelSet.class || panel.getClass() == PanelCompte.class) && (user.getPostUtilisateur().equals("Vendeur")) ) {
+		 JOptionPane.showMessageDialog(null, "Admin only");
+	 }
+	 else {
+		 panelCaisse.setVisible(false);
+		 panelClient.setVisible(false);
+		 panelStock.setVisible(false);
+		 panelPlann.setVisible(false);
+		 panelVente.setVisible(false);
+		 panelVente2.setVisible(false);
+		 panelCompte.setVisible(false);
+		 panelSet.setVisible(false);
+		 panelSet2.setVisible(false);
+		 panelSet3.setVisible(false);
+		 panelSet4.setVisible(false);
+		 panelProduit.setVisible(false);
+		 
+		 panel.setVisible(true);
+	 }
+
  }
 	 
  public  void changerMenu(){
@@ -393,6 +399,8 @@ public class ACC extends JFrame {
 	 panelSet.setVisible(false);
 	 panelSet3.setVisible(false);
 	 panelSet2.setVisible(false);
+	 panelSet4.setVisible(false);
+	 panelProduit.setVisible(false);
 	 
 	 panelVente2.setVisible(true);
 	 
@@ -411,6 +419,8 @@ public class ACC extends JFrame {
 	 panelCompte.setVisible(false);
 	 panelSet.setVisible(false);
 	 panelSet3.setVisible(false);
+	 panelSet4.setVisible(false);
+	 panelProduit.setVisible(false);
 	 
 	 panelSet2.setVisible(true);
 	 
@@ -428,8 +438,45 @@ public class ACC extends JFrame {
 	 panelCompte.setVisible(false);
 	 panelSet.setVisible(false);
 	 panelSet2.setVisible(false);
+	 panelProduit.setVisible(false);
+	 panelSet4.setVisible(false);
 	 
 	 panelSet3.setVisible(true);
+	 
+     
+     
+ }
+ public  void changerMenu4(){
+		
+	 panelCaisse.setVisible(false);
+	 panelClient.setVisible(false);
+	 panelStock.setVisible(false);
+	 panelPlann.setVisible(false);
+	 panelVente.setVisible(false);
+	 panelVente2.setVisible(false);
+	 panelCompte.setVisible(false);
+	 panelSet.setVisible(false);
+	 panelSet2.setVisible(false);
+	 panelSet3.setVisible(false);
+	 panelSet4.setVisible(true);
+	 
+     
+     
+ }
+ public  void changerMenu5(){
+		
+	 panelCaisse.setVisible(false);
+	 panelClient.setVisible(false);
+	 panelStock.setVisible(false);
+	 panelPlann.setVisible(false);
+	 panelVente.setVisible(false);
+	 panelVente2.setVisible(false);
+	 panelCompte.setVisible(false);
+	 panelSet.setVisible(false);
+	 panelSet2.setVisible(false);
+	 panelSet3.setVisible(false);
+	 panelSet4.setVisible(false);
+	 panelProduit.setVisible(true);
 	 
      
      
@@ -445,6 +492,8 @@ public class ACC extends JFrame {
 	 panelCompte.setVisible(false);
 	 panelSet2.setVisible(false);
 	 panelSet3.setVisible(false);
+	 panelSet4.setVisible(false);
+	 panelProduit.setVisible(false);
 	 
 	 panelSet.setVisible(true);
 	 

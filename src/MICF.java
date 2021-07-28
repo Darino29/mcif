@@ -39,27 +39,11 @@ public class MICF extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField nomTxt;
-	private JTextField mdpTxt;
-	private JTextField confirmMdpTxt;
 	private JComboBox comboBox ;
 	int xx,xy;
+	private JPasswordField mdpTxt;
+	private JPasswordField confirmMdpTxt;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MICF frame = new MICF();
-					frame.setUndecorated(true);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -134,12 +118,6 @@ public class MICF extends JFrame {
 		JLabel lblNewLabel = new JLabel("USERNAME");
 		lblNewLabel.setBounds(414, 83, 77, 21);
 		contentPane.add(lblNewLabel);
-		
-
-		mdpTxt = new JTextField();
-		mdpTxt.setColumns(10);
-		mdpTxt.setBounds(414, 194, 249, 39);
-		contentPane.add(mdpTxt);
     
 		JLabel lblPassword = new JLabel("PASSWORD");
 		lblPassword.setBounds(414, 163, 77, 21);
@@ -148,11 +126,6 @@ public class MICF extends JFrame {
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(414, 237, 249, 2);
 		contentPane.add(separator_1);
-		
-		confirmMdpTxt = new JTextField();
-		confirmMdpTxt.setColumns(10);
-		confirmMdpTxt.setBounds(414, 268, 249, 39);
-		contentPane.add(confirmMdpTxt);
 		JLabel lblConfirmPassword = new JLabel("CONFIRM PASSWORD");
 		lblConfirmPassword.setBounds(414, 237, 139, 21);
 		contentPane.add(lblConfirmPassword);
@@ -189,10 +162,36 @@ public class MICF extends JFrame {
 		lblclose.setBackground(Color.WHITE);
 		lblclose.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblclose.setBounds(839, 0, 25, 21);
+		contentPane.add(lblclose);
+		
 		
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Admin", "Vendeur"}));
 		comboBox.setBounds(414, 317, 111, 21);
 		contentPane.add(comboBox);
+		
+		JLabel lblNewLabel_2 = new JLabel("Have an account?Sign Up ");
+		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MICF2 m = new MICF2();
+				m.setVisible(true);
+				m.setUndecorated(true);
+				dispose();
+				
+			}
+		});
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setBounds(414, 445, 249, 21);
+		contentPane.add(lblNewLabel_2);
+		
+		mdpTxt = new JPasswordField();
+		mdpTxt.setBounds(414, 194, 249, 39);
+		contentPane.add(mdpTxt);
+		
+		confirmMdpTxt = new JPasswordField();
+		confirmMdpTxt.setBounds(414, 268, 249, 39);
+		contentPane.add(confirmMdpTxt);
 	}
 }

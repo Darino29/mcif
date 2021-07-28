@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import Controlleur.ProduitControlleur;
 import Controlleur.StockControlleur;
 import model.Produit;
 import model.Stock;
@@ -30,13 +31,13 @@ import java.util.List;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-public class PanelStock extends JPanel {
+public class PanelProduit extends JPanel {
 	private JTextField searchTxt;
 	private JTextField produit;
-	private ACC parent;
-	private JTextField quantite;
+	private JTextField prix;
 	private JTextField description;
 	private JTable table;
+	private ACC parent;
 	private String name = "Stock";
 	public String getName() {
 		return name;
@@ -47,14 +48,13 @@ public class PanelStock extends JPanel {
 	}
 
 	DefaultTableModel model;
-	private JTextField id;
-	final Object[] row = new Object[4];
+	final Object[] row = new Object[3];
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelStock(ACC p) {
-		parent = p ;
+	public PanelProduit(ACC ppp) {
+		parent = ppp;
 		setBackground(Color.WHITE);
 		setBounds(0,0,780,455);
 		setLayout(null);
@@ -91,11 +91,11 @@ public class PanelStock extends JPanel {
 				        model.removeRow(i);
 				    }
 				}
-				 List<Stock> stock = new ArrayList<>();
-				 StockControlleur stck = new StockControlleur();
+				 List<Produit> stock = new ArrayList<>();
+				 ProduitControlleur prodC = new ProduitControlleur();
 				if(searchTxt.getText().equals("")) {	
 					 try {
-						 stock = stck.allStock();
+						 stock = prodC.allProduit();
 						 
 					 }catch(Exception e1) {
 						 System.out.println("not found");
@@ -104,23 +104,22 @@ public class PanelStock extends JPanel {
 				else {
 					try {
 						 
-						 stock = stck.searchStock(searchTxt.getText());
+						 stock = prodC.searchProduit(searchTxt.getText());
 						 
 					 }catch(Exception e1) {
 						 System.out.println("not found");
 					 }
 				}
-					 for (Stock stk : stock) {
+					 for (Produit stk : stock) {
 						 	System.out.println(stk.toString());
-							row[0] = stk.getIdStock();
-							row[1] = stk.getIdProduit();
-							row[2] = stk.getQteStock();
-							row[3] = stk.getDesc();
+							row[0] = stk.getidProduit();
+							row[1] = stk.getPrix();
+							row[2] = stk.getDescritpion();
 							model.addRow(row) ;
 						}
 			}
 		});
-		search.setIcon(new ImageIcon(PanelStock.class.getResource("/img/icons8-search-24.png")));
+		search.setIcon(new ImageIcon(PanelProduit.class.getResource("/img/icons8-search-24.png")));
 		search.setBounds(212, 10, 50, 40);
 		add(search);
 		
@@ -130,7 +129,7 @@ public class PanelStock extends JPanel {
 		
 		JPanel panel = new JPanel();
 		panel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Ajouter un produit au Stock", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Ajouter un produit", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(4, 68, 389, 340);
 		add(panel);
 		panel.setLayout(null);
@@ -141,7 +140,7 @@ public class PanelStock extends JPanel {
 		lblCa.setHorizontalAlignment(SwingConstants.LEFT);
 		lblCa.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
-		JLabel lblDernierAchat = new JLabel("Quantite");
+		JLabel lblDernierAchat = new JLabel("Prix");
 		lblDernierAchat.setBounds(10, 109, 97, 13);
 		panel.add(lblDernierAchat);
 		lblDernierAchat.setHorizontalAlignment(SwingConstants.LEFT);
@@ -158,10 +157,10 @@ public class PanelStock extends JPanel {
 		panel.add(produit);
 		produit.setColumns(10);
 		
-		quantite = new JTextField();
-		quantite.setColumns(10);
-		quantite.setBounds(100, 106, 229, 23);
-		panel.add(quantite);
+		prix = new JTextField();
+		prix.setColumns(10);
+		prix.setBounds(100, 106, 229, 23);
+		panel.add(prix);
 		
 		description = new JTextField();
 		description.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -169,36 +168,23 @@ public class PanelStock extends JPanel {
 		description.setBounds(100, 139, 229, 180);
 		panel.add(description);
 		
-		id = new JTextField();
-		id.setColumns(10);
-		id.setBounds(100, 38, 229, 24);
-		panel.add(id);
-		
-		JLabel lblId = new JLabel("Id");
-		lblId.setHorizontalAlignment(SwingConstants.LEFT);
-		lblId.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblId.setBounds(10, 43, 80, 13);
-		panel.add(lblId);
-		
 		JButton btnNewButton_1 = new JButton("Enregistrer");
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-        if(id.getText().equals("") || produit.getText().equals("") || quantite.getText().equals("") || description.getText().equals(""))
+        if( produit.getText().equals("") || prix.getText().equals("") || description.getText().equals(""))
 				{
 					JOptionPane.showMessageDialog(null, "Completer les cases vides");
 				}
 				else
 				{
 				String prod = produit.getText();
-				String idStock = id.getText();
-				String qte = quantite.getText();
+				String qte = prix.getText();
 				String descrp = description.getText();
-				StockControlleur stck = new StockControlleur();
-				stck.CreateStock(idStock, prod, qte, descrp);
-				id.setText("");
+				ProduitControlleur prodC = new ProduitControlleur();
+				prodC.CreateProduit( prod, qte, descrp);
 				produit.setText("");
-				quantite.setText("");
+				prix.setText("");
 				description.setText("");
 				JOptionPane.showMessageDialog(null, "Enregistrer");
         }
@@ -214,22 +200,20 @@ public class PanelStock extends JPanel {
 		JButton edite = new JButton("Editer");
 		edite.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(id.getText().equals("") || produit.getText().equals("") || quantite.getText().equals("") || description.getText().equals(""))
+				if(produit.getText().equals("") || prix.getText().equals("") || description.getText().equals(""))
 				{
 					JOptionPane.showMessageDialog(null, "Completer les cases vides");
 				}
 				else
 				{
 					int i=table.getSelectedRow();
-					String idStock = id.getText();
-					String qte = quantite.getText();
+					String qte = prix.getText();
 					String prod = produit.getText();
 					String descrp = description.getText();
-					StockControlleur stck = new StockControlleur();
+					ProduitControlleur prodC = new ProduitControlleur();
 					try {
-						String oldStock = model.getValueAt(i, 1).toString();
 						String oldId = model.getValueAt(i, 0).toString();
-						stck.editStock(idStock, prod, qte, descrp, oldId, oldStock);
+						prodC.editProduit(prod, qte, descrp, oldId);
 					}catch(Exception e1) {
 						JOptionPane.showMessageDialog(null, "selectionner un elements");
 					}
@@ -248,12 +232,11 @@ public class PanelStock extends JPanel {
 				int i = table.getSelectedRow();
 				if(i>=0)
 				{
-					String idStock = id.getText();
-					String qte = quantite.getText();
+					String qte = prix.getText();
 					String prod = produit.getText();
 					String descrp = description.getText();
-					StockControlleur stck = new StockControlleur();
-					stck.supprStock(idStock, prod, qte, descrp);
+					ProduitControlleur prodC = new ProduitControlleur();
+					prodC.supprProduit(prod, qte, descrp);
 					model.removeRow(i);
 					JOptionPane.showMessageDialog(null, "Supprim�");
 				}
@@ -277,15 +260,14 @@ public class PanelStock extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int i=table.getSelectedRow();
-				id.setText(model.getValueAt(i, 0).toString());
-				produit.setText(model.getValueAt(i, 1).toString());
-				quantite.setText(model.getValueAt(i, 2).toString());
-				description.setText(model.getValueAt(i, 3).toString());
+				produit.setText(model.getValueAt(i, 0).toString());
+				prix.setText(model.getValueAt(i, 1).toString());
+				description.setText(model.getValueAt(i, 2).toString());
 				
 			}
 		});
 		model = new DefaultTableModel();
-		Object[] column = {"ID","Produit","Prix","Description"};
+		Object[] column = {"Produit","Prix","Description"};
 		
 		model.setColumnIdentifiers(column);
 		table.setModel(model);
@@ -300,35 +282,20 @@ public class PanelStock extends JPanel {
 				        model.removeRow(i);
 				    }
 				}
-				List<Stock> stock = new ArrayList<>();
-				StockControlleur stck = new StockControlleur();
-				stock = stck.allStock();
-				 for (Stock stk : stock) {
+				 List<Produit> stock = new ArrayList<>();
+				 ProduitControlleur prodC = new ProduitControlleur();
+				 stock = prodC.allProduit();
+				 for (Produit stk : stock) {
 					 	System.out.println(stk.toString());
-						row[0] = stk.getIdStock();
-						row[1] = stk.getIdProduit();
-						row[2] = stk.getQteStock();
-						row[3] = stk.getDesc();
+						row[0] = stk.getidProduit();
+						row[1] = stk.getPrix();
+						row[2] = stk.getDescritpion();
 						model.addRow(row) ;
 					}
 			}
 		});
 		btnNewButton.setBounds(685, 29, 85, 21);
 		add(btnNewButton);
-		
-		JButton btnNouvelleProduit = new JButton("Nouvelle Produit  +");
-		btnNouvelleProduit.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				parent.changerMenu5();
-			}
-		});
-		btnNouvelleProduit.setForeground(new Color(240, 255, 240));
-		btnNouvelleProduit.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnNouvelleProduit.setBorderPainted(false);
-		btnNouvelleProduit.setBackground(new Color(255, 140, 0));
-		btnNouvelleProduit.setBounds(457, 10, 167, 40);
-		add(btnNouvelleProduit);
 
 	}
 }

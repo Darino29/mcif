@@ -24,7 +24,7 @@ public class Database {
         	
             stmt.execute();
             this.dbLocation += "/MICF";
-            
+            conn.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -50,12 +50,32 @@ public class Database {
 		    return produits;	
 	}
 	
+	public List<Produit> searchProd(String mot){
+		 List<Produit> produits = new ArrayList<>();
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        ResultSet rs = statement.executeQuery("select * from produits WHERE idProduit LIKE "  + mot);
+		        while (rs.next()) {
+		            String id = rs.getString("idProduit");
+		            String description = rs.getString("description");
+		            Double price = rs.getDouble("prix");
+		            produits.add(new Produit(id, price, description));
+		        }
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return produits;	
+	}
+	
 	public void addProduit (Produit prod) {
 		  try {
 		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
 		        Statement statement = connection.createStatement();
 		        statement.execute(prod.createTable());
 		        statement.executeUpdate(prod.addToDb());
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -68,6 +88,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(prod.createTable());
 		        statement.executeUpdate(prod.update(id));
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -80,6 +101,7 @@ public class Database {
 	        Statement statement = connection.createStatement();
 	        statement.execute(prod.createTable());
 	        statement.executeUpdate(prod.delete());
+	        connection.close();
 	  }
   	 catch (SQLException e) {
 	  e.printStackTrace();
@@ -111,24 +133,50 @@ public class Database {
 		    return clients;	
 	}
 	
+	public List<Client> searchClient(String mot){
+		 List<Client> clients = new ArrayList<>();
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        ResultSet rs = statement.executeQuery("select * from Client WHERE nomClient LIKE " + mot );
+		        while (rs.next()) {
+		            int id = rs.getInt("idClient");
+		            String nom = rs.getString("nomClient");
+		            String prenom  = rs.getString("PrenomClient");
+		            String ddn  = rs.getString("ddnClient");
+		            String addresse  = rs.getString("adresseClient");
+		            String ville  = rs.getString("villeClient");
+		            String pays  = rs.getString("paysClient");
+		            String tel  = rs.getString("telClient");
+		            clients.add(new Client(id, nom, prenom, ddn , addresse, ville, pays, tel));
+		        }
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return clients;	
+	}
+	
 	public void addClient (Client clt) {
 		  try {
 		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
 		        Statement statement = connection.createStatement();
 		        statement.execute(clt.createTable());
 		        statement.executeUpdate(clt.addToDb());
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
 	    }
 	}
 	
-	public void updateClient (Client clt, int id) {
+	public void updateClient (Client clt, String nom, String prenom) {
 		 try {
 		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
 		        Statement statement = connection.createStatement();
 		        statement.execute(clt.createTable());
-		        statement.executeUpdate(clt.update(id));
+		        statement.executeUpdate(clt.update(nom, prenom));
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -141,6 +189,7 @@ public class Database {
 	        Statement statement = connection.createStatement();
 	        statement.execute(clt.createTable());
 	        statement.executeUpdate(clt.delete());
+	        connection.close();
 	  }
  	 catch (SQLException e) {
 	  e.printStackTrace();
@@ -174,6 +223,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(cmd.createTable());
 		        statement.executeUpdate(cmd.addToDb());
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -186,6 +236,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(cmd.createTable());
 		        statement.executeUpdate(cmd.update(id));
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -198,6 +249,7 @@ public class Database {
 	        Statement statement = connection.createStatement();
 	        statement.execute(cmd.createTable());
 	        statement.executeUpdate(cmd.delete());
+	        connection.close();
 	  }
 	 catch (SQLException e) {
 	  e.printStackTrace();
@@ -231,6 +283,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(cmdPro.createTable());
 		        statement.executeUpdate(cmdPro.addToDb());
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -243,6 +296,7 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(cmdPro.createTable());
 		        statement.executeUpdate(cmdPro.update(idCommande, idClient, idProduit));
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -255,6 +309,7 @@ public class Database {
 	        Statement statement = connection.createStatement();
 	        statement.execute(cmdPro.createTable());
 	        statement.executeUpdate(cmdPro.delete());
+	        connection.close();
 	  }
 	 catch (SQLException e) {
 	  e.printStackTrace();
@@ -281,12 +336,57 @@ public class Database {
 		    return commandes ;	
 	}
 	
+	public List<Stock> searchStock(String motClee){
+		 List<Stock> commandes = new ArrayList<>();
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        ResultSet rs = statement.executeQuery("SELECT * from Stock WHERE idStock LIKE " + motClee);
+		        while (rs.next()) {
+		            int stockqte = rs.getInt("qteStock");
+		            String idStock = rs.getString("idStock");
+		            String idProduit  = rs.getString("idProduit");
+		            String desc= rs.getString("Description");
+		            commandes.add(new Stock(idStock, idProduit, stockqte, desc));
+		        }
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return commandes ;	
+	}
+	
+	public Stock useStock(String id, String produit) {
+		
+		try {
+	        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+	        Statement statement = connection.createStatement();
+	        ResultSet rs = statement.executeQuery("SELECT * from Stock WHERE idStock = " + id + " and idProduit = " + produit);
+	        while (rs.next()) {
+	            int stockqte = rs.getInt("qteStock");
+	            String idStock = rs.getString("idStock");
+	            String idProduit  = rs.getString("idProduit");
+	            String desc= rs.getString("Description");
+	            Stock stock = new Stock(idStock, idProduit, stockqte, desc);
+	            return stock;
+	        }
+	        connection.close();
+	        return null;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+
+		
+	}
+	
 	public void addStock (Stock stock) {
 		  try {
 		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
 		        Statement statement = connection.createStatement();
 		        statement.execute(stock.createTable());
 		        statement.executeUpdate(stock.addToDb());
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -299,18 +399,20 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(stock.createTable());
 		        statement.executeUpdate(stock.update(idStock, idProduit));
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
 	    }
 	}
 	
-	public void deleteStock (CommandeProduit cmdPro) {
+	public void deleteStock (Stock stock) {
 		try {
 	        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
 	        Statement statement = connection.createStatement();
-	        statement.execute(cmdPro.createTable());
-	        statement.executeUpdate(cmdPro.delete());
+	        statement.execute(stock.createTable());
+	        statement.executeUpdate(stock.delete());
+	        connection.close();
 	  }
 	 catch (SQLException e) {
 	  e.printStackTrace();
@@ -338,12 +440,35 @@ public class Database {
 		    return utilisateurs;	
 	}
 	
+	public Utilisateur getUtilisateur(String username, String mdpIn){
+		Utilisateur utilisateur = null;
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        ResultSet rs = statement.executeQuery("select * from Utilisateurs Where nomUtilisateur = " + username);
+		        while (rs.next()) {
+		        	if(rs.getString("mdpUtilisateur").equals(mdpIn)) { 
+		            int id = rs.getInt("idUtilisateur");
+		            String nom = rs.getString("nomUtilisateur");
+		            String mdp  = rs.getString("mdpUtilisateur");
+		            String post  = rs.getString("postUtilisateur");
+		            utilisateur = new Utilisateur(id, nom, mdp, post);
+		        	}
+		        }
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return utilisateur;	
+	}
+	
 	public void addUtilisateur (Utilisateur util) {
 		  try {
 		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
 		        Statement statement = connection.createStatement();
 		        statement.execute(util.createTable());
 		        statement.executeUpdate(util.addToDb());
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -356,18 +481,19 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(util.createTable());
 		        statement.executeUpdate(util.update(id));
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
 	    }
 	}
 	
-	public void deleteUtilisateur ( Utilisateur util) {
+	public void deleteUtilisateur ( String id) {
 		try {
 	        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
 	        Statement statement = connection.createStatement();
-	        statement.execute(util.createTable());
-	        statement.executeUpdate(util.delete());
+	        statement.executeUpdate(Utilisateur.delete(id));
+	        connection.close();
 	  }
  	 catch (SQLException e) {
 	  e.printStackTrace();
@@ -382,16 +508,39 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        ResultSet rs = statement.executeQuery("select * from Ventes");
 		        while (rs.next()) {
-		            String idVente = rs.getString("idVente");
-		            int idClient = rs.getInt("idClient");
+		        	int idVente = rs.getInt("idVente");
+		            String nomClient = rs.getString("nomClient");
 		            String idProduit = rs.getString("idProduit");
 		            int idUtilisateur = rs.getInt("idUtilisateur");
 		            String idStock  = rs.getString("idStock");
 		            Double prixVente  = rs.getDouble("prixVente");
 		            int quantiter = rs.getInt("quantiter");
 		            String date  = rs.getString("dateVente");
-		            String note  = rs.getString("note");
-		            ventes.add(new Vente(idVente, idClient, idProduit, idUtilisateur, idStock, prixVente, quantiter, date, note));
+		            ventes.add(new Vente( nomClient, idProduit, idUtilisateur, idStock, prixVente, quantiter, date));
+		        }
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return ventes;	
+	}
+	
+	public List<Vente> searchVente(String motClee){
+		 List<Vente> ventes = new ArrayList<>();
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        ResultSet rs = statement.executeQuery("select * from Ventes WHERE idProduit LIKE " + motClee);
+		        while (rs.next()) {
+		        	int idVente = rs.getInt("idVente");
+		            String nomClient = rs.getString("nomClient");
+		            String idProduit = rs.getString("idProduit");
+		            int idUtilisateur = rs.getInt("idUtilisateur");
+		            String idStock  = rs.getString("idStock");
+		            Double prixVente  = rs.getDouble("prixVente");
+		            int quantiter = rs.getInt("quantiter");
+		            String date  = rs.getString("dateVente");
+		            ventes.add(new Vente( nomClient, idProduit, idUtilisateur, idStock, prixVente, quantiter, date));
 		        }
 		        connection.close();
 		    } catch (SQLException e) {
@@ -406,18 +555,20 @@ public class Database {
 		        Statement statement = connection.createStatement();
 		        statement.execute(vt.createTable());
 		        statement.executeUpdate(vt.addToDb());
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
 	    }
 	}
 	
-	public void updateVente (Vente vt, String idVente, int idClient, String idProduit, int idUtilisateur, String idStock) {
+	public void updateVente (Vente vt, int idVente, String idClient, String idProduit, int idUtilisateur, String idStock) {
 		 try {
 		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
 		        Statement statement = connection.createStatement();
 		        statement.execute(vt.createTable());
 		        statement.executeUpdate(vt.update(idVente, idClient, idProduit, idUtilisateur,idStock));
+		        connection.close();
 		  }
 	  	 catch (SQLException e) {
 		  e.printStackTrace();
@@ -430,11 +581,130 @@ public class Database {
 	        Statement statement = connection.createStatement();
 	        statement.execute(vt.createTable());
 	        statement.executeUpdate(vt.delete());
+	        connection.close();
 	  }
 	 catch (SQLException e) {
 	  e.printStackTrace();
   }
 		
 	}
+
+	public List<Planning> getAllPlann(){
+		 List<Planning> plannings = new ArrayList<>();
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        ResultSet rs = statement.executeQuery("select * from Planning");
+		        while (rs.next()) {
+		        	String titre= rs.getString("titre");
+		            
+		            String date  = rs.getString("date");
+		            String heure  = rs.getString("heure");
+		            String commentaire= rs.getString("Commentaire");
+		            plannings.add(new Planning(titre, date,heure, commentaire));
+		        }
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return plannings ;	
+	}
+	
+	public List<Planning> searchPlann(String motClee){
+		 List<Planning> plannings = new ArrayList<>();
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        ResultSet rs = statement.executeQuery("SELECT * from Planning WHERE titre LIKE " + motClee);
+		        while (rs.next()) {
+		        	String titre= rs.getString("titre");    
+		            String date  = rs.getString("date");
+		            String heure  = rs.getString("heure");
+		            String commentaire= rs.getString("Commentaire");
+		            plannings.add(new Planning(titre, date,heure, commentaire));
+		        }
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return plannings ;	
+	}
+	
+	public void addPlann (Planning plann) {
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        statement.execute(plann.createTable());
+		        statement.executeUpdate(plann.addToDb());
+		        connection.close();
+		  }
+	  	 catch (SQLException e) {
+		  e.printStackTrace();
+	    }
+	}
+	
+	public void updatePlanning (Planning plann, String titre) {
+		 try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        statement.execute(plann.createTable());
+		        statement.executeUpdate(plann.update(titre));
+		        connection.close();
+		  }
+	  	 catch (SQLException e) {
+		  e.printStackTrace();
+	    }
+	}
+	
+	public void deletePlann (Planning plann) {
+		try {
+	        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+	        Statement statement = connection.createStatement();
+	        statement.execute(plann.createTable());
+	        statement.executeUpdate(plann.delete());
+	        connection.close();
+	  }
+	 catch (SQLException e) {
+	  e.printStackTrace();
+}
+	}
+	
+	
+	public List<DepotRetrait> getAllDR(){
+		 List<DepotRetrait> dr = new ArrayList<>();
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        statement.execute(DepotRetrait.createTable());
+		        ResultSet rs = statement.executeQuery("select * from comptabiliter");
+		        while (rs.next()) {
+		        	int id = rs.getInt("id");
+		            String type = rs.getString("type");
+		            int montant = rs.getInt("montant");
+		            String date = rs.getString("date");
+		            String commentaire  = rs.getString("commentaire");
+		            int totale = rs.getInt("totale");
+		            dr.add(new DepotRetrait(type, montant, date, commentaire, totale));
+		        }
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return dr;	
+	}
+	
+	public void addDr (DepotRetrait dr) {
+		  try {
+		        Connection connection = DriverManager.getConnection(this.dbLocation, this.user, this.mdp);
+		        Statement statement = connection.createStatement();
+		        statement.execute(dr.createTable());
+		        statement.executeUpdate(dr.addToDb());
+		        connection.close();
+		  }
+	  	 catch (SQLException e) {
+		  e.printStackTrace();
+	    }
+	}
+	
 	
 }
